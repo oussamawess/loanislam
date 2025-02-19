@@ -2030,183 +2030,399 @@
 
 
 
-                        <!-- Start admins table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex mb-2 align-items-center">
-                                    <div>
-                                        <h5>Liste des administrateurs</h5>
-                                    </div>
-                                </div>
-                                <div class="table-responsive border rounded-1">
-                                    <table class="table text-nowrap customize-table mb-0 align-middle">
-                                        <thead class="text-dark fs-4">
-                                            <tr>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Nom</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Adresse email</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Mot de passe</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Action</h6>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">Mark</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">mark@gmail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">UQzp!*dktTp</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success">Editer</button>
-                                                    <button class="btn btn-danger">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">Mark</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">mark@gmail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">UMp?sdkss</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success">Editer</button>
-                                                    <button class="btn btn-danger">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">Mark</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">mark@gmail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">-PMXs!Vn</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success">Editer</button>
-                                                    <button class="btn btn-danger">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <!-- Start Notifications -->
+                        
+                        <div class="card overflow-hidden invoice-application">
+                            <div class="d-flex align-items-center justify-content-between gap-6 m-3 d-lg-none">
+                              <button class="btn btn-primary d-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#chat-sidebar" aria-controls="chat-sidebar">
+                                <i class="ti ti-menu-2 fs-5"></i>
+                              </button>
+                              <form class="position-relative w-100">
+                                <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search Contact">
+                                <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                              </form>
                             </div>
-                        </div>
-                        <!-- End admins table-->
-                        <!--Start add admin -->
-                        <!-- Add the Font Awesome library for eye icons -->
-                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">Ajouter un administrateur</h4>
-                                <form id="adminForm">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="tb-fname"
-                                                    placeholder="Enter Name here" required>
-                                                <label for="tb-fname">Nom</label>
-                                            </div>
+                            <div class="d-flex">
+                              <div class="w-25 d-none d-lg-block border-end user-chat-box">
+                                <div class="p-3 border-bottom">
+                                  <form class="position-relative">
+                                    <input type="search" class="form-control search-invoice ps-5" id="text-srh" placeholder="Chercher">
+                                    <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                                  </form>
+                                </div>
+                                <div class="app-invoice">
+                                  <ul class="overflow-auto invoice-users simplebar-scrollable-y" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light-subtle" id="invoice-123" data-invoice-id="123">
+                                        <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" id="tb-email"
-                                                    placeholder="name@example.com" required>
-                                                <label for="tb-email">Adresse email</label>
-                                            </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">James Anderson</h6>
+                
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #123</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-pwd"
-                                                    placeholder="Password" required>
-                                                <label for="tb-pwd">Mot de passe</label>
-                                                <i id="togglePwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                            </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-124" data-invoice-id="124">
+                                        <div class="btn btn-danger round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-cpwd"
-                                                    placeholder="Confirm Password" required>
-                                                <label for="tb-cpwd">Confirmer le mot de passe</label>
-                                                <i id="toggleCpwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                                <small id="passwordError" class="form-text text-danger"
-                                                    style="display:none;">Les mots de passe ne correspondent pas.
-                                                    Veuillez les vérifier.</small>
-                                            </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Bianca Doe</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#124</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="d-md-flex align-items-center">
-                                                <div class="ms-auto mt-3 mt-md-0">
-                                                    <button type="submit"
-                                                        class="btn btn-primary hstack gap-6">Ajouter</button>
-                                                </div>
-                                            </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-125" data-invoice-id="125">
+                                        <div class="btn btn-info round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
                                         </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Angelina Rhodes</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#125</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-126" data-invoice-id="126">
+                                        <div class="btn btn-warning round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Samuel Smith</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#126</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-127" data-invoice-id="127">
+                                        <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Gabriel Jobs</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#127</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li></li>
+                                  </div></div></div></div><div class="simplebar-placeholder" style="width: 238px; height: 480px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="height: 236px; transform: translate3d(0px, 0px, 0px); display: block;"></div></div></ul>
+                                </div>
+                              </div>
+                              <div class="w-75 w-xs-100 chat-container">
+                                <div class="invoice-inner-part h-100">
+                                  <div class="invoiceing-box">
+                                    <div class="invoice-header d-flex align-items-center border-bottom p-3">
+                                      <h4 class=" text-uppercase mb-0">notifications</h4>
+                                      <div class="ms-auto">
+                                        <h4 class="invoice-number"></h4>
+                                      </div>
                                     </div>
-                                </form>
+                                    <div class="p-3" id="custom-invoice">
+                                      <div class="invoice-123" id="printableArea" style="display: block;">
+                                        <div class="row pt-3">
+                                          <div class="col-md-12">
+                                            <div>
+                                              <address>
+                                                <h6>&nbsp;From,</h6>
+                                                <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
+                                                <p class="ms-1">
+                                                  1108, Clair Street,
+                                                  <br>Massachusetts,
+                                                  <br>Woods Hole - 02543
+                                                </p>
+                                              </address>
+                                            </div>
+                                            <div class="text-end">
+                                              <address>
+                                                <h6>To,</h6>
+                                                <h6 class="fw-bold invoice-customer">
+                                                  James Anderson,
+                                                </h6>
+                                                <p class="ms-4">
+                                                  455, Shobe Lane,
+                                                  <br>Colorado,
+                                                  <br>Fort
+                                                  Collins - 80524
+                                                </p>
+                                                <p class="mt-4 mb-1">
+                                                  <span>Invoice Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  23rd Jan 2021
+                                                </p>
+                                                <p>
+                                                  <span>Due Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  25th Jan 2021
+                                                </p>
+                                              </address>
+                                            </div>
+                                          </div>
+                                          
+                                        </div>
+                                      </div>
+                                      <!-- 2 -->
+                                      <div class="invoice-124" id="printableArea">
+                                        <div class="row pt-3">
+                                          <div class="col-md-12">
+                                            <div>
+                                              <address>
+                                                <h6>&nbsp;From,</h6>
+                                                <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
+                                                <p class="ms-1">
+                                                  1108, Clair Street,
+                                                  <br>Massachusetts,
+                                                  <br>Woods Hole - 02543
+                                                </p>
+                                              </address>
+                                            </div>
+                                            <div class="text-end">
+                                              <address>
+                                                <h6>To,</h6>
+                                                <h6 class="fw-bold invoice-customer">
+                                                  Bianca Doe,
+                                                </h6>
+                                                <p class="ms-4">
+                                                  455, Shobe Lane,
+                                                  <br>Colorado,
+                                                  <br>Fort
+                                                  Collins - 80524
+                                                </p>
+                                                <p class="mt-4 mb-1">
+                                                  <span>Invoice Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  23rd Jan 2021
+                                                </p>
+                                                <p>
+                                                  <span>Due Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  25th Jan 2021
+                                                </p>
+                                              </address>
+                                            </div>
+                                          </div>                                         
+                                        </div>
+                                      </div>
+                                      <!-- 3 -->
+                                      <div class="invoice-125" id="printableArea">
+                                        <div class="row pt-3">
+                                          <div class="col-md-12">
+                                            <div>
+                                              <address>
+                                                <h6>&nbsp;From,</h6>
+                                                <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
+                                                <p class="ms-1">
+                                                  1108, Clair Street,
+                                                  <br>Massachusetts,
+                                                  <br>Woods Hole - 02543
+                                                </p>
+                                              </address>
+                                            </div>
+                                            <div class="text-end">
+                                              <address>
+                                                <h6>To,</h6>
+                                                <h6 class="fw-bold invoice-customer">
+                                                  Angelina Rhodes,
+                                                </h6>
+                                                <p class="ms-4">
+                                                  455, Shobe Lane,
+                                                  <br>Colorado,
+                                                  <br>Fort
+                                                  Collins - 80524
+                                                </p>
+                                                <p class="mt-4 mb-1">
+                                                  <span>Invoice Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  23rd Jan 2021
+                                                </p>
+                                                <p>
+                                                  <span>Due Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  25th Jan 2021
+                                                </p>
+                                              </address>
+                                            </div>
+                                          </div>                                          
+                                        </div>
+                                      </div>
+                                      <!-- 4 -->
+                                      <div class="invoice-126" id="printableArea">
+                                        <div class="row pt-3">
+                                          <div class="col-md-12">
+                                            <div>
+                                              <address>
+                                                <h6>&nbsp;From,</h6>
+                                                <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
+                                                <p class="ms-1">
+                                                  1108, Clair Street,
+                                                  <br>Massachusetts,
+                                                  <br>Woods Hole - 02543
+                                                </p>
+                                              </address>
+                                            </div>
+                                            <div class="text-end">
+                                              <address>
+                                                <h6>To,</h6>
+                                                <h6 class="fw-bold invoice-customer">
+                                                  Samuel Smith,
+                                                </h6>
+                                                <p class="ms-4">
+                                                  455, Shobe Lane,
+                                                  <br>Colorado,
+                                                  <br>Fort
+                                                  Collins - 80524
+                                                </p>
+                                                <p class="mt-4 mb-1">
+                                                  <span>Invoice Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  23rd Jan 2021
+                                                </p>
+                                                <p>
+                                                  <span>Due Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  25th Jan 2021
+                                                </p>
+                                              </address>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <!-- 5 -->
+                                      <div class="invoice-127" id="printableArea">
+                                        <div class="row pt-3">
+                                          <div class="col-md-12">
+                                            <div>
+                                              <address>
+                                                <h6>&nbsp;From,</h6>
+                                                <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
+                                                <p class="ms-1">
+                                                  1108, Clair Street,
+                                                  <br>Massachusetts,
+                                                  <br>Woods Hole - 02543
+                                                </p>
+                                              </address>
+                                            </div>
+                                            <div class="text-end">
+                                              <address>
+                                                <h6>To,</h6>
+                                                <h6 class="fw-bold invoice-customer">
+                                                  Gabriel Jobs,
+                                                </h6>
+                                                <p class="ms-4">
+                                                  455, Shobe Lane,
+                                                  <br>Colorado,
+                                                  <br>Fort
+                                                  Collins - 80524
+                                                </p>
+                                                <p class="mt-4 mb-1">
+                                                  <span>Invoice Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  23rd Jan 2021
+                                                </p>
+                                                <p>
+                                                  <span>Due Date :</span>
+                                                  <i class="ti ti-calendar"></i>
+                                                  25th Jan 2021
+                                                </p>
+                                              </address>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="offcanvas offcanvas-start user-chat-box" tabindex="-1" id="chat-sidebar" aria-labelledby="offcanvasExampleLabel">
+                                <div class="offcanvas-header">
+                                  <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                                    Invoice
+                                  </h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                </div>
+                                <div class="p-3 border-bottom">
+                                  <form class="position-relative">
+                                    <input type="search" class="form-control search-invoice ps-5" id="text-srh" placeholder="Chercher">
+                                    <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                                  </form>
+                                </div>
+                                <div class="app-invoice overflow-auto">
+                                  <ul class="invoice-users">
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light" id="invoice-123" data-invoice-id="123">
+                                        <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">James Anderson</h6>
+                
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #123</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-124" data-invoice-id="124">
+                                        <div class="btn btn-danger round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Bianca Doe</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#124</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-125" data-invoice-id="125">
+                                        <div class="btn btn-info round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Angelina Rhodes</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#125</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-126" data-invoice-id="126">
+                                        <div class="btn btn-warning round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Samuel Smith</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#126</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-127" data-invoice-id="127">
+                                        <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
+                                          <i class="ti ti-user fs-6"></i>
+                                        </div>
+                                        <div class="ms-3 d-inline-block w-75">
+                                          <h6 class="mb-0 invoice-customer">Gabriel Jobs</h6>
+                                          <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#127</span>
+                                          <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
+                                        </div>
+                                      </a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
-                        </div>
-
-                        <script>
-                            // Toggle password visibility
-                            function togglePasswordVisibility(inputId, iconId) {
-                                var passwordInput = document.getElementById(inputId);
-                                var icon = document.getElementById(iconId);
-
-                                // Toggle the type of input and icon
-                                if (passwordInput.type === "password") {
-                                    passwordInput.type = "text";
-                                    icon.classList.remove("fa-eye-slash");
-                                    icon.classList.add("fa-eye");
-                                } else {
-                                    passwordInput.type = "password";
-                                    icon.classList.remove("fa-eye");
-                                    icon.classList.add("fa-eye-slash");
-                                }
-                            }
-
-                            // Add event listeners for both password fields
-                            document.getElementById("togglePwd").addEventListener("click", function () {
-                                togglePasswordVisibility("tb-pwd", "togglePwd");
-                            });
-                            document.getElementById("toggleCpwd").addEventListener("click", function () {
-                                togglePasswordVisibility("tb-cpwd", "toggleCpwd");
-                            });
-
-                            // Form validation on submit
-                            document.getElementById("adminForm").addEventListener("submit", function (event) {
-                                var password = document.getElementById("tb-pwd").value;
-                                var confirmPassword = document.getElementById("tb-cpwd").value;
-                                var errorMessage = document.getElementById("passwordError");
-
-                                // Check if passwords match
-                                if (password !== confirmPassword) {
-                                    event.preventDefault();  // Prevent form submission
-                                    errorMessage.style.display = "block";  // Show error message
-                                } else {
-                                    errorMessage.style.display = "none";  // Hide error message if passwords match
-                                }
-                            });
-                        </script>
-
-                        <!--End add admin-->
+                          </div>
+                        <!--End Notifications-->
 
                         <div id="settlements" style="display: none;"></div>
 
@@ -2524,6 +2740,13 @@
     <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="../assets/js/dashboards/dashboard1.js"></script>
     <script src="../assets/libs/fullcalendar/index.global.min.js"></script>
+
+   
+
+  <!-- solar icons -->
+  
+  <script src="../assets/js/apps/invoice.js"></script>
+  <script src="../assets/js/apps/jquery.PrintArea.js"></script>
 </body>
 
 </html>
