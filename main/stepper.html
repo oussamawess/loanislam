@@ -16,11 +16,11 @@
   <title>MatDash Bootstrap Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .step-content {
+    .step {
       display: none;
     }
 
-    .step-content.active {
+    .step.active {
       display: block;
     }
   </style>
@@ -41,646 +41,591 @@
               <div class="row gx-0">
                 <!-- ------------------------------------------------- -->
                 <!-- Stepper -->
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <div class="col-md-12 p-3">
-                      <!-- Stepper -->
-                      <div class="stepper">
-                        <!-- Step 1: Personal Info -->
-                        <div id="step1" class="step-content active">
-                          <h3>Informations personnelles</h3>
-                          <div class="card">
-                            <div class="card-body p-2">
-                              <!-- <h2 class="p-1 mt-3">Demandes</h2> -->
-                              <form action="#">
-                                <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
-                                <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
-                                  <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
-                                    <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                                      <span
-                                        class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                                        <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
-                                          style="color: #22825d"></iconify-icon>
-                                      </span>
-                                      <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
-                                    </div>
-                                    <div class="mb-3">
+                <div class="container my-4">
+                  <div class="stepper">
+                    <!-- Step 1 -->
+                    <div class="step active" id="step1">
+                      <h3>Sélectionnez le nombre de personnes</h3>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="1person" name="person" value="1">
+                        <label class="form-check-label" for="1person">1 Person</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="2persons" name="person" value="2">
+                        <label class="form-check-label" for="2persons">2 Persons</label>
+                      </div>
+                    </div>
 
+                    <!-- Step 2 -->
+                    <div class="step" id="step2">
+                      <h3>Détails personnels</h3>
+                      <!-- Add form fields for Person 1 -->
+                      <div class="form-body p-3 border rounded col-12 col-md-12 col-lg-12">
+                        <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                          <span
+                            class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                            <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
+                              style="color: #22825d"></iconify-icon>
+                          </span>
+                          <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
+                        </div>
 
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Nom</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="John">
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">prénom</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="Doe">
+                            </div>
+                          </div>
+                        </div>
 
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Age</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="35 Ans">
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">Téléphone</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="+1-202-555-0116">
+                            </div>
+                          </div>
+                        </div>
+                        
+                        
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Email</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="john.doe@gmail.com">
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">Adresse</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="12 rue de la Croissant. Appartement 3D. 56000">
+                            </div>
+                          </div>
+                        </div>
 
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Nom, prénom</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-6 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="John">
-                                            </div>
-                                            <div class="col-md-6">
-                                              <input type="text" class="form-control" placeholder="Doe">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Age</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="35 Ans">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Téléphone</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="+1-202-555-0116">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Email</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="john.doe@gmail.com">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Adresse</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control"
-                                                placeholder="12 rue de la Croissant. Appartement 3D. 56000">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Profession</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control"
-                                                placeholder="Ingénieur Informatique">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Salaire Brut</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="3500€">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Statut</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="Célibataire">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <button type="button"
-                                        class="my-4 col-lg-12 col-md-12 d-flex gap-3 bg-transparent border-0"
-                                        id="toggleButton">
-                                        <div class="d-flex">
-                                          <label class="fw-bold">Consulter les données coemprunteur</label>
-                                        </div>
-                                        <div class="d-flex">
-                                          <iconify-icon icon="icons8:plus" width="1.5em" height="1.5em"
-                                            style="color: #000"></iconify-icon>
-                                        </div>
-                                      </button>
-                                    </div>
-                                  </div>
-                                  <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-5">
-                                    <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                                      <span
-                                        class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                                        <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
-                                          style="color: #22825d"></iconify-icon>
-                                      </span>
-                                      <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Montant souhaité</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="150.000€"
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Profession</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="Ingénieur Informatique">
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">Salaire Brut</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="3500€">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <label class="col-lg-2 form-label">Statut</label>
+                            <div class="col-lg-4">
+                              <div class="row">
+                                <div class="col-md-12 mb-2 mb-md-0">
+                                  <input type="text" class="form-control" placeholder="Célibataire">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Montant souhaité</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="150.000€"
                                                  id="montant" name="montant" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">D.Remboursement</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="24 mois" id="duree"
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">D.Remboursement</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="24 mois" id="duree"
                                                 name="duree" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Type de maison</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="520€" id="typeMaison"
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Type de maison</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="" id="typeMaison"
                                                 name="typeMaison" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Montant total dû</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="170.000€" id="total"
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">Montant total dû</label>
+                            <div class="col-md-4">
+                              <input type="text" class="form-control" placeholder="170.000€" id="total"
                                                 name="total" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                                      <span
-                                        class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                                        <iconify-icon icon="ic:outline-book" width="2em" height="2em"
-                                          style="color: #22825d"></iconify-icon>
-                                      </span>
-                                      <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Fichier de paie</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Attestation Salaire</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Extrait Bancaire</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Contrat</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </form>
                             </div>
                           </div>
-                          <div class="card" id="cardDiv" style="display: none;">
-                            <div class="card-body p-2">
-                              <h2 class="p-1 mt-3">les données du co-emprunteur</h2>
-                              <form action="#">
-                                <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
-                                <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
-                                  <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
-                                    <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                                      <span
-                                        class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                                        <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
-                                          style="color: #22825d"></iconify-icon>
-                                      </span>
-                                      <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Nom, prénom</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-6 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="John">
-                                            </div>
-                                            <div class="col-md-6">
-                                              <input type="text" class="form-control" placeholder="Doe">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Age</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="35 Ans">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Téléphone</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="+1-202-555-0116">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Email</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="john.doe@gmail.com">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Adresse</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control"
-                                                placeholder="12 rue de la Croissant. Appartement 3D. 56000">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Profession</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control"
-                                                placeholder="Ingénieur Informatique">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Salaire Brut</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="3500€">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-3 form-label">Statut</label>
-                                        <div class="col-lg-9">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="Célibataire">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-5">
-                                    <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                                      <span
-                                        class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                                        <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
-                                          style="color: #22825d"></iconify-icon>
-                                      </span>
-                                      <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Montant souhaité</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="150.000€"
-                                                id="montant1" name="montant1" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">D.Remboursement</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="24 mois" id="duree1"
-                                                name="duree1" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Type de maison</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="520€" id="typeMaison1"
-                                              name="typeMaison1" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Montant total dû</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input type="text" class="form-control" placeholder="170.000€" id="total1"
-                                                name="total1" readonly>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                                      <span
-                                        class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                                        <iconify-icon icon="ic:outline-book" width="2em" height="2em"
-                                          style="color: #22825d"></iconify-icon>
-                                      </span>
-                                      <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Fichier de paie</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Attestation Salaire</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Extrait Bancaire</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="mb-3">
-                                      <div class="row align-items-center">
-                                        <label class="col-lg-6 form-label">Contrat</label>
-                                        <div class="col-lg-6">
-                                          <div class="row">
-                                            <div class="col-md-12 mb-2 mb-md-0">
-                                              <input class="form-control" type="file" id="formFile">
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </form>
+                        </div>
+                        
+
+                      </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step" id="step3">
+                      <h3>Fichiers</h3>
+                      <!-- Add form fields for Person 2 -->
+                      <div class="form-body p-3 border rounded col-12 col-md-12 col-lg-12">
+                        <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                          <span
+                            class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                            <iconify-icon icon="ic:outline-book" width="2em" height="2em"
+                              style="color: #22825d"></iconify-icon>
+                          </span>
+                          <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
+                        </div>
+
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Fichier de paie</label>
+                            <div class="col-md-4">
+                              <input class="form-control" type="file" id="formFile">
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">Attestation Salaire</label>
+                            <div class="col-md-4">
+                              <input class="form-control" type="file" id="formFile">
                             </div>
                           </div>
-                          <script>
-                            document.getElementById('toggleButton').addEventListener('click', function () {
-                              var cardDiv = document.getElementById('cardDiv');
-                              if (cardDiv.style.display === 'none') {
-                                cardDiv.style.display = 'block';
-                              } else {
-                                cardDiv.style.display = 'none';
-                              }
-                            });
-                          </script>
                         </div>
-
-                        <!-- Step 2: Job Status -->
-                        <div id="step2" class="step-content">
-                          <h3>Inscriptions</h3>
-
-                          <div class="card-body">
-                            <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img d-block mb-4 w-100">
-                              <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo"
-                                alt="Logo-Dark">
-                            </a>
-
-                            <form>
-                              <div class="mb-3">
-                                <label for="text-name" class="form-label">Nom</label>
-                                <input type="text" class="form-control" id="text-name" placeholder="Entrez votre nom"
-                                  aria-describedby="emailHelp">
-                              </div>
-                              <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                  placeholder="Entrez votre adresse e-mail" aria-describedby="emailHelp">
-                              </div>
-                              <div class="mb-4">
-                                <div class="d-flex align-items-center justify-content-between">
-                                  <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-                                  <a class="text-primary link-dark fs-6" href="../main/forgotpassword.html">Mot de passe
-                                    oublié ?</a>
-                                </div>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                  placeholder="Entrez votre mot de passe">
-                              </div>
-                              <a href="../main/tableau-de-bord.html"
-                                class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</a>
-                              <div class="d-flex align-items-center">
-                                <p class="fs-12 mb-0 fw-medium">Vous avez déjà un compte ?</p>
-                                <a class="text-primary fw-bolder ms-2" href="../main/login.html">Se connecter
-                                  maintenant</a>
-                              </div>
-                            </form>
+                        <div class="mb-3">
+                          <div class="row align-items-center">
+                            <!-- Age Label and Input -->
+                            <label class="col-md-2 form-label">Extrait Bancaire</label>
+                            <div class="col-md-4">
+                              <input class="form-control" type="file" id="formFile">
+                            </div>
+                      
+                            <!-- Phone Label and Input -->
+                            <label class="col-md-2 form-label">Contrat</label>
+                            <div class="col-md-4">
+                              <input class="form-control" type="file" id="formFile">
+                            </div>
                           </div>
-
                         </div>
+                        
+                      </div>
+                    </div>
 
-                        <!-- Navigation Buttons -->
-                        <div class="d-flex justify-content-between mt-3">
-                          <button id="prevBtn" class="btn btn-secondary" disabled>Précédent</button>
-                          <button id="nextBtn" class="btn btn-primary">Suivant</button>
+                    <!-- Step 4 -->
+                    <div class="step" id="step4">
+                      <h3>les données du co-emprunteur</h3>
+                      <!-- Add additional information fields -->
+                      <div class="card">
+                        <div class="card-body p-2">
+                          <form action="#">
+                            <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
+                            <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
+                              <div class="form-body p-3 border rounded col-12 col-md-6 col-lg-7">
+                                <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                                  <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                                    <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
+                                      style="color: #22825d"></iconify-icon>
+                                  </span>
+                                  <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Nom, prénom</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-6 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="John">
+                                        </div>
+                                        <div class="col-md-6">
+                                          <input type="text" class="form-control" placeholder="Doe">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Age</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="35 Ans">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Téléphone</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="+1-202-555-0116">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Email</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="john.doe@gmail.com">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Adresse</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control"
+                                            placeholder="12 rue de la Croissant. Appartement 3D. 56000">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Profession</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control"
+                                            placeholder="Ingénieur Informatique">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Salaire Brut</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="3500€">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Statut</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="Célibataire">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-body p-3 my-1 mx-1 border rounded col-12 col-md-6 col-lg-5">
+                                <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                                  <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                                    <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
+                                      style="color: #22825d"></iconify-icon>
+                                  </span>
+                                  <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Montant souhaité</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="150.000€"
+                                            id="montant1" name="montant1" readonly>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">D.Remboursement</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="24 mois" id="duree1"
+                                            name="duree1" readonly>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Type de maison</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="520€" id="typeMaison1"
+                                          name="typeMaison1" readonly>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Montant total dû</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="170.000€" id="total1"
+                                            name="total1" readonly>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                                  <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                                    <iconify-icon icon="ic:outline-book" width="2em" height="2em"
+                                      style="color: #22825d"></iconify-icon>
+                                  </span>
+                                  <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Fichier de paie</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Attestation Salaire</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Extrait Bancaire</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Contrat</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>                          
+                          </form>
                         </div>
                       </div>
                     </div>
+
+                    <!-- Step 5 -->
+                    <div class="step" id="step5">
+                      <h3>Inscription</h3>
+                      <!-- Add confirmation details -->
+                      <div class="card-body">
+                        <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img d-block mb-4 w-100">
+                          <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo"
+                            alt="Logo-Dark">
+                        </a>
+
+                        <form>
+                          <div class="mb-3">
+                            <label for="text-name" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="text-name" placeholder="Entrez votre nom"
+                              aria-describedby="emailHelp">
+                          </div>
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                              placeholder="Entrez votre adresse e-mail" aria-describedby="emailHelp">
+                          </div>
+                          <div class="mb-4">
+                            <div class="d-flex align-items-center justify-content-between">
+                              <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                              <a class="text-primary link-dark fs-6 text-decoration-none" href="../main/forgotpassword.html">Mot de passe
+                                oublié ?</a>
+                            </div>
+                            <input type="password" class="form-control" id="exampleInputPassword1"
+                              placeholder="Entrez votre mot de passe">
+                          </div>
+                          <a href="../main/tableau-de-bord.html"
+                            class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</a>
+                          <div class="d-flex align-items-center">
+                            <p class="fs-12 mb-0 fw-medium">Vous avez déjà un compte ?</p>
+                            <a class="text-primary fw-bolder ms-2 text-decoration-none" href="../main/login.html">Se connecter
+                              maintenant</a>
+                          </div>
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="mt-3 d-flex justify-content-between">
+                    <button class="btn btn-secondary" id="prevBtn" disabled>Précédent</button>
+                    <button class="btn btn-primary" id="nextBtn" disabled>Suivant</button>
                   </div>
                 </div>
 
-                <!-- Bootstrap 5 JS and dependencies -->
-                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
-                <!-- Custom JS for stepper functionality -->
-                <script>
-                  document.addEventListener('DOMContentLoaded', function () {
-                    const step1 = document.getElementById('step1');
-                    const step2 = document.getElementById('step2');
-                    const prevBtn = document.getElementById('prevBtn');
-                    const nextBtn = document.getElementById('nextBtn');
-
-                    nextBtn.addEventListener('click', function () {
-                      if (step1.classList.contains('active')) {
-                        step1.classList.remove('active');
-                        step2.classList.add('active');
-                        prevBtn.disabled = false;
-                        nextBtn.textContent = "S'inscrire";
-                      } else {
-                        alert('Form submitted successfully!');
-                        // You can add form submission logic here
+                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                <script
+                  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+                  <script>
+                    $(document).ready(function() {
+                      let currentStep = 1;
+                      let totalSteps = 5;
+                      let isTwoPersons = false;
+                
+                      // Ensure only one checkbox is checked at a time
+                      $('input[name="person"]').change(function() {
+                        $('input[name="person"]').not(this).prop('checked', false);
+                        isTwoPersons = $('#2persons').is(':checked');
+                        updateSteps();
+                      });
+                
+                      function updateSteps() {
+                        $('.step').removeClass('active');
+                        $(`#step${currentStep}`).addClass('active');
+                
+                        // Disable "Précédent" button on the first step
+                        $('#prevBtn').prop('disabled', currentStep === 1);
+                
+                        // Disable "Suivant" button on the first step if no checkbox is selected
+                        if (currentStep === 1) {
+                          const isCheckboxSelected = $('#1person').is(':checked') || $('#2persons').is(':checked');
+                          $('#nextBtn').prop('disabled', !isCheckboxSelected);
+                        } else {
+                          // Disable "Suivant" button on the last step
+                          $('#nextBtn').prop('disabled', currentStep === totalSteps);
+                        }
                       }
+                
+                      $('#nextBtn').click(function() {
+                        if (currentStep < totalSteps) {
+                          currentStep++;
+                          // Skip Step 4 if "1 Person" is selected
+                          if (currentStep === 4 && !isTwoPersons) {
+                            currentStep++; // Skip to Step 5
+                          }
+                          updateSteps();
+                        }
+                      });
+                
+                      $('#prevBtn').click(function() {
+                        if (currentStep > 1) {
+                          currentStep--;
+                          // Skip Step 4 if "1 Person" is selected
+                          if (currentStep === 4 && !isTwoPersons) {
+                            currentStep--; // Go back to Step 3
+                          }
+                          updateSteps();
+                        }
+                      });
+                
+                      updateSteps();
                     });
+                  </script>
 
-                    prevBtn.addEventListener('click', function () {
-                      if (step2.classList.contains('active')) {
-                        step2.classList.remove('active');
-                        step1.classList.add('active');
-                        prevBtn.disabled = true;
-                        nextBtn.textContent = 'Suivant';
-                      }
-                    });
-                  });
-                </script>
-                <!-- Stepper -->
-                <!-- script for retreiving data from similator -->
-                <script>
-                  // Function to get URL parameters
-                  function getParameterByName(name, url = window.location.href) {
-                    name = name.replace(/[\[\]]/g, '\\$&');
-                    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                      results = regex.exec(url);
-                    if (!results) return null;
-                    if (!results[2]) return '';
-                    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-                  }
 
-                  // Retrieve the data from the URL
-                  const montant = getParameterByName('montant');
-                  const duree = getParameterByName('duree');
-                  const typeMaison = getParameterByName('typeMaison');
-                  const total = getParameterByName('total');
+<!-- retrieve data from stepper-->
+<script>
+  // Function to get URL parameters
+  function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
 
-                  // Populate the inputs with the data
-                  document.getElementById('montant').value = montant + ' €';
-                  document.getElementById('duree').value = duree + ' mois';
-                  document.getElementById('typeMaison').value = typeMaison;
-                  document.getElementById('total').value = total + ' €';
+  // Retrieve the data from the URL
+  const montant = getParameterByName('montant');
+  const duree = getParameterByName('duree');
+  const typeMaison = getParameterByName('typeMaison');
+  const total = getParameterByName('total');
 
-                  // Retrieve the data from the URL
-                  const montant1 = getParameterByName('montant');
-                  const duree1 = getParameterByName('duree');
-                  const typeMaison1 = getParameterByName('typeMaison');
-                  const total1 = getParameterByName('total');
+  // Populate the inputs with the data
+  document.getElementById('montant').value = montant + ' €';
+  document.getElementById('duree').value = duree + ' mois';
+  document.getElementById('typeMaison').value = typeMaison;
+  document.getElementById('total').value = total + ' €';
 
-                  // Populate the inputs with the data
-                  document.getElementById('montant1').value = montant + ' €';
-                  document.getElementById('duree1').value = duree + ' mois';
-                  document.getElementById('typeMaison1').value = typeMaison;
-                  document.getElementById('total1').value = total + ' €';
-                </script>
-                <!-- script for retreiving data from similator -->
+  // Retrieve the data from the URL
+  const montant1 = getParameterByName('montant');
+  const duree1 = getParameterByName('duree');
+  const typeMaison1 = getParameterByName('typeMaison');
+  const total1 = getParameterByName('total');
 
+  // Populate the inputs with the data
+  document.getElementById('montant1').value = montant + ' €';
+  document.getElementById('duree1').value = duree + ' mois';
+  document.getElementById('typeMaison1').value = typeMaison;
+  document.getElementById('total1').value = total + ' €';
+</script>
+<!-- retrieve data from stepper-->
                 <!-- ------------------------------------------------- -->
               </div>
             </div>
