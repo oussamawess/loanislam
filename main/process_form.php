@@ -7,12 +7,26 @@ function sanitize($data) {
 }
 
 // Function to handle file upload
+// Function to handle file upload and save it in "files" directory
 function uploadFile($file) {
     if (isset($_FILES[$file]) && $_FILES[$file]['error'] === UPLOAD_ERR_OK) {
-        return file_get_contents($_FILES[$file]['tmp_name']); // Convert file to blob
+        $uploadDir = 'files/'; // Folder to store uploaded files
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true); // Create folder if it doesn't exist
+        }
+
+        $originalName = $_FILES[$file]['name'];
+        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+        $uniqueName = uniqid('file_', true) . '.' . $extension; // Generate unique filename
+        $uploadPath = $uploadDir . $uniqueName; // Full path to save the file
+
+        if (move_uploaded_file($_FILES[$file]['tmp_name'], $uploadPath)) {
+            return $uploadPath; // Return the saved file path
+        }
     }
-    return ""; // Return empty string instead of NULL
+    return null; // Return null if upload fails
 }
+
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
