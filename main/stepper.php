@@ -790,46 +790,60 @@
 
                       <!-- Step 5 -->
                       <div class="step" id="step5">
-                        <h3>Inscription</h3>
-                        <!-- Add confirmation details -->
-                        <div class="card-body">
-                          <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img d-block mb-4 w-100">
-                            <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo" alt="Logo-Dark">
-                          </a>
+  <h3>Inscription</h3>
+  <!-- Error message placeholder -->
+  <div id="error-message" class="alert alert-danger" style="display: none;"></div>
 
+  <!-- Add your form fields here -->
+  <div class="mb-3">
+    <label for="text-name" class="form-label">Nom</label>
+    <input type="text" name="nom_user" class="form-control" id="text-name" placeholder="Entrez votre nom" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
+    <input type="email" name="mail_user" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" required>
+  </div>
+  <div class="mb-4">
+    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+    <input type="password" name="password_user" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe" required>
+  </div>
+  <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</button>
+</div>
 
-                          <div class="mb-3">
-                            <label for="text-name" class="form-label">Nom</label>
-                            <input type="text" name="nom_user" class="form-control" id="text-name" placeholder="Entrez votre nom"
-                              aria-describedby="emailHelp">
-                          </div>
-                          <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
-                            <input type="email" name="mail_user" class="form-control" id="exampleInputEmail1"
-                              placeholder="Entrez votre adresse e-mail" aria-describedby="emailHelp">
-                          </div>
-                          <div class="mb-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                              <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-                              <a class="text-primary link-dark fs-6 text-decoration-none"
-                                href="../main/forgotpassword.html">Mot de passe
-                                oublié ?</a>
-                            </div>
-                            <input type="password" name="password_user" class="form-control" id="exampleInputPassword1"
-                              placeholder="Entrez votre mot de passe">
-                          </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Handle form submission
+    $('#multiStepForm').on('submit', function(e) {
+      e.preventDefault(); // Prevent the default form submission
 
-                          <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</button>
-                          <div class="d-flex align-items-center">
-                            <p class="fs-12 mb-0 fw-medium">Vous avez déjà un compte ?</p>
-                            <a class="text-primary fw-bolder ms-2 text-decoration-none" href="../main/login.html">Se
-                              connecter
-                              maintenant</a>
-                          </div>
+      // Serialize form data
+      const formData = $(this).serialize();
 
-                        </div>
-
-                      </div>
+      // Send AJAX request
+      $.ajax({
+        url: 'process_form.php', // URL to the PHP script
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+          if (response.status === "success") {
+            // Redirect or show success message
+           
+            window.location.href = "login.php"; // Redirect to login page
+          } else if (response.status === "error") {
+            // Display error message in step5
+            $('#step5 #error-message').text(response.message).show();
+          }
+        },
+        error: function(xhr, status, error) {
+          // Handle AJAX errors
+          $('#step5 #error-message').text("Une erreur s'est produite. Veuillez réessayer.").show();
+        }
+      });
+    });
+  });
+</script>
                     </form>
                   </div>
 
