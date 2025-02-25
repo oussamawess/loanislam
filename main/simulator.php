@@ -267,7 +267,7 @@
             const total = mensualite * duree;
 
             // Create a URL with the data as parameters
-            const url = `stepper.html?montant=${montant}&duree=${duree}&typeMaison=${typeMaison}&total=${total.toFixed(2)}`;
+            const url = `stepper.php?montant=${montant}&duree=${duree}&typeMaison=${typeMaison}&total=${total.toFixed(2)}`;
 
             // Open the new page with the data
             window.open(url, '_blank');

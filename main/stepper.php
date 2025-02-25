@@ -24,6 +24,13 @@
       display: block;
     }
 
+    .error-message {
+      color: red;
+      font-size: 12px;
+      display: none;
+      /* Hide by default */
+    }
+
     /* Add your custom CSS here */
     .flex-container {
       display: flex;
@@ -255,292 +262,296 @@
             <div class="card mb-0 bg-body auth-login m-auto w-100">
               <div class="row gx-0">
                 <!-- ------------------------------------------------- -->
+
                 <!-- Stepper -->
                 <div class="container my-4">
                   <div class="stepper">
-                    <!-- Step 1 -->
-                    <div class="container mt-5">
-                      <div class="step active" id="step1">
-                        <h3>Sélectionnez le nombre de personnes</h3>
-                        <div class="c-selection selection-gap">
-                          <div class="c-selection-card js-1person">
-                            <div class="c-selection-card__header">
-                              <div class="flex-container">
-                                <div class="flex-check">
-                                  <input id="1person" name="person" class="c-selection-card__selector" type="radio"
-                                    value="1" />
-                                  <label for="1person">
-                                    <div class="control__indicator"></div>
-                                  </label>
+                    <form id="multiStepForm" method="POST" action="process_form.php" enctype="multipart/form-data">
+                      <!-- Step 1 -->
+                      <div class="container mt-5">
+                        <div class="step active" id="step1">
+                          <h3>Sélectionnez le nombre de personnes</h3>
+                          <div class="c-selection selection-gap">
+                            <div class="c-selection-card js-1person">
+                              <div class="c-selection-card__header">
+                                <div class="flex-container">
+                                  <div class="flex-check">
+                                    <input id="1person" name="1person" class="c-selection-card__selector" type="radio"
+                                      value="1" />
+                                    <label for="1person">
+                                      <div class="control__indicator"></div>
+                                    </label>
+                                  </div>
+                                  <div class="center">
+                                    <div class="c-selection-card__heading">
+                                      1 Personne
+                                    </div>
+                                  </div>
+                                  <div class="flex-title"></div>
                                 </div>
-                                <div class="center">
-                                  <div class="c-selection-card__heading">
-                                    1 Personne
+                              </div>
+                              <div class="c-selection-card__body">
+                                <div class="c-selection-card__price">
+                                  <iconify-icon icon="material-symbols:person" width="1.2em" height="1.2em"
+                                    style="color: #22825d"></iconify-icon>
+                                </div>
+                                <div class="c-selection-card__frequency">
+                                  text text
+                                </div>
+                              </div>
+                              <div class="c-selection-card__footer">
+                                <div class="footer-item-left">text text</div>
+                                <div class="footer-item-right">text text</div>
+                              </div>
+                            </div>
+
+                            <div class="c-selection-card js-2persons">
+                              <div class="c-selection-card__header">
+                                <div class="flex-container">
+                                  <div class="flex-check">
+                                    <input id="2persons" name="2person" class="c-selection-card__selector" type="radio"
+                                      value="2" />
+                                    <label for="2persons">
+                                      <div class="control__indicator"></div>
+                                    </label>
+                                  </div>
+                                  <div class="center">
+                                    <div class="c-selection-card__heading">
+                                      2 Personnes
+                                    </div>
+                                  </div>
+                                  <div class="flex-title"></div>
+                                </div>
+                              </div>
+                              <div class="c-selection-card__body">
+                                <div class="c-selection-card__price">
+                                  <iconify-icon icon="material-symbols:group" width="1.2em" height="1.2em"
+                                    style="color: #22825d"></iconify-icon>
+                                </div>
+                                <div class="c-selection-card__frequency">
+                                  text text
+                                </div>
+                              </div>
+                              <div class="c-selection-card__footer">
+                                <div class="footer-item-left text-grey">text text</div>
+                                <div class="footer-item-right">text text</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+
+                      <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                      <script>
+                        $(document).ready(function() {
+                          $(".js-1person").click(function() {
+                            $("#1person").prop("checked", true);
+                            $("#2persons").prop("checked", false);
+
+                            $('.js-1person').addClass('selected');
+                            $('.js-2persons').removeClass('selected');
+                          });
+
+                          $(".js-2persons").click(function() {
+                            $("#1person").prop("checked", false);
+                            $("#2persons").prop("checked", true);
+
+                            $('.js-1person').removeClass('selected');
+                            $('.js-2persons').addClass('selected');
+                          });
+                        });
+                      </script> -->
+                      <!-- Step 2 -->
+                      <div class="step" id="step2">
+                        <h3>Détails personnels</h3>
+                        <!-- Add form fields for Person 1 -->
+                        <div class="form-body p-3 border rounded col-12 col-md-12 col-lg-12">
+                          <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                            <span
+                              class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                              <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
+                                style="color: #22825d"></iconify-icon>
+                            </span>
+                            <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
+                          </div>
+
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Nom</label>
+                              <div class="col-md-4">
+                                <input type="text" name="nom_client" class="form-control" placeholder="John" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
+                              </div>
+
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">prénom</label>
+                              <div class="col-md-4">
+                                <input type="text" name="prenom_client" class="form-control" placeholder="Doe" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Age</label>
+                              <div class="col-md-4">
+                                <input type="number" name="age_client" class="form-control" placeholder="35 Ans">
+                              </div>
+
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">Téléphone</label>
+                              <div class="col-md-4">
+                                <input type="text" name="telephone_client" class="form-control" placeholder="+1-202-555-0116">
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Email</label>
+                              <div class="col-md-4">
+                                <input type="text" name="email_client" class="form-control" placeholder="john.doe@gmail.com">
+                              </div>
+
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">Adresse</label>
+                              <div class="col-md-4">
+                                <input type="text" name="adresse_client" class="form-control"
+                                  placeholder="12 rue de la Croissant. Appartement 3D. 56000">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Profession</label>
+                              <div class="col-md-4">
+                                <input type="text" name="profession_client" class="form-control" placeholder="Ingénieur Informatique">
+                              </div>
+
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">Salaire Brut</label>
+                              <div class="col-md-4">
+                                <input type="number" name="salaire_client" class="form-control" placeholder="3500€">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-2 form-label">Statut</label>
+                              <div class="col-lg-4">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" name="statut_civil_client" class="form-control" placeholder="Célibataire">
                                   </div>
                                 </div>
-                                <div class="flex-title"></div>
                               </div>
-                            </div>
-                            <div class="c-selection-card__body">
-                              <div class="c-selection-card__price">
-                                <iconify-icon icon="material-symbols:person" width="1.2em" height="1.2em"
-                                  style="color: #22825d"></iconify-icon>
-                              </div>
-                              <div class="c-selection-card__frequency">
-                                text text
-                              </div>
-                            </div>
-                            <div class="c-selection-card__footer">
-                              <div class="footer-item-left">text text</div>
-                              <div class="footer-item-right">text text</div>
                             </div>
                           </div>
 
-                          <div class="c-selection-card js-2persons">
-                            <div class="c-selection-card__header">
-                              <div class="flex-container">
-                                <div class="flex-check">
-                                  <input id="2persons" name="person" class="c-selection-card__selector" type="radio"
-                                    value="2" />
-                                  <label for="2persons">
-                                    <div class="control__indicator"></div>
-                                  </label>
-                                </div>
-                                <div class="center">
-                                  <div class="c-selection-card__heading">
-                                    2 Personnes
-                                  </div>
-                                </div>
-                                <div class="flex-title"></div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Montant souhaité</label>
+                              <div class="col-md-4">
+                                <input type="text" name="montant" class="form-control" placeholder="150.000€" id="montant"
+                                  readonly>
                               </div>
-                            </div>
-                            <div class="c-selection-card__body">
-                              <div class="c-selection-card__price">
-                                <iconify-icon icon="material-symbols:group" width="1.2em" height="1.2em"
-                                  style="color: #22825d"></iconify-icon>
+
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">D.Remboursement</label>
+                              <div class="col-md-4">
+                                <input type="text" name="duree" class="form-control" placeholder="24 mois" id="duree"
+                                  readonly>
                               </div>
-                              <div class="c-selection-card__frequency">
-                                text text
-                              </div>
-                            </div>
-                            <div class="c-selection-card__footer">
-                              <div class="footer-item-left text-grey">text text</div>
-                              <div class="footer-item-right">text text</div>
                             </div>
                           </div>
+
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Type de maison</label>
+                              <div class="col-md-4">
+                                <input type="text" name="typeMaison" class="form-control" placeholder="Neuve" id="typeMaison"
+                                  readonly>
+                              </div>
+
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">Montant total dû</label>
+                              <div class="col-md-4">
+                                <input type="text" name="total" class="form-control" placeholder="170.000€" id="total"
+                                  readonly>
+                              </div>
+                            </div>
+                          </div>
+
+
                         </div>
                       </div>
-                    </div>
 
-                    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-                    <script>
-                      $(document).ready(function () {
-                        $(".js-1person").click(function () {
-                          $("#1person").prop("checked", true);
-                          $("#2persons").prop("checked", false);
-
-                          $('.js-1person').addClass('selected');
-                          $('.js-2persons').removeClass('selected');
-                        });
-
-                        $(".js-2persons").click(function () {
-                          $("#1person").prop("checked", false);
-                          $("#2persons").prop("checked", true);
-
-                          $('.js-1person').removeClass('selected');
-                          $('.js-2persons').addClass('selected');
-                        });
-                      });
-                    </script>
-
-                    <!-- Step 2 -->
-                    <div class="step" id="step2">
-                      <h3>Détails personnels</h3>
-                      <!-- Add form fields for Person 1 -->
-                      <div class="form-body p-3 border rounded col-12 col-md-12 col-lg-12">
-                        <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                          <span
-                            class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                            <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
-                              style="color: #22825d"></iconify-icon>
-                          </span>
-                          <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
-                        </div>
-
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Nom</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="John">
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">prénom</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="Doe">
-                            </div>
+                      <!-- Step 3 -->
+                      <div class="step" id="step3">
+                        <h3>Fichiers</h3>
+                        <!-- Add form fields for Person 2 -->
+                        <div class="form-body p-3 border rounded col-12 col-md-12 col-lg-12">
+                          <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                            <span
+                              class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                              <iconify-icon icon="ic:outline-book" width="2em" height="2em"
+                                style="color: #22825d"></iconify-icon>
+                            </span>
+                            <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
                           </div>
-                        </div>
 
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Age</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="35 Ans">
-                            </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Fichier de paie</label>
+                              <div class="col-md-4">
+                                <input class="form-control" name="fichier_paie_client" type="file" id="formFile">
+                              </div>
 
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">Téléphone</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="+1-202-555-0116">
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Email</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="john.doe@gmail.com">
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">Adresse</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control"
-                                placeholder="12 rue de la Croissant. Appartement 3D. 56000">
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Profession</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="Ingénieur Informatique">
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">Salaire Brut</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="3500€">
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <label class="col-lg-2 form-label">Statut</label>
-                            <div class="col-lg-4">
-                              <div class="row">
-                                <div class="col-md-12 mb-2 mb-md-0">
-                                  <input type="text" class="form-control" placeholder="Célibataire">
-                                </div>
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">Attestation Salaire</label>
+                              <div class="col-md-4">
+                                <input class="form-control" name="attestation_salaire_client" type="file" id="formFile">
                               </div>
                             </div>
                           </div>
-                        </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <!-- Age Label and Input -->
+                              <label class="col-md-2 form-label">Extrait Bancaire</label>
+                              <div class="col-md-4">
+                                <input class="form-control" name="extrait_salaire_client" type="file" id="formFile">
+                              </div>
 
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Montant souhaité</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="150.000€" id="montant" name="montant"
-                                readonly>
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">D.Remboursement</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="24 mois" id="duree" name="duree"
-                                readonly>
+                              <!-- Phone Label and Input -->
+                              <label class="col-md-2 form-label">Contrat</label>
+                              <div class="col-md-4">
+                                <input class="form-control" name="contrat_client" type="file" id="formFile">
+                              </div>
                             </div>
                           </div>
+
                         </div>
-
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Type de maison</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="" id="typeMaison" name="typeMaison"
-                                readonly>
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">Montant total dû</label>
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" placeholder="170.000€" id="total" name="total"
-                                readonly>
-                            </div>
-                          </div>
-                        </div>
-
-
                       </div>
-                    </div>
 
-                    <!-- Step 3 -->
-                    <div class="step" id="step3">
-                      <h3>Fichiers</h3>
-                      <!-- Add form fields for Person 2 -->
-                      <div class="form-body p-3 border rounded col-12 col-md-12 col-lg-12">
-                        <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                          <span
-                            class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                            <iconify-icon icon="ic:outline-book" width="2em" height="2em"
-                              style="color: #22825d"></iconify-icon>
-                          </span>
-                          <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
-                        </div>
+                      <!-- Step 4 -->
+                      <div class="step" id="step4">
+                        <h3>les données du co-emprunteur</h3>
+                        <!-- Add additional information fields -->
+                        <div class="card">
+                          <div class="card-body p-2">
 
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Fichier de paie</label>
-                            <div class="col-md-4">
-                              <input class="form-control" type="file" id="formFile">
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">Attestation Salaire</label>
-                            <div class="col-md-4">
-                              <input class="form-control" type="file" id="formFile">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <div class="row align-items-center">
-                            <!-- Age Label and Input -->
-                            <label class="col-md-2 form-label">Extrait Bancaire</label>
-                            <div class="col-md-4">
-                              <input class="form-control" type="file" id="formFile">
-                            </div>
-
-                            <!-- Phone Label and Input -->
-                            <label class="col-md-2 form-label">Contrat</label>
-                            <div class="col-md-4">
-                              <input class="form-control" type="file" id="formFile">
-                            </div>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="step" id="step4">
-                      <h3>les données du co-emprunteur</h3>
-                      <!-- Add additional information fields -->
-                      <div class="card">
-                        <div class="card-body p-2">
-                          <form action="#">
                             <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
                             <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
                               <div class="form-body p-3 border rounded col-12 col-md-6 col-lg-7">
@@ -558,10 +569,10 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-6 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="John">
+                                          <input type="text" name="nom_partner" class="form-control" placeholder="John">
                                         </div>
                                         <div class="col-md-6">
-                                          <input type="text" class="form-control" placeholder="Doe">
+                                          <input type="text" name="prenom_partner" class="form-control" placeholder="Doe">
                                         </div>
                                       </div>
                                     </div>
@@ -573,7 +584,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="35 Ans">
+                                          <input type="number" name="age_partner" class="form-control" placeholder="35 Ans">
                                         </div>
                                       </div>
                                     </div>
@@ -585,7 +596,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="+1-202-555-0116">
+                                          <input type="text" name="telephone_partner" class="form-control" placeholder="+1-202-555-0116">
                                         </div>
                                       </div>
                                     </div>
@@ -597,7 +608,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="john.doe@gmail.com">
+                                          <input type="text" name="email_partner" class="form-control" placeholder="john.doe@gmail.com">
                                         </div>
                                       </div>
                                     </div>
@@ -609,7 +620,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control"
+                                          <input type="text" name="adresse_partner" class="form-control"
                                             placeholder="12 rue de la Croissant. Appartement 3D. 56000">
                                         </div>
                                       </div>
@@ -622,7 +633,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="Ingénieur Informatique">
+                                          <input type="text" name="profession_partner" class="form-control" placeholder="Ingénieur Informatique">
                                         </div>
                                       </div>
                                     </div>
@@ -634,7 +645,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="3500€">
+                                          <input type="number" name="salaire_partner" class="form-control" placeholder="3500€">
                                         </div>
                                       </div>
                                     </div>
@@ -646,7 +657,7 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="Célibataire">
+                                          <input type="text" name="statut_civil_partner" class="form-control" placeholder="Célibataire">
                                         </div>
                                       </div>
                                     </div>
@@ -694,7 +705,7 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" class="form-control" placeholder="520€" id="typeMaison1"
+                                          <input type="text" class="form-control" placeholder="Neuve" id="typeMaison1"
                                             name="typeMaison1" readonly>
                                         </div>
                                       </div>
@@ -728,7 +739,7 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" type="file" id="formFile">
+                                          <input class="form-control" name="fichier_paie_partner" type="file" id="formFile">
                                         </div>
                                       </div>
                                     </div>
@@ -740,7 +751,7 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" type="file" id="formFile">
+                                          <input class="form-control" name="attestation_salaire_partner" type="file" id="formFile">
                                         </div>
                                       </div>
                                     </div>
@@ -752,7 +763,7 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" type="file" id="formFile">
+                                          <input class="form-control" name="extrait_salaire_partner" type="file" id="formFile">
                                         </div>
                                       </div>
                                     </div>
@@ -764,7 +775,7 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" type="file" id="formFile">
+                                          <input class="form-control" name="contrat_partner" type="file" id="formFile">
                                         </div>
                                       </div>
                                     </div>
@@ -772,29 +783,29 @@
                                 </div>
                               </div>
                             </div>
-                          </form>
+
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <!-- Step 5 -->
-                    <div class="step" id="step5">
-                      <h3>Inscription</h3>
-                      <!-- Add confirmation details -->
-                      <div class="card-body">
-                        <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img d-block mb-4 w-100">
-                          <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo" alt="Logo-Dark">
-                        </a>
+                      <!-- Step 5 -->
+                      <div class="step" id="step5">
+                        <h3>Inscription</h3>
+                        <!-- Add confirmation details -->
+                        <div class="card-body">
+                          <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img d-block mb-4 w-100">
+                            <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo" alt="Logo-Dark">
+                          </a>
 
-                        <form>
+
                           <div class="mb-3">
                             <label for="text-name" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="text-name" placeholder="Entrez votre nom"
+                            <input type="text" name="nom_user" class="form-control" id="text-name" placeholder="Entrez votre nom"
                               aria-describedby="emailHelp">
                           </div>
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
+                            <input type="email" name="mail_user" class="form-control" id="exampleInputEmail1"
                               placeholder="Entrez votre adresse e-mail" aria-describedby="emailHelp">
                           </div>
                           <div class="mb-4">
@@ -804,21 +815,22 @@
                                 href="../main/forgotpassword.html">Mot de passe
                                 oublié ?</a>
                             </div>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
+                            <input type="password" name="password_user" class="form-control" id="exampleInputPassword1"
                               placeholder="Entrez votre mot de passe">
                           </div>
-                          <a href="../main/tableau-de-bord.html"
-                            class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</a>
+
+                          <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</button>
                           <div class="d-flex align-items-center">
                             <p class="fs-12 mb-0 fw-medium">Vous avez déjà un compte ?</p>
                             <a class="text-primary fw-bolder ms-2 text-decoration-none" href="../main/login.html">Se
                               connecter
                               maintenant</a>
                           </div>
-                        </form>
-                      </div>
 
-                    </div>
+                        </div>
+
+                      </div>
+                    </form>
                   </div>
 
                   <div class="mt-3 d-flex justify-content-between">
@@ -827,17 +839,121 @@
                   </div>
                 </div>
 
+
                 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+    let totalSteps = 5;
+    let isTwoPersons = false;
+
+    // Card Selection Logic
+    $(".js-1person").click(function() {
+      $("#1person").prop("checked", true);
+      $("#2persons").prop("checked", false);
+      isTwoPersons = false;
+      $('.js-1person').addClass('selected');
+      $('.js-2persons').removeClass('selected');
+      updateSteps();
+    });
+
+    $(".js-2persons").click(function() {
+      $("#1person").prop("checked", false);
+      $("#2persons").prop("checked", true);
+      isTwoPersons = true;
+      $('.js-1person').removeClass('selected');
+      $('.js-2persons').addClass('selected');
+      updateSteps();
+    });
+
+    // Stepper Logic
+    function updateSteps() {
+      $('.step').removeClass('active');
+      $(`#step${currentStep}`).addClass('active');
+
+      // Disable "Précédent" button on the first step
+      $('#prevBtn').prop('disabled', currentStep === 1);
+
+      // Enable "Suivant" button on the first step only if a radio button is selected
+      if (currentStep === 1) {
+        const isRadioSelected = $('#1person').is(':checked') || $('#2persons').is(':checked');
+        $('#nextBtn').prop('disabled', !isRadioSelected);
+      } else {
+        // Enable "Suivant" button for other steps (validation happens on click)
+        $('#nextBtn').prop('disabled', false);
+      }
+
+      // Hide "Suivant" button in Step 5
+      if (currentStep === totalSteps) {
+        $('#nextBtn').hide();
+      } else {
+        $('#nextBtn').show();
+      }
+    }
+
+    // Validate the current step and show error messages if any
+    function validateStep(step) {
+      let isValid = true;
+      $(`#step${step} input[required]`).each(function() {
+        if (!$(this).val()) {
+          isValid = false;
+          $(this).addClass('is-invalid');
+          $(this).siblings('.invalid-feedback').show(); // Show error message
+        } else {
+          $(this).removeClass('is-invalid');
+          $(this).siblings('.invalid-feedback').hide(); // Hide error message
+        }
+      });
+      return isValid;
+    }
+
+    // Next Button Click
+    $('#nextBtn').click(function() {
+      if (currentStep === 1) {
+        // For Step 1, no validation is needed (only radio button selection)
+        currentStep++;
+        updateSteps();
+      } else {
+        // For other steps, validate inputs
+        const isStepValid = validateStep(currentStep);
+        if (isStepValid) {
+          currentStep++;
+          // Skip Step 4 if "1 Person" is selected
+          if (currentStep === 4 && !isTwoPersons) {
+            currentStep++; // Skip to Step 5
+          }
+          updateSteps();
+        }
+      }
+    });
+
+    // Previous Button Click
+    $('#prevBtn').click(function() {
+      if (currentStep > 1) {
+        currentStep--;
+        // Skip Step 4 if "1 Person" is selected
+        if (currentStep === 4 && !isTwoPersons) {
+          currentStep--; // Go back to Step 3
+        }
+        updateSteps();
+      }
+    });
+
+    updateSteps();
+  });
+</script>
+                <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                 <script
                   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
-                  $(document).ready(function () {
+                  $(document).ready(function() {
                     let currentStep = 1;
                     let totalSteps = 5;
                     let isTwoPersons = false;
 
                     // Card Selection Logic
-                    $(".js-1person").click(function () {
+                    $(".js-1person").click(function() {
                       $("#1person").prop("checked", true);
                       $("#2persons").prop("checked", false);
                       isTwoPersons = false;
@@ -846,7 +962,7 @@
                       updateSteps();
                     });
 
-                    $(".js-2persons").click(function () {
+                    $(".js-2persons").click(function() {
                       $("#1person").prop("checked", false);
                       $("#2persons").prop("checked", true);
                       isTwoPersons = true;
@@ -873,7 +989,7 @@
                       }
                     }
 
-                    $('#nextBtn').click(function () {
+                    $('#nextBtn').click(function() {
                       if (currentStep < totalSteps) {
                         currentStep++;
                         // Skip Step 4 if "1 Person" is selected
@@ -884,7 +1000,7 @@
                       }
                     });
 
-                    $('#prevBtn').click(function () {
+                    $('#prevBtn').click(function() {
                       if (currentStep > 1) {
                         currentStep--;
                         // Skip Step 4 if "1 Person" is selected
@@ -897,8 +1013,72 @@
 
                     updateSteps();
                   });
-                </script>
+                </script> -->
 
+                <!-- script for required inputs START-->
+                <!-- <script>
+                  const form = document.getElementById("multiStepForm");
+                  const steps = document.querySelectorAll(".step");
+                  const nextBtn = document.getElementById("nextBtn");
+                  const prevBtn = document.getElementById("prevBtn");
+
+                  let currentStep = 0;
+
+                  // Function to validate required inputs in the current step
+                  function validateInputs() {
+                    let isValid = true;
+                    const currentInputs = steps[currentStep].querySelectorAll(".required");
+
+                    currentInputs.forEach(input => {
+                      const errorMessage = input.nextElementSibling;
+
+                      if (!input.value.trim()) {
+                        errorMessage.textContent = "Please fill out this field";
+                        errorMessage.style.display = "inline";
+                        isValid = false;
+                      } else {
+                        errorMessage.style.display = "none";
+                      }
+                    });
+
+                    return isValid;
+                  }
+
+                  // Function to show the current step
+                  function showStep(stepIndex) {
+                    steps.forEach((step, index) => {
+                      step.classList.toggle("active", index === stepIndex);
+                    });
+
+                    prevBtn.disabled = stepIndex === 0;
+                    nextBtn.textContent = stepIndex === steps.length - 1 ? "Submit" : "Suivant";
+                  }
+
+                  // Event listener for "Next" button
+                  nextBtn.addEventListener("click", (event) => {
+                    if (!validateInputs()) {
+                      event.preventDefault(); // Prevent going to the next step if fields are empty
+                      return;
+                    }
+
+                    if (currentStep < steps.length - 1) {
+                      currentStep++;
+                      showStep(currentStep);
+                    } else {
+                      form.submit(); // Submit the form on the last step
+                    }
+                  });
+
+                  // Event listener for "Previous" button
+                  prevBtn.addEventListener("click", () => {
+                    if (currentStep > 0) {
+                      currentStep--;
+                      showStep(currentStep);
+                    }
+                  });
+                </script> -->
+
+                <!-- script for required inputs END-->
 
                 <!-- retrieve data from stepper-->
                 <script>

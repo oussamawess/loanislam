@@ -1,0 +1,104 @@
+<?php
+require_once 'db.php';
+
+// Function to sanitize input data
+function sanitize($data) {
+    return htmlspecialchars(strip_tags(trim($data)));
+}
+
+// Function to handle file upload
+function uploadFile($file) {
+    if (isset($_FILES[$file]) && $_FILES[$file]['error'] === UPLOAD_ERR_OK) {
+        return file_get_contents($_FILES[$file]['tmp_name']); // Convert file to blob
+    }
+    return ""; // Return empty string instead of NULL
+}
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+    // Client data
+    $nom_client = sanitize($_POST['nom_client']);
+    $prenom_client = sanitize($_POST['prenom_client']);
+    $age_client = (int) $_POST['age_client'];
+    $telephone_client = sanitize($_POST['telephone_client']);
+    $email_client = filter_var($_POST['email_client'], FILTER_VALIDATE_EMAIL) ? $_POST['email_client'] : null;
+    $adresse_client = sanitize($_POST['adresse_client']);
+    $profession_client = sanitize($_POST['profession_client']);
+    $salaire_client = (float) str_replace('€', '', $_POST['salaire_client']);
+    $statut_civil_client = sanitize($_POST['statut_civil_client']);
+    $montant_souhaite = (float) str_replace('€', '', $_POST['montant']);
+    $duree_remboursement = (int) str_replace(' mois', '', $_POST['duree']);
+    $type_maison = sanitize($_POST['typeMaison']);
+    $montant_total_du = (float) str_replace('€', '', $_POST['total']);
+    $statut = "Nouvelles";
+    $have_partner = isset($_POST['2person']) ? 1 : 0; // Convert boolean to integer
+
+
+    // File uploads
+    $fichier_paie_client = uploadFile('fichier_paie_client');
+    $attestation_salaire_client = uploadFile('attestation_salaire_client');
+    $extrait_bancaire_client = uploadFile('extrait_salaire_client');
+    $contrat_client = uploadFile('contrat_client');
+
+    echo "Number of variables: " . count([$nom_client, $prenom_client, $age_client, $telephone_client, $email_client, $adresse_client, $profession_client, $salaire_client, $statut_civil_client, $montant_souhaite, $duree_remboursement, $type_maison, $montant_total_du, $statut, $have_partner, $fichier_paie_client, $attestation_salaire_client, $extrait_bancaire_client, $contrat_client]) . "\n";
+echo "Type definition string length: " . strlen("ssissssdsdidsisssss") . "\n";
+    // Insert client data
+    $stmt = $conn->prepare("INSERT INTO client (nom, prenom, age, telephone, email, adress, profession, salaire_brut, statut_civil, montant_souhaite, duree_remboursement, type_maison, montant_total_du, statut, have_partner, fichier_paie, attestation_salaire, extrait_bancaire, contrat) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssissssdsdissssssss", $nom_client, $prenom_client, $age_client, $telephone_client, $email_client, $adresse_client, $profession_client, $salaire_client, $statut_civil_client, $montant_souhaite, $duree_remboursement, $type_maison, $montant_total_du, $statut, $have_partner, $fichier_paie_client, $attestation_salaire_client, $extrait_bancaire_client, $contrat_client);
+    
+    if ($stmt->execute()) {
+        $client_id = $stmt->insert_id; // Get the last inserted client ID
+        $stmt->close();
+
+        // If the client has a partner, insert partner data
+        if ($have_partner) {
+            $nom_partner = sanitize($_POST['nom_partner']);
+            $prenom_partner = sanitize($_POST['prenom_partner']);
+            $age_partner = (int) $_POST['age_partner'];
+            $telephone_partner = sanitize($_POST['telephone_partner']);
+            $email_partner = filter_var($_POST['email_partner'], FILTER_VALIDATE_EMAIL) ? $_POST['email_partner'] : null;
+            $adresse_partner = sanitize($_POST['adresse_partner']);
+            $profession_partner = sanitize($_POST['profession_partner']);
+            $salaire_partner = (float) str_replace('€', '', $_POST['salaire_partner']);
+            $statut_civil_partner = sanitize($_POST['statut_civil_partner']);
+            $montant_souhaite_partner = (float) str_replace('€', '', $_POST['montant1']);
+            $duree_remboursement_partner = (int) str_replace(' mois', '', $_POST['duree1']);
+            $type_maison_partner = sanitize($_POST['typeMaison1']);
+            $montant_total_du_partner = (float) str_replace('€', '', $_POST['total1']);
+            $statut_partner = "Nouvelles";
+
+            // File uploads for partner
+            $fichier_paie_partner = uploadFile('fichier_paie_partner');
+            $attestation_salaire_partner = uploadFile('attestation_salaire_partner');
+            $extrait_bancaire_partner = uploadFile('extrait_salaire_partner');
+            $contrat_partner = uploadFile('contrat_partner');
+
+            // Insert partner data
+            $stmt = $conn->prepare("INSERT INTO partner (id_client, nom, prenom, age, telephone, email, adress, profession, salaire_brut, statut_civil, montant_souhaite, duree_remboursement, type_maison, montant_total_du, statut, fichier_paie, attestation_salaire, extrait_bancaire, contrat) 
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ississssdsdisssssss", $client_id, $nom_partner, $prenom_partner, $age_partner, $telephone_partner, $email_partner, $adresse_partner, $profession_partner, $salaire_partner, $statut_civil_partner, $montant_souhaite_partner, $duree_remboursement_partner, $type_maison_partner, $montant_total_du_partner, $statut_partner, $fichier_paie_partner, $attestation_salaire_partner, $extrait_bancaire_partner, $contrat_partner);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        // Insert user data
+        $nom_user = sanitize($_POST['nom_user']);
+        $email_user = filter_var($_POST['mail_user'], FILTER_VALIDATE_EMAIL) ? $_POST['mail_user'] : null;
+        $password_user = password_hash($_POST['password_user'], PASSWORD_DEFAULT); // Secure password
+        $role = "client"; // Default role
+
+        $stmt = $conn->prepare("INSERT INTO user (id_client, nom, email, password, role) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $client_id, $nom_user, $email_user, $password_user, $role);
+        $stmt->execute();
+        $stmt->close();
+
+        // Redirect to success page
+        header("Location: login.php");
+        exit();
+    } else {
+        echo "Erreur lors de l'inscription.";
+    }
+}
+?>
