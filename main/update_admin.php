@@ -57,7 +57,7 @@
                     </div>
                     <div class="sidebarmenu">
                         <div class="brand-logo d-flex align-items-center nav-logo">
-                            <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img">
+                            <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img">
                                 <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
                             </a>
 
@@ -77,7 +77,7 @@
                                 <!-- Dashboard -->
                                 <!-- ---------------------------------- -->
                                 <li class="sidebar-item" style="display: none;">
-                                    <a class="sidebar-link" href="tableau-de-bord.html" id="get-url"
+                                    <a class="sidebar-link" href="tableau-de-bord.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="solar:atom-line-duotone"></iconify-icon>
                                         <span class="hide-menu">Tableau de bord</span>
@@ -85,7 +85,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="tableau-de-bord.html" id="get-url"
+                                    <a class="sidebar-link" href="tableau-de-bord.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="mage:dashboard-fill"></iconify-icon>
                                         <span class="hide-menu">Tableau de bord</span>

@@ -35,7 +35,7 @@
                   <div class="row justify-content-center py-4">
                     <div class="col-lg-11">
                       <div class="card-body">
-                        <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img d-block mb-4 w-100">
+                        <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img d-block mb-4 w-100">
                           <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo" alt="Logo-Dark" />
                         </a>
                         <h4 class="lh-base mb-4">Connectez-vous</h4>
@@ -53,7 +53,7 @@
                             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe">
                           </div>
                           
-                          <a href="../main/tableau-de-bord.html" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Se connecter</a>
+                          <a href="../main/tableau-de-bord.php" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Se connecter</a>
                           <div class="d-flex align-items-center">
                             <p class="fs-12 mb-0 fw-medium">Vous n'avez pas encore de compte ?</p>
                             <a class="text-primary fw-bolder ms-2" href="../main/signup.html">Inscrivez-vous maintenant</a>
