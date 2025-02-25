@@ -19,6 +19,7 @@
 
 
     <link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-okaidia.min.css">
+
 </head>
 
 <body>
@@ -36,7 +37,7 @@
         </div>
     </div>
     <!-- Preloader -->
-     <div class="preloader">
+    <div class="preloader">
         <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
     </div>
     <div id="main-wrapper">
@@ -57,8 +58,8 @@
                     <div class="sidebarmenu">
                         <div class="brand-logo d-flex align-items-center nav-logo">
                             <a href="../main/tableau-de-bord.html" class="text-nowrap logo-img">
-                                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35"/>
-                              </a>
+                                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
+                            </a>
 
                         </div>
                         <!-- ---------------------------------- -->
@@ -161,7 +162,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="parametres.html" id="get-url" aria-expanded="false">
+                                    <a class="sidebar-link" href="parametres.php" id="get-url" aria-expanded="false">
                                         <iconify-icon icon="solar:settings-outline"></iconify-icon>
                                         <span class="hide-menu">Paramètres</span>
                                     </a>
@@ -173,6 +174,35 @@
                                         <span class="hide-menu">Déconnexion</span>
                                     </a>
                                 </li>
+
+                                <?php
+include 'db.php';
+
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // Get user ID from URL
+
+    // Fetch user details from the database
+    $sql = "SELECT id FROM user WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc(); // Store user data
+    } else {
+        echo "User not found.";
+        exit;
+    }
+} else {
+    echo "Invalid request.";
+    exit;
+}
+?>
+<!-- Corrected HTML with PHP embedded in href -->
+<a style="display: none;" href="update_admin.php?id=<?php echo $user['id']; ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
+
+                                
                             </ul>
                         </nav>
 
@@ -360,7 +390,7 @@
                         </ul>
 
                         <div class="d-block d-lg-none py-9 py-xl-0">
-                            <img src="../assets/images/logos/loanislam.png"  alt="matdash-img" height="35"/>
+                            <img src="../assets/images/logos/loanislam.png" alt="matdash-img" height="35" />
                         </div>
                         <a class="navbar-toggler p-0 border-0 nav-icon-hover-bg rounded-circle"
                             href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -2024,138 +2054,78 @@
                 <!-- End Sidebar scroll-->
             </aside>
 
+
+            <?php
+            include 'db.php';
+
+            if (isset($_GET['id'])) {
+                $id = intval($_GET['id']); // Get user ID from URL
+
+                // Fetch user details from the database
+                $sql = "SELECT id, nom, email, password FROM user WHERE id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $user = $result->fetch_assoc(); // Store user data
+                } else {
+                    echo "User not found.";
+                    exit;
+                }
+            } else {
+                echo "Invalid request.";
+                exit;
+            }
+            ?>
+
             <div class="body-wrapper">
                 <div class="container-fluid">
                     <div class="row">
-
-
-
-                        <!-- Start admins table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex mb-2 align-items-center">
-                                    <div>
-                                        <h5>Liste des administrateurs</h5>
-                                    </div>
-                                </div>
-                                <div class="table-responsive border rounded-1">
-                                    <table class="table text-nowrap customize-table mb-0 align-middle">
-                                        <thead class="text-dark fs-4">
-                                            <tr>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Nom</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Adresse email</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Mot de passe</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Action</h6>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">Mark</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">mark@gmail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">UQzp!*dktTp</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success">Editer</button>
-                                                    <button class="btn btn-danger">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">Mark</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">mark@gmail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">UMp?sdkss</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success">Editer</button>
-                                                    <button class="btn btn-danger">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">Mark</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">mark@gmail.com</p>
-                                                </td>
-                                                <td>
-                                                    <p class="mb-0 fw-normal fs-4 text-dark">-PMXs!Vn</p>
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-success">Editer</button>
-                                                    <button class="btn btn-danger">Supprimer</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End admins table-->
                         <!--Start add admin -->
                         <!-- Add the Font Awesome library for eye icons -->
                         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-3">Ajouter un administrateur</h4>
-                                <form id="adminForm">
+                                <h4 class="card-title mb-3">Modifier un administrateur</h4>
+                                <div id="errorMessage" class="alert alert-danger text-danger fs-4" style="display: none;"></div>
+
+                                <form id="adminForm" method="POST" action="update_admin_process.php" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="tb-fname"
-                                                    placeholder="Enter Name here" required>
+                                                <input type="text" class="form-control" id="tb-fname" name="nom" value="<?php echo $user['nom']; ?>" placeholder="Enter Name here" required>
                                                 <label for="tb-fname">Nom</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" id="tb-email"
-                                                    placeholder="name@example.com" required>
+                                                <input type="email" class="form-control" id="tb-email" name="email" value="<?php echo $user['email']; ?>" placeholder="name@example.com" required>
                                                 <label for="tb-email">Adresse email</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-pwd"
-                                                    placeholder="Password" required>
-                                                <label for="tb-pwd">Mot de passe</label>
-                                                <i id="togglePwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+                                                <input type="password" class="form-control" id="tb-pwd" name="password" placeholder="Password" required>
+                                                <label for="tb-pwd">Nouveau mot de passe</label>
+                                                <i id="togglePwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-cpwd"
-                                                    placeholder="Confirm Password" required>
-                                                <label for="tb-cpwd">Confirmer le mot de passe</label>
-                                                <i id="toggleCpwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                                <small id="passwordError" class="form-text text-danger"
-                                                    style="display:none;">Les mots de passe ne correspondent pas.
-                                                    Veuillez les vérifier.</small>
+                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword" placeholder="Confirm Password" required>
+                                                <label for="tb-cpwd">Confirmer le nouveau mot de passe</label>
+                                                <i id="toggleCpwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+                                                <small id="passwordError" class="form-text text-danger" style="display:none;">Les mots de passe ne correspondent pas. Veuillez les vérifier.</small>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-md-flex align-items-center">
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <button type="submit"
-                                                        class="btn btn-primary hstack gap-6">Ajouter</button>
+                                                    <button type="submit" class="btn btn-success hstack gap-6">Modifier</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -2163,6 +2133,40 @@
                                 </form>
                             </div>
                         </div>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                document.querySelector("#adminForm").addEventListener("submit", function(event) {
+                                    event.preventDefault(); // Prevent form from submitting normally
+
+                                    // Get form data
+                                    var formData = new FormData(this);
+
+                                    fetch('update_admin_process.php', {
+                                            method: 'POST',
+                                            body: formData
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Hide the error message initially
+                                            document.getElementById("errorMessage").style.display = "none";
+
+                                            if (data.status === "error") {
+                                                // Show the error message if there's an error
+                                                document.getElementById("errorMessage").innerHTML = data.message;
+                                                document.getElementById("errorMessage").style.display = "block";
+                                            } else {
+                                                // Success message (you can show a success message or redirect)
+                                                
+                                                window.location.href = 'parametres.php'; 
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error("Error:", error);
+                                        });
+                                });
+                            });
+                        </script>
 
                         <script>
                             // Toggle password visibility
@@ -2183,25 +2187,25 @@
                             }
 
                             // Add event listeners for both password fields
-                            document.getElementById("togglePwd").addEventListener("click", function () {
+                            document.getElementById("togglePwd").addEventListener("click", function() {
                                 togglePasswordVisibility("tb-pwd", "togglePwd");
                             });
-                            document.getElementById("toggleCpwd").addEventListener("click", function () {
+                            document.getElementById("toggleCpwd").addEventListener("click", function() {
                                 togglePasswordVisibility("tb-cpwd", "toggleCpwd");
                             });
 
                             // Form validation on submit
-                            document.getElementById("adminForm").addEventListener("submit", function (event) {
+                            document.getElementById("adminForm").addEventListener("submit", function(event) {
                                 var password = document.getElementById("tb-pwd").value;
                                 var confirmPassword = document.getElementById("tb-cpwd").value;
                                 var errorMessage = document.getElementById("passwordError");
 
                                 // Check if passwords match
                                 if (password !== confirmPassword) {
-                                    event.preventDefault();  // Prevent form submission
-                                    errorMessage.style.display = "block";  // Show error message
+                                    event.preventDefault(); // Prevent form submission
+                                    errorMessage.style.display = "block"; // Show error message
                                 } else {
-                                    errorMessage.style.display = "none";  // Hide error message if passwords match
+                                    errorMessage.style.display = "none"; // Hide error message if passwords match
                                 }
                             });
                         </script>

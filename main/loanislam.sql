@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 25 fév. 2025 à 01:59
+-- Généré le : mar. 25 fév. 2025 à 18:14
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -45,10 +45,10 @@ CREATE TABLE `client` (
   `date_creation` datetime DEFAULT current_timestamp(),
   `statut` varchar(50) NOT NULL,
   `have_partner` tinyint(1) DEFAULT 0,
-  `fichier_paie` longblob DEFAULT NULL,
-  `attestation_salaire` longblob DEFAULT NULL,
-  `extrait_bancaire` longblob DEFAULT NULL,
-  `contrat` longblob DEFAULT NULL
+  `fichier_paie` varchar(255) DEFAULT NULL,
+  `attestation_salaire` varchar(255) DEFAULT NULL,
+  `extrait_bancaire` varchar(255) DEFAULT NULL,
+  `contrat` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -64,7 +64,15 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `age`, `telephone`, `email`, `adres
 (14, 'oussama', 'ammar', 98, '+1 (445) 587-1382', 'pimutetegu@mailinator.com', 'Ipsum cumque quo inc', 'Quas temporibus repe', '5.00', 'Aut et et rem odio c', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:48:50', 'Nouvelles', 0, '', '', '', ''),
 (15, 'ammar', 'oussama', 30, '+1 (585) 177-8787', 'dafa@mailinator.com', 'Velit laborum Quis', 'Quo architecto atque', '15.00', 'Non eum rerum amet', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:50:48', 'Nouvelles', 1, '', '', '', ''),
 (16, 'nom1', 'Blanditiis enim expl', 27, '+1 (303) 211-9536', 'harok@mailinator.com', 'Sit incididunt ex u', 'Et consequuntur reru', '34.00', 'Atque consectetur re', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:55:58', 'Nouvelles', 0, '', '', '', ''),
-(18, 'nom2', 'Totam quibusdam non', 100, '+1 (366) 902-9495', 'filywo@mailinator.com', 'Officia voluptatem e', 'Sequi placeat conse', '41.00', 'Excepturi delectus', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:58:29', 'Nouvelles', 1, '', '', '', '');
+(18, 'nom2', 'Totam quibusdam non', 100, '+1 (366) 902-9495', 'filywo@mailinator.com', 'Officia voluptatem e', 'Sequi placeat conse', '41.00', 'Excepturi delectus', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:58:29', 'Nouvelles', 1, '', '', '', ''),
+(19, 'file1', 'Inventore incididunt', 45, '+1 (967) 246-4894', 'rumy@mailinator.com', 'Eos earum iusto cupi', 'Veniam ullamco ut e', '26.00', 'Minim explicabo Sus', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 02:12:12', 'Nouvelles', 1, 'files/file_67bd18ec1b6434.10111500.pdf', 'files/file_67bd18ec1bc245.82679653.pdf', 'files/file_67bd18ec1beb18.96472367.pdf', 'files/file_67bd18ec1c1191.37831046.pdf'),
+(20, 'Nulla aut cupidatat', 'Dolor sint unde inci', 84, '+1 (731) 706-7169', 'wury@mailinator.com', 'Accusamus dolores es', 'Sed nemo voluptatem', '41.00', 'Ut repudiandae magni', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 02:19:07', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
+(22, 'Sequi facere blandit', 'Commodo aperiam pers', 85, '+1 (951) 193-9161', 'fufibasobe@mailinator.com', 'Placeat qui nihil a', 'Occaecat qui rerum o', '98.00', 'Sunt sint aliquip u', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 02:20:37', 'Nouvelles', 0, 'files/file_67bd1ae54865e6.68147745.pdf', 'files/file_67bd1ae5488ca1.46884316.pdf', 'files/file_67bd1ae548b1d4.94085631.pdf', 'files/file_67bd1ae548e227.94195540.pdf'),
+(23, 'Consequuntur quia en', 'Aperiam omnis sit c', 84, '+1 (758) 415-2946', 'roweqosuse@mailinator.com', 'Nobis fugiat amet a', 'Velit aliquam lorem', '93.00', 'Laboris soluta exped', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 11:39:32', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
+(26, 'fb', 'Inventore corporis e', 77, '+1 (685) 361-8959', 'wexyfive@mailinator.com', 'Et quasi quidem rati', 'Aut aut dicta quam a', '82.00', 'Eiusmod dolor rerum', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:42:01', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
+(27, 'Pariatur Eligendi i', 'Quibusdam dolorem in', 37, '+1 (613) 174-6538', 'gywu@mailinator.com', 'Id esse sed beatae', 'Accusamus cupiditate', '20.00', 'Qui cupidatat sapien', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:43:33', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
+(28, 'Dolorem sit aperiam', 'Cupiditate aut aliqu', 67, '+1 (955) 288-7325', 'retoze@mailinator.com', 'Praesentium veniam', 'Consequuntur ex eum', '3.00', 'Consequat Vel tempo', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:44:14', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
+(29, 'Qui sapiente possimu', 'Quia tenetur quia la', 5, '+1 (361) 744-6847', 'micahic@mailinator.com', 'Soluta numquam odio', 'Non ipsum facere do', '21.00', 'Illum culpa est ei', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:45:45', 'Nouvelles', 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -104,10 +112,10 @@ CREATE TABLE `partner` (
   `montant_total_du` decimal(10,2) NOT NULL,
   `date_creation` datetime DEFAULT current_timestamp(),
   `statut` varchar(50) NOT NULL,
-  `fichier_paie` longblob DEFAULT NULL,
-  `attestation_salaire` longblob DEFAULT NULL,
-  `extrait_bancaire` longblob DEFAULT NULL,
-  `contrat` longblob DEFAULT NULL
+  `fichier_paie` varchar(255) DEFAULT NULL,
+  `attestation_salaire` varchar(255) DEFAULT NULL,
+  `extrait_bancaire` varchar(255) DEFAULT NULL,
+  `contrat` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -117,7 +125,9 @@ CREATE TABLE `partner` (
 INSERT INTO `partner` (`id`, `id_client`, `nom`, `prenom`, `age`, `telephone`, `email`, `adress`, `profession`, `salaire_brut`, `statut_civil`, `montant_souhaite`, `duree_remboursement`, `type_maison`, `montant_total_du`, `date_creation`, `statut`, `fichier_paie`, `attestation_salaire`, `extrait_bancaire`, `contrat`) VALUES
 (1, 13, 'Aliqua Officiis non', 'Sint sit occaecat cu', 77, '+1 (218) 704-7159', 'muzo@mailinator.com', 'Pariatur Fuga Fugi', 'Illum maxime quia a', '27.00', 'Lorem totam mollit a', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-22 17:20:26', 'Nouvelles', '', '', '', ''),
 (2, 15, 'wessP', 'WeessP', 94, '+1 (823) 904-7472', 'bahunejoni@mailinator.com', 'Fugit quas enim qui', 'Omnis quibusdam enim', '6.00', 'Eveniet blanditiis', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:50:48', 'Nouvelles', '', '', '', ''),
-(3, 18, 'nom2P', 'Incidunt eius sunt', 46, '+1 (553) 709-7999', 'mapuneri@mailinator.com', 'Aut earum sapiente e', 'Sequi dolor ab tempo', '65.00', 'Pariatur Officiis a', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:58:29', 'Nouvelles', '', '', '', '');
+(3, 18, 'nom2P', 'Incidunt eius sunt', 46, '+1 (553) 709-7999', 'mapuneri@mailinator.com', 'Aut earum sapiente e', 'Sequi dolor ab tempo', '65.00', 'Pariatur Officiis a', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:58:29', 'Nouvelles', '', '', '', ''),
+(4, 19, 'file 2', 'Nostrud id quibusda', 7, '+1 (868) 835-5563', 'kuzelozyci@mailinator.com', 'Sit dolore deserunt', 'Dolore dolorum dolor', '97.00', 'Autem aut qui est c', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 02:12:12', 'Nouvelles', 'files/file_67bd18ec1f9387.08954574.pdf', 'files/file_67bd18ec1fd2e4.08980689.pdf', 'files/file_67bd18ec1ff910.59865080.pdf', 'files/file_67bd18ec201da2.55450901.pdf'),
+(5, 29, 'Laboris vel suscipit', 'Explicabo Et aut ar', 37, '+1 (913) 107-6678', 'hatyqasef@mailinator.com', 'Est molestiae animi', 'Voluptatem neque est', '94.00', 'Eius aut et qui quid', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:45:45', 'Nouvelles', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,7 +137,7 @@ INSERT INTO `partner` (`id`, `id_client`, `nom`, `prenom`, `age`, `telephone`, `
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `id_client` int(11) NOT NULL,
+  `id_client` int(11) DEFAULT NULL,
   `nom` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -146,7 +156,14 @@ INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUE
 (7, 14, 'oussama', 'oussama@gmail.com', '$2y$10$gvcBZxf9sjuQbwR1nnmEpuYcSkGPsQD8RBWjsvcGB3zjSCbgtUwHu', 'client'),
 (8, 15, 'oussama', 'oussama11@gmail.com', '$2y$10$dp17iqQKMtVTsFFBWiwQ1.I./XtjRChvThZORPOYM/Bx15LnCJdAq', 'client'),
 (9, 16, 'nom1', 'nom1@gmail.com', '$2y$10$w0boQydNcwcIgEyRGbnPm.9czpvvHtnSHlLkmf3mVzE/eGI5pATPW', 'client'),
-(10, 18, 'nom2', 'nom2@gmail.com', '$2y$10$/Lpa5JaxycSf.0uwSeyO0eAtCnNCe2mIv6EAbBwyC3sCKeBQqvA42', 'client');
+(10, 18, 'nom2', 'nom2@gmail.com', '$2y$10$/Lpa5JaxycSf.0uwSeyO0eAtCnNCe2mIv6EAbBwyC3sCKeBQqvA42', 'client'),
+(11, 19, 'file 12', 'file12@gmail.com', '$2y$10$sJLFwSXXx/HGiwRi1gjl8eb8WMhcBytBpVd89QjxM2l14jjvgitGu', 'client'),
+(16, 26, 'wess', 'wess1234@gmail.com', '$2y$10$1hfFRAVnixcXGCQ/tG9TTuetY2N9.dUJE69d6k0ZLvBDsjIwbJff.', 'client'),
+(17, 27, 'wess', 'asssa@gmail.com', '$2y$10$nycemjU/9iBO1hvKebBipu5XA6IkPhC8ByvJnzbuyg4uVJf5TBvTO', 'client'),
+(18, 28, 'wess', 'wessd@gmail.com', '$2y$10$D21Cqfrq6EM9X9tRlk9eS.sJgazqX3mUaIstD.HhQFABb.uighWuK', 'client'),
+(19, 29, 'wess', 'wessa@gmail.com', '$2y$10$vJIWv8JadpF6nW2tYMqhGOM0UnqKXoutAVfzMoOhpM7nxMgkItW5K', 'client'),
+(20, NULL, 'aa', 'wescsss@gmail.com', '$2y$10$Dpa6xQuu1tw/BPY4ft9lkedh.RtBmy338Kmq067P5XC5A5Wyfze6S', 'admin'),
+(21, NULL, 'wees', 'wescss@gmail.com', '$2y$10$wfz67MHKkyghZn6YjS/50.unpeN/W11eSnZDYhFkLm68fQXra7lQq', 'admin');
 
 --
 -- Index pour les tables déchargées
@@ -190,7 +207,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT pour la table `notification`
@@ -202,13 +219,13 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT pour la table `partner`
 --
 ALTER TABLE `partner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Contraintes pour les tables déchargées
