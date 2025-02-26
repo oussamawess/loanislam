@@ -92,7 +92,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="nouvelles-demandes.html" id="get-url"
+                                    <a class="sidebar-link" href="nouvelles-demandes.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                                         <span class="hide-menu">Nouvelles demandes</span>
@@ -100,7 +100,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="en-attente-detudes.html" id="get-url"
+                                    <a class="sidebar-link" href="en-attente-detudes.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="solar:calendar-linear"></iconify-icon>
                                         <span class="hide-menu">En attente d'études</span>
@@ -108,7 +108,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="etude-en-cours.html" id="get-url"
+                                    <a class="sidebar-link" href="etude-en-cours.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="solar:server-2-outline"></iconify-icon>
                                         <span class="hide-menu">Étude en cours</span>
@@ -116,7 +116,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="en-attente-signature-contrat.html" id="get-url"
+                                    <a class="sidebar-link" href="en-attente-signature-contrat.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="solar:chart-2-outline"></iconify-icon>
                                         <span class="hide-menu">En Attente signature<br> contrat</span>
@@ -124,7 +124,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="contrat-signe.html" id="get-url"
+                                    <a class="sidebar-link" href="contrat-signe.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="mingcute:bubble-line" width="1.2em"
                                             height="1.2em"></iconify-icon>
@@ -133,7 +133,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="contrat-annule.html" id="get-url"
+                                    <a class="sidebar-link" href="contrat-annule.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="mynaui:credit-card-minus" width="1.2em"
                                             height="1.2em"></iconify-icon>
@@ -146,7 +146,7 @@
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="notifications.html" id="get-url"
+                                    <a class="sidebar-link" href="notifications.php" id="get-url"
                                         aria-expanded="false">
                                         <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
                                         <span class="hide-menu">Notifications</span>

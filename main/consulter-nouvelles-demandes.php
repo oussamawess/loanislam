@@ -90,42 +90,42 @@
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="nouvelles-demandes.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="nouvelles-demandes.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">Nouvelles demandes</span>
                   </a>
                 </li>                
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="en-attente-detudes.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="en-attente-detudes.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:calendar-linear"></iconify-icon>
                     <span class="hide-menu">En attente d'études</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="etude-en-cours.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="etude-en-cours.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:server-2-outline"></iconify-icon>
                     <span class="hide-menu">Étude en cours</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="en-attente-signature-contrat.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="en-attente-signature-contrat.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:chart-2-outline"></iconify-icon>
                     <span class="hide-menu">En Attente signature<br> contrat</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="contrat-signe.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="contrat-signe.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="mingcute:bubble-line" width="1.2em" height="1.2em"></iconify-icon>
                     <span class="hide-menu">Contrat signé</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="contrat-annule.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="contrat-annule.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="mynaui:credit-card-minus" width="1.2em" height="1.2em"></iconify-icon>
                     <span class="hide-menu">Contrat annulé</span>
                   </a>
@@ -136,7 +136,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="notifications.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="notifications.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
                     <span class="hide-menu">Notifications</span>
                   </a>
@@ -163,32 +163,40 @@
                   </a>
                 </li>
 
-                <li class="sidebar-item d-none">
-                  <a class="sidebar-link" href="consulter-nouvelles-demandes.html" id="get-url" aria-expanded="false">
+                <!-- <li class="sidebar-item d-none">
+                  <a class="sidebar-link" href="consulter-nouvelles-demandes.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">consulter Nouvelles demandes</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item d-none">
-                  <a class="sidebar-link" href="consulter-en-attente-detude.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="consulter-en-attente-detude.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">consulter en attente d'etude</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item d-none">
-                  <a class="sidebar-link" href="consulter-etude-en-cours.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="consulter-etude-en-cours.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">consulter etude en cours</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item d-none">
-                  <a class="sidebar-link" href="consulter-en-attente-signature-contrat.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="consulter-en-attente-signature-contrat.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">consulter en attente signature contrat</span>
                   </a>
+                </li> -->
+                
+
+                <li class="sidebar-item d-none">
+                  <a class="sidebar-link" href="consulter-nouvelles-demandes.php" id="get-url" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-en-attente-detude.php" id="get-url" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-etude-en-cours.php" id="get-url" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-en-attente-signature-contrat.php" id="get-url" aria-expanded="false"></a>
                 </li>
               </ul>
             </nav>
@@ -1897,7 +1905,7 @@
             <!-- start Grid With Row Label -->
             <div class="card">
               <div class="card-body p-2">
-                <h2 class="p-1 mt-3">En attente signature contrat: Demande 0152x9</h2>
+                <h2 class="p-1 mt-3">Nouvelles Demandes: Demande 0152x9</h2>
                 <form action="#">
                   <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
                   <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
@@ -2395,11 +2403,11 @@
             <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
-                  <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Retour
+                  <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
+                    Ajouter à étude en cours
                   </button>
-                  <button type="submit" class="btn-declined btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Refusé la demande
+                  <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
+                    Ajouter à en attente d'étude
                   </button>
                 </div>
               </div>

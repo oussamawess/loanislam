@@ -90,42 +90,42 @@
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="nouvelles-demandes.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="nouvelles-demandes.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">Nouvelles demandes</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="en-attente-detudes.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="en-attente-detudes.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:calendar-linear"></iconify-icon>
                     <span class="hide-menu">En attente d'études</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="etude-en-cours.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="etude-en-cours.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:server-2-outline"></iconify-icon>
                     <span class="hide-menu">Étude en cours</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="en-attente-signature-contrat.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="en-attente-signature-contrat.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:chart-2-outline"></iconify-icon>
                     <span class="hide-menu">En Attente signature<br> contrat</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="contrat-signe.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="contrat-signe.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="mingcute:bubble-line" width="1.2em" height="1.2em"></iconify-icon>
                     <span class="hide-menu">Contrat signé</span>
                   </a>
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="contrat-annule.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="contrat-annule.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="mynaui:credit-card-minus" width="1.2em" height="1.2em"></iconify-icon>
                     <span class="hide-menu">Contrat annulé</span>
                   </a>
@@ -136,7 +136,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="notifications.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="notifications.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
                     <span class="hide-menu">Notifications</span>
                   </a>
@@ -2856,7 +2856,7 @@
                       style="background-color: #22825d; border-color: #22825d;">Recherche</button>
                   </div>
                 </div>
-                <h2>Nouvelles demandes</h2>
+                <h2>Contrat annulé</h2>
                 <div class="table-container">
                   <!-- Table -->
                   <table class="table" id="dataTable">
@@ -2879,7 +2879,7 @@
                         <td>Nouvelles</td>
                         <td>3600€</td>
                         <td>151.000€</td>
-                        <td><a href="consulter-nouvelles-demandes.html"><button class="btn btn-info">Consulter</button></a></td>
+                        <td><button class="btn btn-info">Consulter</button></td>
                       </tr>
                       <tr>
                         <td>0152X9</td>
