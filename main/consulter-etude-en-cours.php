@@ -57,7 +57,7 @@
           <div class="sidebarmenu">
             <div class="brand-logo d-flex align-items-center nav-logo">
               <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35"/>
+                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
               </a>
 
             </div>
@@ -94,7 +94,7 @@
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">Nouvelles demandes</span>
                   </a>
-                </li>                
+                </li>
 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="en-attente-detudes.php" id="get-url" aria-expanded="false">
@@ -189,6 +189,30 @@
                     <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
                     <span class="hide-menu">consulter en attente signature contrat</span>
                   </a>
+                </li>
+
+                <?php
+                // Check if 'id' is set in the URL
+                if (isset($_GET['id'])) {
+                  $client_id_link = $_GET['id']; // Get the 'id' value directly from the URL (e.g., 's10')
+                } else {
+                  echo "No ID provided in the URL.";
+                }
+                ?>
+
+
+                <li class="sidebar-item d-none">
+                  <a style="display: none;" href="consulter-nouvelles-demandes.php?id=<?= htmlspecialchars($client_id_link); ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-nouvelles-demandes.php" id="get-url" aria-expanded="false"></a>
+
+                  <a style="display: none;" href="consulter-en-attente-detude.php?id=<?= htmlspecialchars($client_id_link); ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-en-attente-detude.php" id="get-url" aria-expanded="false"></a>
+
+                  <a style="display: none;" href="consulter-etude-en-cours.php?id=<?= htmlspecialchars($client_id_link); ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-etude-en-cours.php" id="get-url" aria-expanded="false"></a>
+
+                  <a style="display: none;" href="consulter-en-attente-signature-contrat.php?id=<?= htmlspecialchars($client_id_link); ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
+                  <a class="sidebar-link" href="consulter-en-attente-signature-contrat.php" id="get-url" aria-expanded="false"></a>
                 </li>
               </ul>
             </nav>
@@ -352,7 +376,7 @@
             </ul>
 
             <div class="d-block d-lg-none py-9 py-xl-0">
-              <img src="../assets/images/logos/loanislam.png"  alt="matdash-img" height="35"/>
+              <img src="../assets/images/logos/loanislam.png" alt="matdash-img" height="35" />
             </div>
             <a class="navbar-toggler p-0 border-0 nav-icon-hover-bg rounded-circle" href="javascript:void(0)"
               data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -1891,508 +1915,884 @@
       <div class="body-wrapper">
         <div class="container-fluid">
           <div class="row">
- 
-
-
-            <!-- start Grid With Row Label -->
-            <div class="card">
-              <div class="card-body p-2">
-                <h2 class="p-1 mt-3">Étude en cours: Demande 0152x9</h2>
-                <form action="#">
-                  <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
-                  <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
-                    <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
-                      <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                        <span
-                          class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                          <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
-                            style="color: #22825d"></iconify-icon>
-                        </span>
-                        <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Nom, prénom</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-6 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="John" />
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Doe" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Age</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="35 Ans" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Téléphone</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="+1-202-555-0116" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Email</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="john.doe@gmail.com" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Adresse</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control"
-                                  placeholder="12 rue de la Croissant. Appartement 3D. 56000" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Profession</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="Ingénieur Informatique" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Salaire Brut</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="3500€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Statut</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="Célibataire" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <button type="button" class="my-4 col-lg-12 col-md-12 d-flex gap-3 bg-transparent border-0"
-                          id="toggleButton">
-                          <div class="d-flex">
-                            <label class="fw-bold">Consulter les données coemprunteur</label>
-                          </div>
-                          <div class="d-flex">
-                            <iconify-icon icon="icons8:plus" width="1.5em" height="1.5em"
-                              style="color: #000"></iconify-icon>
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-5">
-                      <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                        <span
-                          class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                          <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
-                            style="color: #22825d"></iconify-icon>
-                        </span>
-                        <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Montant souhaité</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="150.000€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">D.Remboursement</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="24 mois" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Mensualités</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="520€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Montant total dû</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="170.000€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                        <span
-                          class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                          <iconify-icon icon="ic:outline-book" width="2em" height="2em"
-                            style="color: #22825d"></iconify-icon>
-                        </span>
-                        <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Fichier de paie</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Attestation Salaire</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Extrait Bancaire</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Contrat</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <!-- end Grid With Row Label -->
 
 
 
             <!-- start Grid With Row Label -->
-            <div class="card" id="cardDiv" style="display: none;">
-              <div class="card-body p-2">
-                <h2 class="p-1 mt-3">les données du co-emprunteur</h2>
-                <form action="#">
-                  <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
-                  <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
-                    <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
-                      <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                        <span
-                          class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                          <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
-                            style="color: #22825d"></iconify-icon>
-                        </span>
-                        <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Nom, prénom</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-6 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="John" />
-                              </div>
-                              <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Doe" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Age</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="35 Ans" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Téléphone</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="+1-202-555-0116" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Email</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="john.doe@gmail.com" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Adresse</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control"
-                                  placeholder="12 rue de la Croissant. Appartement 3D. 56000" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Profession</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="Ingénieur Informatique" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Salaire Brut</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="3500€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-3 form-label">Statut</label>
-                          <div class="col-lg-9">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="Célibataire" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-5">
-                      <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                        <span
-                          class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                          <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
-                            style="color: #22825d"></iconify-icon>
-                        </span>
-                        <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Montant souhaité</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="150.000€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">D.Remboursement</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="24 mois" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Mensualités</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="520€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Montant total dû</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input type="text" class="form-control" placeholder="170.000€" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
-                        <span
-                          class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
-                          <iconify-icon icon="ic:outline-book" width="2em" height="2em"
-                            style="color: #22825d"></iconify-icon>
-                        </span>
-                        <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Fichier de paie</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Attestation Salaire</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Extrait Bancaire</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row align-items-center">
-                          <label class="col-lg-6 form-label">Contrat</label>
-                          <div class="col-lg-6">
-                            <div class="row">
-                              <div class="col-md-12 mb-2 mb-md-0">
-                                <input class="form-control" type="file" id="formFile">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <script>
-              document.getElementById('toggleButton').addEventListener('click', function () {
-                var cardDiv = document.getElementById('cardDiv');
-                if (cardDiv.style.display === 'none') {
-                  cardDiv.style.display = 'block';
-                } else {
-                  cardDiv.style.display = 'none';
-                }
-              });
-            </script>
-            <!-- end Grid With Row Label -->
+            <?php
+            include 'db.php'; // Include database connection
 
-            <div class="form-actions">
+            // Check if 'id' is set in the URL
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+              $client_id = intval($_GET['id']); // Convert to integer for security
+
+              // Fetch client details
+              $sql = "SELECT * FROM client WHERE id = ?";
+              $stmt = $conn->prepare($sql);
+              $stmt->bind_param("i", $client_id);
+              $stmt->execute();
+              $result = $stmt->get_result();
+
+              if ($result->num_rows > 0) {
+                $client = $result->fetch_assoc();
+            ?>
+
+                <div class="card">
+                  <div class="card-body p-2">
+                    <h2 class="p-1 mt-3">Étude en cours: Demande <?= htmlspecialchars($client['id']); ?></h2>
+                    <form action="#">
+                      <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
+                      <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
+                        <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
+                          <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                            <span
+                              class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                              <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
+                                style="color: #22825d"></iconify-icon>
+                            </span>
+                            <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Nom, prénom</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-6 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="John" value="<?= htmlspecialchars($client['nom']); ?>" readonly />
+                                  </div>
+                                  <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Doe" value="<?= htmlspecialchars($client['prenom']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Age</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="35 Ans" value="<?= htmlspecialchars($client['age']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Téléphone</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="+1-202-555-0116" value="<?= htmlspecialchars($client['telephone']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Email</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="john.doe@gmail.com" value="<?= htmlspecialchars($client['email']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Adresse</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control"
+                                      placeholder="12 rue de la Croissant. Appartement 3D. 56000" value="<?= htmlspecialchars($client['adress']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Profession</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="Ingénieur Informatique" value="<?= htmlspecialchars($client['profession']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Salaire Brut</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="3500€" value="<?= htmlspecialchars($client['salaire_brut']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-3 form-label">Statut</label>
+                              <div class="col-lg-9">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="Célibataire" value="<?= htmlspecialchars($client['statut_civil']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <?php
+                          if ($client['have_partner'] == 1) {
+                            echo '<div class="mb-3">
+                              <button type="button" class="my-4 col-lg-12 col-md-12 d-flex gap-3 bg-transparent border-0"
+                                id="toggleButton">
+                                <div class="d-flex">
+                                  <label class="fw-bold">Consulter les données coemprunteur</label>
+                                </div>
+                                <div class="d-flex">
+                                  <iconify-icon icon="icons8:plus" width="1.5em" height="1.5em"
+                                    style="color: #000"></iconify-icon>
+                                </div>
+                              </button>
+                            </div>';
+                          }
+                          ?>
+                        </div>
+                        <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-5">
+                          <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                            <span
+                              class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                              <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
+                                style="color: #22825d"></iconify-icon>
+                            </span>
+                            <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Montant souhaité</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="150.000€" value="<?= htmlspecialchars($client['montant_souhaite']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">D.Remboursement</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="24 mois" value="<?= htmlspecialchars($client['duree_remboursement']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Type de maison</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="520€" value="<?= htmlspecialchars($client['type_maison']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Montant total dû</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <input type="text" class="form-control" placeholder="170.000€" value="<?= htmlspecialchars($client['montant_total_du']); ?>" readonly />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                            <span
+                              class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                              <iconify-icon icon="ic:outline-book" width="2em" height="2em"
+                                style="color: #22825d"></iconify-icon>
+                            </span>
+                            <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Fichier de paie</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($client['fichier_paie']); ?>">
+                                      Afficher PDF
+                                    </button>
+
+                                    <!-- Bootstrap Modal -->
+                                    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <!-- PDF Display -->
+                                            <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <!-- Download Button -->
+                                            <a id="downloadPdf" href="" class="btn btn-success" download>
+                                              <i class="fas fa-download"></i> Télécharger PDF
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <script>
+                                      // Add an event listener to the modal to set the PDF path
+                                      document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                        // Get the button that triggered the modal
+                                        const button = event.relatedTarget;
+
+                                        // Get the PDF path from the data-pdf-path attribute
+                                        const pdfPath = button.getAttribute('data-pdf-path');
+
+                                        // Set the PDF path in the iframe and download link
+                                        const pdfViewer = document.getElementById('pdfViewer');
+                                        const downloadPdf = document.getElementById('downloadPdf');
+
+                                        pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                        downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                      });
+                                    </script>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Attestation Salaire</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($client['attestation_salaire']); ?>">
+                                      Afficher PDF
+                                    </button>
+                                    <!-- Bootstrap Modal -->
+                                    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <!-- PDF Display -->
+                                            <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <!-- Download Button -->
+                                            <a id="downloadPdf" href="" class="btn btn-success" download>
+                                              <i class="fas fa-download"></i> Télécharger PDF
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <script>
+                                      // Add an event listener to the modal to set the PDF path
+                                      document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                        // Get the button that triggered the modal
+                                        const button = event.relatedTarget;
+
+                                        // Get the PDF path from the data-pdf-path attribute
+                                        const pdfPath = button.getAttribute('data-pdf-path');
+
+                                        // Set the PDF path in the iframe and download link
+                                        const pdfViewer = document.getElementById('pdfViewer');
+                                        const downloadPdf = document.getElementById('downloadPdf');
+
+                                        pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                        downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                      });
+                                    </script>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Extrait Bancaire</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($client['extrait_bancaire']); ?>">
+                                      Afficher PDF
+                                    </button>
+                                    <!-- Bootstrap Modal -->
+                                    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <!-- PDF Display -->
+                                            <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <!-- Download Button -->
+                                            <a id="downloadPdf" href="" class="btn btn-success" download>
+                                              <i class="fas fa-download"></i> Télécharger PDF
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <script>
+                                      // Add an event listener to the modal to set the PDF path
+                                      document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                        // Get the button that triggered the modal
+                                        const button = event.relatedTarget;
+
+                                        // Get the PDF path from the data-pdf-path attribute
+                                        const pdfPath = button.getAttribute('data-pdf-path');
+
+                                        // Set the PDF path in the iframe and download link
+                                        const pdfViewer = document.getElementById('pdfViewer');
+                                        const downloadPdf = document.getElementById('downloadPdf');
+
+                                        pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                        downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                      });
+                                    </script>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <div class="row align-items-center">
+                              <label class="col-lg-6 form-label">Contrat</label>
+                              <div class="col-lg-6">
+                                <div class="row">
+                                  <div class="col-md-12 mb-2 mb-md-0">
+                                    <!-- Button to trigger the modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($client['contrat']); ?>">
+                                      Afficher PDF
+                                    </button>
+                                    <!-- Bootstrap Modal -->
+                                    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <!-- PDF Display -->
+                                            <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <!-- Download Button -->
+                                            <a id="downloadPdf" href="" class="btn btn-success" download>
+                                              <i class="fas fa-download"></i> Télécharger PDF
+                                            </a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <script>
+                                      // Add an event listener to the modal to set the PDF path
+                                      document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                        // Get the button that triggered the modal
+                                        const button = event.relatedTarget;
+
+                                        // Get the PDF path from the data-pdf-path attribute
+                                        const pdfPath = button.getAttribute('data-pdf-path');
+
+                                        // Set the PDF path in the iframe and download link
+                                        const pdfViewer = document.getElementById('pdfViewer');
+                                        const downloadPdf = document.getElementById('downloadPdf');
+
+                                        pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                        downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                      });
+                                    </script>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <!-- end Grid With Row Label -->
+
+
+
+                <!-- start Grid With Row Label -->
+                <?php
+                // Check if client has a partner
+                if ($client['have_partner'] == 1) {
+
+                  // Fetch partner details
+                  $sql_partner = "SELECT * FROM partner WHERE id_client = ?";
+                  $stmt_partner = $conn->prepare($sql_partner);
+                  $stmt_partner->bind_param("i", $client_id);
+                  $stmt_partner->execute();
+                  $result_partner = $stmt_partner->get_result();
+
+                  if ($result_partner->num_rows > 0) {
+                    while ($partner = $result_partner->fetch_assoc()) {
+                ?>
+                      <div class="card" id="cardDiv" style="display: none;">
+                        <div class="card-body p-2">
+                          <h2 class="p-1 mt-3">les données du co-emprunteur</h2>
+                          <form action="#">
+                            <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
+                            <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
+                              <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
+                                <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                                  <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                                    <iconify-icon icon="solar:users-group-rounded-linear" width="2em" height="2em"
+                                      style="color: #22825d"></iconify-icon>
+                                  </span>
+                                  <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Details</h6>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Nom, prénom</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-6 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="John" value="<?= htmlspecialchars($partner['nom']); ?>" readonly />
+                                        </div>
+                                        <div class="col-md-6">
+                                          <input type="text" class="form-control" placeholder="Doe" value="<?= htmlspecialchars($partner['prenom']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Age</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="35 Ans" value="<?= htmlspecialchars($partner['age']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Téléphone</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="+1-202-555-0116" value="<?= htmlspecialchars($partner['telephone']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Email</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="john.doe@gmail.com" value="<?= htmlspecialchars($partner['email']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Adresse</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control"
+                                            placeholder="12 rue de la Croissant. Appartement 3D. 56000" value="<?= htmlspecialchars($partner['adress']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Profession</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="Ingénieur Informatique" value="<?= htmlspecialchars($partner['profession']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Salaire Brut</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="3500€" value="<?= htmlspecialchars($partner['salaire_brut']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-3 form-label">Statut</label>
+                                    <div class="col-lg-9">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="Célibataire" value="<?= htmlspecialchars($partner['statut_civil']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-5">
+                                <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                                  <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                                    <iconify-icon icon="lets-icons:bubble" width="2em" height="2em"
+                                      style="color: #22825d"></iconify-icon>
+                                  </span>
+                                  <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Simulation</h6>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Montant souhaité</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="150.000€" value="<?= htmlspecialchars($partner['montant_souhaite']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">D.Remboursement</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="24 mois" value="<?= htmlspecialchars($partner['duree_remboursement']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Type de maison</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="520€" value="<?= htmlspecialchars($partner['type_maison']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Montant total dû</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <input type="text" class="form-control" placeholder="170.000€" value="<?= htmlspecialchars($partner['montant_total_du']); ?>" readonly />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-6 mb-4 justify-content-between">
+                                  <span
+                                    class="round-48 d-flex align-items-center justify-content-center rounded bg-icons-dashboard">
+                                    <iconify-icon icon="ic:outline-book" width="2em" height="2em"
+                                      style="color: #22825d"></iconify-icon>
+                                  </span>
+                                  <h6 class="mb-0 fs-4 fw-medium" style="color: #22825d">Documents</h6>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Fichier de paie</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <!-- Button to trigger the modal -->
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($partner['fichier_paie']); ?>">
+                                            Afficher PDF
+                                          </button>
+                                          <!-- Bootstrap Modal -->
+                                          <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <!-- PDF Display -->
+                                                  <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <!-- Download Button -->
+                                                  <a id="downloadPdf" href="" class="btn btn-success" download>
+                                                    <i class="fas fa-download"></i> Télécharger PDF
+                                                  </a>
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <script>
+                                            // Add an event listener to the modal to set the PDF path
+                                            document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                              // Get the button that triggered the modal
+                                              const button = event.relatedTarget;
+
+                                              // Get the PDF path from the data-pdf-path attribute
+                                              const pdfPath = button.getAttribute('data-pdf-path');
+
+                                              // Set the PDF path in the iframe and download link
+                                              const pdfViewer = document.getElementById('pdfViewer');
+                                              const downloadPdf = document.getElementById('downloadPdf');
+
+                                              pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                              downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                            });
+                                          </script>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Attestation Salaire</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <!-- Button to trigger the modal -->
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($partner['attestation_salaire']); ?>">
+                                            Afficher PDF
+                                          </button>
+                                          <!-- Bootstrap Modal -->
+                                          <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <!-- PDF Display -->
+                                                  <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <!-- Download Button -->
+                                                  <a id="downloadPdf" href="" class="btn btn-success" download>
+                                                    <i class="fas fa-download"></i> Télécharger PDF
+                                                  </a>
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <script>
+                                            // Add an event listener to the modal to set the PDF path
+                                            document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                              // Get the button that triggered the modal
+                                              const button = event.relatedTarget;
+
+                                              // Get the PDF path from the data-pdf-path attribute
+                                              const pdfPath = button.getAttribute('data-pdf-path');
+
+                                              // Set the PDF path in the iframe and download link
+                                              const pdfViewer = document.getElementById('pdfViewer');
+                                              const downloadPdf = document.getElementById('downloadPdf');
+
+                                              pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                              downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                            });
+                                          </script>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Extrait Bancaire</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <!-- Button to trigger the modal -->
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($partner['extrait_bancaire']); ?>">
+                                            Afficher PDF
+                                          </button>
+                                          <!-- Bootstrap Modal -->
+                                          <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <!-- PDF Display -->
+                                                  <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <!-- Download Button -->
+                                                  <a id="downloadPdf" href="" class="btn btn-success" download>
+                                                    <i class="fas fa-download"></i> Télécharger PDF
+                                                  </a>
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <script>
+                                            // Add an event listener to the modal to set the PDF path
+                                            document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                              // Get the button that triggered the modal
+                                              const button = event.relatedTarget;
+
+                                              // Get the PDF path from the data-pdf-path attribute
+                                              const pdfPath = button.getAttribute('data-pdf-path');
+
+                                              // Set the PDF path in the iframe and download link
+                                              const pdfViewer = document.getElementById('pdfViewer');
+                                              const downloadPdf = document.getElementById('downloadPdf');
+
+                                              pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                              downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                            });
+                                          </script>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                  <div class="row align-items-center">
+                                    <label class="col-lg-6 form-label">Contrat</label>
+                                    <div class="col-lg-6">
+                                      <div class="row">
+                                        <div class="col-md-12 mb-2 mb-md-0">
+                                          <!-- Button to trigger the modal -->
+                                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal" data-pdf-path="<?= htmlspecialchars($partner['contrat']); ?>">
+                                            Afficher PDF
+                                          </button>
+                                          <!-- Bootstrap Modal -->
+                                          <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="pdfModalLabel">PDF Viewer</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <!-- PDF Display -->
+                                                  <iframe id="pdfViewer" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <!-- Download Button -->
+                                                  <a id="downloadPdf" href="" class="btn btn-success" download>
+                                                    <i class="fas fa-download"></i> Télécharger PDF
+                                                  </a>
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <script>
+                                            // Add an event listener to the modal to set the PDF path
+                                            document.getElementById('pdfModal').addEventListener('show.bs.modal', function(event) {
+                                              // Get the button that triggered the modal
+                                              const button = event.relatedTarget;
+
+                                              // Get the PDF path from the data-pdf-path attribute
+                                              const pdfPath = button.getAttribute('data-pdf-path');
+
+                                              // Set the PDF path in the iframe and download link
+                                              const pdfViewer = document.getElementById('pdfViewer');
+                                              const downloadPdf = document.getElementById('downloadPdf');
+
+                                              pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                              downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                            });
+                                          </script>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+
+                      <script>
+                        document.getElementById('toggleButton').addEventListener('click', function() {
+                          var cardDiv = document.getElementById('cardDiv');
+                          if (cardDiv.style.display === 'none') {
+                            cardDiv.style.display = 'block';
+                          } else {
+                            cardDiv.style.display = 'none';
+                          }
+                        });
+                      </script>
+                      <!-- end Grid With Row Label -->
+
+                      <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
                   <button type="submit" class="btn-declined btn text-white fw-bold m-2 col-lg-3 col-12">
@@ -2407,6 +2807,26 @@
                 </div>
               </div>
             </div>
+            <?php
+                    }
+                  } else {
+                    echo "<p class='alert alert-warning'>Aucune information sur le partenaire disponible.</p>";
+                  }
+
+                  $stmt_partner->close();
+                }
+              } else {
+                echo "<p class='alert alert-danger'>Client non trouvé.</p>";
+              }
+              $stmt->close();
+            } else {
+              echo "<p class='alert alert-warning'>Aucun client sélectionné.</p>";
+            }
+
+            $conn->close();
+            ?>
+
+            
 
             <div id="settlements" style="display: none;"></div>
 

@@ -2858,203 +2858,51 @@
                 </div>
                 <h2>Étude en cours</h2>
                 <div class="table-container">
-                  <!-- Table -->
+                  <?php
+                  include 'db.php'; // Include database connection
+
+                  // Fetch clients from database
+                  $sql = "SELECT * FROM client WHERE statut = 'En cours'";
+                  $result = $conn->query($sql);
+                  ?>
+
                   <table class="table" id="dataTable">
                     <thead>
                       <tr>
-                        <th onclick="sortTable(0)">ID ↑↓</th>
-                        <th onclick="sortTable(1)">Nom ↑↓</th>
-                        <th onclick="sortTable(2)">Age ↑↓</th>
-                        <th onclick="sortTable(3)">Statut ↑↓</th>
-                        <th onclick="sortTable(4)">Salaire Brut ↑↓</th>
-                        <th onclick="sortTable(5)">Montant souhaité ↑↓</th>
-                        <th onclick="sortTable(6)">Actions ↑↓</th>
+                        <th onclick="sortTable(0)">ID↑↓</th>
+                        <th onclick="sortTable(1)">Nom↑↓</th>
+                        <th onclick="sortTable(2)">Age↑↓</th>
+                        <th onclick="sortTable(3)">Statut↑↓</th>
+                        <th onclick="sortTable(4)">Salaire Brut↑↓</th>
+                        <th onclick="sortTable(5)">Montant souhaité↑↓</th>
+                        <th>Actions ↑↓</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>0152X8</td>
-                        <td>John Doe</td>
-                        <td>30 Ans</td>
-                        <td>Nouvelles</td>
-                        <td>3600€</td>
-                        <td>151.000€</td>
-                        <td><a href="consulter-etude-en-cours.php"><button class="btn btn-info">Consulter</button></a></td>
-                      </tr>
-                      <tr>
-                        <td>0152X9</td>
-                        <td>Jane Doe</td>
-                        <td>28 Ans</td>
-                        <td>En attente</td>
-                        <td>3500€</td>
-                        <td>150.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y1</td>
-                        <td>Mark Smith</td>
-                        <td>35 Ans</td>
-                        <td>En cours</td>
-                        <td>4000€</td>
-                        <td>180.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y2</td>
-                        <td>Alice Brown</td>
-                        <td>29 Ans</td>
-                        <td>Signé</td>
-                        <td>3900€</td>
-                        <td>155.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X8</td>
-                        <td>John Doe</td>
-                        <td>30 Ans</td>
-                        <td>Nouvelles</td>
-                        <td>3600€</td>
-                        <td>151.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X9</td>
-                        <td>Jane Doe</td>
-                        <td>28 Ans</td>
-                        <td>En attente</td>
-                        <td>3500€</td>
-                        <td>150.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y1</td>
-                        <td>Mark Smith</td>
-                        <td>35 Ans</td>
-                        <td>En cours</td>
-                        <td>4000€</td>
-                        <td>180.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y2</td>
-                        <td>Alice Brown</td>
-                        <td>29 Ans</td>
-                        <td>Signé</td>
-                        <td>3900€</td>
-                        <td>155.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X8</td>
-                        <td>John Doe</td>
-                        <td>30 Ans</td>
-                        <td>Nouvelles</td>
-                        <td>3600€</td>
-                        <td>151.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X9</td>
-                        <td>Jane Doe</td>
-                        <td>28 Ans</td>
-                        <td>En attente</td>
-                        <td>3500€</td>
-                        <td>150.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y1</td>
-                        <td>Mark Smith</td>
-                        <td>35 Ans</td>
-                        <td>En cours</td>
-                        <td>4000€</td>
-                        <td>180.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y2</td>
-                        <td>Alice Brown</td>
-                        <td>29 Ans</td>
-                        <td>Signé</td>
-                        <td>3900€</td>
-                        <td>155.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X8</td>
-                        <td>John Doe</td>
-                        <td>30 Ans</td>
-                        <td>Nouvelles</td>
-                        <td>3600€</td>
-                        <td>151.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X9</td>
-                        <td>Jane Doe</td>
-                        <td>28 Ans</td>
-                        <td>En attente</td>
-                        <td>3500€</td>
-                        <td>150.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y1</td>
-                        <td>Mark Smith</td>
-                        <td>35 Ans</td>
-                        <td>En cours</td>
-                        <td>4000€</td>
-                        <td>180.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y2</td>
-                        <td>Alice Brown</td>
-                        <td>29 Ans</td>
-                        <td>Signé</td>
-                        <td>3900€</td>
-                        <td>155.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X8</td>
-                        <td>John Doe</td>
-                        <td>30 Ans</td>
-                        <td>Nouvelles</td>
-                        <td>3600€</td>
-                        <td>151.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X9</td>
-                        <td>Jane Doe</td>
-                        <td>28 Ans</td>
-                        <td>En attente</td>
-                        <td>3500€</td>
-                        <td>150.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y1</td>
-                        <td>Mark Smith</td>
-                        <td>35 Ans</td>
-                        <td>En cours</td>
-                        <td>4000€</td>
-                        <td>180.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152Y2</td>
-                        <td>Alice Brown</td>
-                        <td>29 Ans</td>
-                        <td>Signé</td>
-                        <td>3900€</td>
-                        <td>155.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <!-- Add more rows as needed -->
+                    <tbody id="clientTableBody">
+                      <?php
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          echo "<tr>
+                                          <td>{$row['id']}</td>
+                                          <td>{$row['nom']}</td>
+                                          <td>{$row['age']} Ans</td>
+                                          <td>{$row['statut']}</td>
+                                          <td>{$row['salaire_brut']}€</td>
+                                          <td>{$row['montant_souhaite']}€</td>
+                                          <td>
+                                            <a href='consulter-etude-en-cours.php?id={$row['id']}' class='btn btn-info'>Consulter</a>
+                                          </td>
+                                        </tr>";
+                        }
+                      } else {
+                        echo "<tr><td colspan='7' class='text-center'>Aucun client trouvé</td></tr>";
+                      }
+                      ?>
                     </tbody>
                   </table>
+
+                  <?php $conn->close(); // Close database connection 
+                  ?>
 
                   <!-- Pagination -->
                   <nav aria-label="Page navigation">

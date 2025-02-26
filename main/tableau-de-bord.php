@@ -2070,6 +2070,7 @@
                         <option value="Nouvelles">Nouvelles</option>
                         <option value="En attente">En attente</option>
                         <option value="En cours">En cours</option>
+                        <option value="En attente signature contrat">En attente signature contrat</option>
                         <option value="Signé">Signé</option>
                         <option value="Annulé">Annulé</option>
                       </select>
@@ -2128,12 +2129,12 @@
                   <table class="table" id="dataTable">
                       <thead>
                           <tr>
-                              <th onclick="sortTable(0)">ID ↑↓</th>
-                              <th onclick="sortTable(1)">Nom ↑↓</th>
-                              <th onclick="sortTable(2)">Age ↑↓</th>
-                              <th onclick="sortTable(3)">Statut ↑↓</th>
-                              <th onclick="sortTable(4)">Salaire Brut ↑↓</th>
-                              <th onclick="sortTable(5)">Montant souhaité ↑↓</th>
+                              <th onclick="sortTable(0)">ID↑↓</th>
+                              <th onclick="sortTable(1)">Nom↑↓</th>
+                              <th onclick="sortTable(2)">Age↑↓</th>
+                              <th onclick="sortTable(3)">Statut↑↓</th>
+                              <th onclick="sortTable(4)">Salaire Brut↑↓</th>
+                              <th onclick="sortTable(5)">Montant souhaité↑↓</th>
                               <th>Actions</th>
                           </tr>
                       </thead>
