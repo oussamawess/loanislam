@@ -2778,6 +2778,7 @@
                                 </div>
                               </div>
                             </div>
+
                           </form>
                         </div>
                       </div>
@@ -2794,18 +2795,7 @@
                       </script>
                       <!-- end Grid With Row Label -->
 
-                      <div class="form-actions">
-                        <div class="text-end">
-                          <div class="card-body p-2 col-12">
-                            <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
-                              Ajouter à étude en cours
-                            </button>
-                            <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
-                              Ajouter à en attente d'étude
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+
             <?php
                     }
                   } else {
@@ -2825,7 +2815,18 @@
             $conn->close();
             ?>
 
-
+            <div class="form-actions">
+              <div class="text-end">
+                <div class="card-body p-2 col-12">
+                  <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
+                    Ajouter à étude en cours
+                  </button>
+                  <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
+                    Ajouter à en attente d'étude
+                  </button>
+                </div>
+              </div>
+            </div>
 
             <div id="settlements" style="display: none;"></div>
 
