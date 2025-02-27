@@ -2821,12 +2821,52 @@
                   <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
                     Accepté la demande
                   </button>
-                  <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Mettre à jour
-                  </button>
                 </div>
               </div>
             </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $(".btn-declined, .btn-in-progress").click(function() {
+                  var clientId = <?php echo $client_id; ?>;
+                  var status, redirectUrl, confirmMessage;
+
+                  if ($(this).hasClass("btn-declined")) {
+                    status = "Annulé";
+                    confirmMessage = "Voulez-vous vraiment refuser la demande ?";
+                    redirectUrl = "contrat-annule.php";
+                  } else if ($(this).hasClass("btn-in-progress")) {
+                    status = "Signé";
+                    confirmMessage = "Voulez-vous vraiment accepter la demande ?";
+                    redirectUrl = "contrat-signe.php";
+                  }
+
+                  // Show confirmation alert
+                  if (confirm(confirmMessage)) {
+                    $.ajax({
+                      url: "update_status.php",
+                      type: "POST",
+                      data: {
+                        id: clientId,
+                        statut: status
+                      },
+                      dataType: "json",
+                      success: function(response) {
+                        if (response.status === "success") {
+                          window.location.href = redirectUrl;
+                        } else {
+                          alert("Erreur: " + response.message);
+                        }
+                      },
+                      error: function() {
+                        alert("Une erreur s'est produite.");
+                      }
+                    });
+                  }
+                });
+              });
+            </script>
 
             <div id="settlements" style="display: none;"></div>
 

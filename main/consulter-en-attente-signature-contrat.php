@@ -2792,18 +2792,7 @@
                       </script>
                       <!-- end Grid With Row Label -->
 
-                      <div class="form-actions">
-                        <div class="text-end">
-                          <div class="card-body p-2 col-12">
-                            <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
-                              Retour
-                            </button>
-                            <button type="submit" class="btn-declined btn text-white fw-bold m-2 col-lg-3 col-12">
-                              Refusé la demande
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                      
             <?php
                     }
                   } else {
@@ -2835,6 +2824,49 @@
                 </div>
               </div>
             </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $(".btn-declined, .btn-in-pause").click(function() {
+                  var clientId = <?php echo $client_id; ?>;
+                  var status, redirectUrl, confirmMessage;
+
+                  if ($(this).hasClass("btn-declined")) {
+                    status = "Annulé";
+                    confirmMessage = "Voulez-vous vraiment refuser la demande ?";
+                    redirectUrl = "contrat-annule.php";
+                  } else if ($(this).hasClass("btn-in-pause")) {
+                    status = "En cours";
+                    confirmMessage = "Voulez-vous vraiment changer le statut en 'En cours' ?";
+                    redirectUrl = "etude-en-cours.php";
+                  }
+
+                  // Show confirmation alert
+                  if (confirm(confirmMessage)) {
+                    $.ajax({
+                      url: "update_status.php",
+                      type: "POST",
+                      data: {
+                        id: clientId,
+                        statut: status
+                      },
+                      dataType: "json",
+                      success: function(response) {
+                        if (response.status === "success") {
+                          window.location.href = redirectUrl;
+                        } else {
+                          alert("Erreur: " + response.message);
+                        }
+                      },
+                      error: function() {
+                        alert("Une erreur s'est produite.");
+                      }
+                    });
+                  }
+                });
+              });
+            </script>
 
             <div id="settlements" style="display: none;"></div>
 

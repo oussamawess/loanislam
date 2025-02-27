@@ -1938,11 +1938,10 @@
               if ($result->num_rows > 0) {
                 $client = $result->fetch_assoc();
             ?>
-
-                <div class="card">
-                  <div class="card-body p-2">
-                    <h2 class="p-1 mt-3">Nouvelles Demandes: Demande <?= htmlspecialchars($client['id']); ?></h2>
-                    <form action="#">
+                <form action="#">
+                  <div class="card">
+                    <div class="card-body p-2">
+                      <h2 class="p-1 mt-3">Nouvelles Demandes: Demande <?= htmlspecialchars($client['id']); ?></h2>
                       <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
                       <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
                         <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
@@ -2356,33 +2355,32 @@
                           </div>
                         </div>
                       </div>
-                    </form>
+                    </div>
                   </div>
-                </div>
 
-                <!-- end Grid With Row Label -->
-
+                  <!-- end Grid With Row Label -->
 
 
-                <!-- start Grid With Row Label -->
-                <?php
-                // Check if client has a partner
-                if ($client['have_partner'] == 1) {
 
-                  // Fetch partner details
-                  $sql_partner = "SELECT * FROM partner WHERE id_client = ?";
-                  $stmt_partner = $conn->prepare($sql_partner);
-                  $stmt_partner->bind_param("i", $client_id);
-                  $stmt_partner->execute();
-                  $result_partner = $stmt_partner->get_result();
+                  <!-- start Grid With Row Label -->
+                  <?php
+                  // Check if client has a partner
+                  if ($client['have_partner'] == 1) {
 
-                  if ($result_partner->num_rows > 0) {
-                    while ($partner = $result_partner->fetch_assoc()) {
-                ?>
-                      <div class="card" id="cardDiv" style="display: none;">
-                        <div class="card-body p-2">
-                          <h2 class="p-1 mt-3">les données du co-emprunteur</h2>
-                          <form action="#">
+                    // Fetch partner details
+                    $sql_partner = "SELECT * FROM partner WHERE id_client = ?";
+                    $stmt_partner = $conn->prepare($sql_partner);
+                    $stmt_partner->bind_param("i", $client_id);
+                    $stmt_partner->execute();
+                    $result_partner = $stmt_partner->get_result();
+
+                    if ($result_partner->num_rows > 0) {
+                      while ($partner = $result_partner->fetch_assoc()) {
+                  ?>
+
+                        <div class="card" id="cardDiv" style="display: none;">
+                          <div class="card-body p-2">
+                            <h2 class="p-1 mt-3">les données du co-emprunteur</h2>
                             <!-- <div class=" d-flex justify-content-center p-3 flex-lg-row flex-sm-column"> -->
                             <div class="d-flex flex-column justify-content-center flex-md-row flex-lg-row p-3">
                               <div class="form-body p-3 m-2 border rounded col-12 col-md-6 col-lg-7">
@@ -2778,57 +2776,104 @@
                                 </div>
                               </div>
                             </div>
-
-                          </form>
+                          </div>
                         </div>
-                      </div>
 
-                      <script>
-                        document.getElementById('toggleButton').addEventListener('click', function() {
-                          var cardDiv = document.getElementById('cardDiv');
-                          if (cardDiv.style.display === 'none') {
-                            cardDiv.style.display = 'block';
-                          } else {
-                            cardDiv.style.display = 'none';
-                          }
-                        });
-                      </script>
-                      <!-- end Grid With Row Label -->
+                        <script>
+                          document.getElementById('toggleButton').addEventListener('click', function() {
+                            var cardDiv = document.getElementById('cardDiv');
+                            if (cardDiv.style.display === 'none') {
+                              cardDiv.style.display = 'block';
+                            } else {
+                              cardDiv.style.display = 'none';
+                            }
+                          });
+                        </script>
+                        <!-- end Grid With Row Label -->
 
 
-            <?php
+              <?php
+                      }
+                    } else {
+                      echo "<p class='alert alert-warning'>Aucune information sur le partenaire disponible.</p>";
                     }
-                  } else {
-                    echo "<p class='alert alert-warning'>Aucune information sur le partenaire disponible.</p>";
+
+                    $stmt_partner->close();
                   }
-
-                  $stmt_partner->close();
+                } else {
+                  echo "<p class='alert alert-danger'>Client non trouvé.</p>";
                 }
+                $stmt->close();
               } else {
-                echo "<p class='alert alert-danger'>Client non trouvé.</p>";
+                echo "<p class='alert alert-warning'>Aucun client sélectionné.</p>";
               }
-              $stmt->close();
-            } else {
-              echo "<p class='alert alert-warning'>Aucun client sélectionné.</p>";
-            }
 
-            $conn->close();
-            ?>
+              $conn->close();
+              ?>
 
-            <div class="form-actions">
-              <div class="text-end">
-                <div class="card-body p-2 col-12">
-                  <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Ajouter à étude en cours
-                  </button>
-                  <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Ajouter à en attente d'étude
-                  </button>
+              <div class="form-actions">
+                <div class="text-end">
+                  <div class="card-body p-2 col-12">
+                    <!-- Display Success/Error Message -->
+                    <div id="status-message" class="mt-2"></div>
+                    <button type="button" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12" data-id="<?= $client['id']; ?>">
+                      Ajouter à étude en cours
+                    </button>
+
+                    <button type="button" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12" data-id="<?= $client['id']; ?>">
+                      Ajouter à en attente d'étude
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+                </form>
+                <div id="settlements" style="display: none;"></div>
 
-            <div id="settlements" style="display: none;"></div>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $(".btn-in-progress, .btn-in-pause").click(function() {
+                  var clientId = <?php echo $client_id; ?>;
+                  var status, redirectUrl, confirmMessage;
+
+                  if ($(this).hasClass("btn-in-progress")) {
+                    status = "En cours";
+                    confirmMessage = "Voulez-vous vraiment changer le statut en 'En cours' ?";
+                    redirectUrl = "etude-en-cours.php";
+                  } else if ($(this).hasClass("btn-in-pause")) {
+                    status = "En attente";
+                    confirmMessage = "Voulez-vous vraiment changer le statut en 'En attente' ?";
+                    redirectUrl = "en-attente-detudes.php";
+                  }
+
+                  // Show confirmation alert
+                  if (confirm(confirmMessage)) {
+                    $.ajax({
+                      url: "update_status.php",
+                      type: "POST",
+                      data: {
+                        id: clientId,
+                        statut: status
+                      },
+                      dataType: "json",
+                      success: function(response) {
+                        if (response.status === "success") {
+                          window.location.href = redirectUrl;
+                        } else {
+                          alert("Erreur: " + response.message);
+                        }
+                      },
+                      error: function() {
+                        alert("Une erreur s'est produite.");
+                      }
+                    });
+                  }
+                });
+              });
+            </script>
+
+               
+
 
 
           </div>

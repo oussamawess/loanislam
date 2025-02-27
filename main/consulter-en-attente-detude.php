@@ -2815,15 +2815,62 @@
             <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
-                  <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
+                  <button type="button" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
                     Retour
                   </button>
-                  <button type="submit" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
+
+                  <button type="button" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
                     Ajouter à étude en cours
                   </button>
+
                 </div>
               </div>
             </div>
+
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                $(".btn-in-pause, .btn-in-progress").click(function() {
+                  var clientId = <?php echo $client_id; ?>;
+                  var status, redirectUrl, confirmMessage;
+
+                  if ($(this).hasClass("btn-in-pause")) {
+                    status = "En cours";
+                    confirmMessage = "Voulez-vous vraiment changer le statut en 'En cours' ?";
+                    redirectUrl = "etude-en-cours.php";
+                  } else if ($(this).hasClass("btn-in-progress")) {
+                    status = "Nouvelles";
+                    confirmMessage = "Voulez-vous vraiment changer le statut en 'Nouvelles' ?";
+                    redirectUrl = "nouvelles-demandes.php";
+                  }
+
+                  // Show confirmation alert
+                  if (confirm(confirmMessage)) {
+                    $.ajax({
+                      url: "update_status.php",
+                      type: "POST",
+                      data: {
+                        id: clientId,
+                        statut: status
+                      },
+                      dataType: "json",
+                      success: function(response) {
+                        if (response.status === "success") {
+                          window.location.href = redirectUrl;
+                        } else {
+                          alert("Erreur: " + response.message);
+                        }
+                      },
+                      error: function() {
+                        alert("Une erreur s'est produite.");
+                      }
+                    });
+                  }
+                });
+              });
+            </script>
+
 
             <div id="settlements" style="display: none;"></div>
 
