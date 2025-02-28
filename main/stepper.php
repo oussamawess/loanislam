@@ -399,13 +399,15 @@
                               <!-- Age Label and Input -->
                               <label class="col-md-2 form-label">Age</label>
                               <div class="col-md-4">
-                                <input type="number" name="age_client" class="form-control" placeholder="35 Ans">
+                                <input type="number" name="age_client" class="form-control" placeholder="35 Ans" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
 
                               <!-- Phone Label and Input -->
                               <label class="col-md-2 form-label">Téléphone</label>
                               <div class="col-md-4">
-                                <input type="text" name="telephone_client" class="form-control" placeholder="+1-202-555-0116">
+                                <input type="text" name="telephone_client" class="form-control" placeholder="+1-202-555-0116" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
                             </div>
                           </div>
@@ -416,14 +418,16 @@
                               <!-- Age Label and Input -->
                               <label class="col-md-2 form-label">Email</label>
                               <div class="col-md-4">
-                                <input type="text" name="email_client" class="form-control" placeholder="john.doe@gmail.com">
+                                <input type="text" name="email_client" class="form-control" placeholder="john.doe@gmail.com" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
 
                               <!-- Phone Label and Input -->
                               <label class="col-md-2 form-label">Adresse</label>
                               <div class="col-md-4">
                                 <input type="text" name="adresse_client" class="form-control"
-                                  placeholder="12 rue de la Croissant. Appartement 3D. 56000">
+                                  placeholder="12 rue de la Croissant. Appartement 3D. 56000" required>
+                                  <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
                             </div>
                           </div>
@@ -433,13 +437,15 @@
                               <!-- Age Label and Input -->
                               <label class="col-md-2 form-label">Profession</label>
                               <div class="col-md-4">
-                                <input type="text" name="profession_client" class="form-control" placeholder="Ingénieur Informatique">
+                                <input type="text" name="profession_client" class="form-control" placeholder="Ingénieur Informatique" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
 
                               <!-- Phone Label and Input -->
                               <label class="col-md-2 form-label">Salaire Brut</label>
                               <div class="col-md-4">
-                                <input type="number" name="salaire_client" class="form-control" placeholder="3500€">
+                                <input type="number" name="salaire_client" class="form-control" placeholder="3500€" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
                             </div>
                           </div>
@@ -450,7 +456,8 @@
                               <div class="col-lg-4">
                                 <div class="row">
                                   <div class="col-md-12 mb-2 mb-md-0">
-                                    <input type="text" name="statut_civil_client" class="form-control" placeholder="Célibataire">
+                                    <input type="text" name="statut_civil_client" class="form-control" placeholder="Célibataire" required>
+                                    <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                   </div>
                                 </div>
                               </div>
@@ -516,13 +523,15 @@
                               <!-- Age Label and Input -->
                               <label class="col-md-2 form-label">Fichier de paie</label>
                               <div class="col-md-4">
-                                <input class="form-control" name="fichier_paie_client" type="file" id="formFile">
+                                <input class="form-control" name="fichier_paie_client" type="file" id="formFile" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
 
                               <!-- Phone Label and Input -->
                               <label class="col-md-2 form-label">Attestation Salaire</label>
                               <div class="col-md-4">
-                                <input class="form-control" name="attestation_salaire_client" type="file" id="formFile">
+                                <input class="form-control" name="attestation_salaire_client" type="file" id="formFile" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
                             </div>
                           </div>
@@ -531,13 +540,15 @@
                               <!-- Age Label and Input -->
                               <label class="col-md-2 form-label">Extrait Bancaire</label>
                               <div class="col-md-4">
-                                <input class="form-control" name="extrait_salaire_client" type="file" id="formFile">
+                                <input class="form-control" name="extrait_salaire_client" type="file" id="formFile" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
 
                               <!-- Phone Label and Input -->
                               <label class="col-md-2 form-label">Contrat</label>
                               <div class="col-md-4">
-                                <input class="form-control" name="contrat_client" type="file" id="formFile">
+                                <input class="form-control" name="contrat_client" type="file" id="formFile" required>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
                             </div>
                           </div>

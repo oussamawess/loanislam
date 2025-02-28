@@ -2833,7 +2833,7 @@
             <div style="background-color: white; border-radius: 15px; padding:20px; margin-bottom: 30px;">
               <div class="datatables">
                 <div class="content">
-                <div class="search-bar mb-3 d-flex justify-content-center">
+                  <div class="search-bar mb-3 d-flex justify-content-center">
                     <div class="col-md-4 mb-2 mb-md-0">
                       <input type="text" id="searchInput" class="form-control" placeholder="Demandes de prets ...">
                     </div>
@@ -2849,11 +2849,34 @@
                         <option value="Annulé">Annulé</option>
                       </select>
                     </div>
-                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
-                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
+                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="startDate" class="form-control"></div>
+                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="endDate" class="form-control"></div>
+                    <button id="searchButton" class="btn btn-primary" style="background-color: #22825d; border-color: #22825d;">Recherche</button>
+                    <script>
+                      document.addEventListener("DOMContentLoaded", function() {
+                        // Get the elements
+                        const startDateInput = document.getElementById("startDate");
+                        const endDateInput = document.getElementById("endDate");
+                        const searchButton = document.getElementById("searchButton");
+                        const rows = Array.from(document.querySelectorAll("#clientTableBody tr"));
 
-                    <button class="btn btn-primary"
-                      style="background-color: #22825d; border-color: #22825d;">Recherche</button>
+                        searchButton.addEventListener("click", function() {
+                          const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
+                          const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+
+                          rows.forEach(row => {
+                            const dateCell = row.cells[6]; // Assuming date_creation is in the 7th column (index 6)
+                            if (!dateCell) return;
+
+                            const rowDate = new Date(dateCell.textContent.trim());
+
+                            // Check if the row should be visible
+                            const inRange = (!startDate || rowDate >= startDate) && (!endDate || rowDate <= endDate);
+                            row.style.display = inRange ? "" : "none";
+                          });
+                        });
+                      });
+                    </script>
                   </div>
                 </div>
                 <h2>Nouvelles demandes</h2>
@@ -2889,6 +2912,7 @@
                                           <td>{$row['statut']}</td>
                                           <td>{$row['salaire_brut']}€</td>
                                           <td>{$row['montant_souhaite']}€</td>
+                                          <td style='display: none;'>{$row['date_creation']}</td>
                                           <td>
                                             <a href='consulter-nouvelles-demandes.php?id={$row['id']}' class='btn btn-info'>Consulter</a>
                                           </td>

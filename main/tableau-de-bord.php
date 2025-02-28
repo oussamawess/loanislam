@@ -57,7 +57,7 @@
           <div class="sidebarmenu">
             <div class="brand-logo d-flex align-items-center nav-logo">
               <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35"/>
+                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
               </a>
 
             </div>
@@ -324,7 +324,7 @@
             </ul>
 
             <div class="d-block d-lg-none py-9 py-xl-0">
-              <img src="../assets/images/logos/loanislam.png"  alt="matdash-img" height="35"/>
+              <img src="../assets/images/logos/loanislam.png" alt="matdash-img" height="35" />
             </div>
             <a class="navbar-toggler p-0 border-0 nav-icon-hover-bg rounded-circle" href="javascript:void(0)"
               data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -1863,48 +1863,48 @@
       <div class="body-wrapper">
         <div class="container-fluid">
           <div class="row">
-          <?php
-include 'db.php'; // Include your database connection
+            <?php
+            include 'db.php'; // Include your database connection
 
-// Fetch total number of rows
-$sql_total = "SELECT COUNT(*) as total FROM client";
-$result_total = $conn->query($sql_total);
-$total_rows = 0;
-if ($result_total) {
-    $row_total = $result_total->fetch_assoc();
-    $total_rows = $row_total['total'];
-}
+            // Fetch total number of rows
+            $sql_total = "SELECT COUNT(*) as total FROM client";
+            $result_total = $conn->query($sql_total);
+            $total_rows = 0;
+            if ($result_total) {
+              $row_total = $result_total->fetch_assoc();
+              $total_rows = $row_total['total'];
+            }
 
-// Fetch rows with statut "En attente"
-$sql_en_attente = "SELECT COUNT(*) as en_attente FROM client WHERE statut = 'En attente'";
-$result_en_attente = $conn->query($sql_en_attente);
-$en_attente_rows = 0;
-if ($result_en_attente) {
-    $row_en_attente = $result_en_attente->fetch_assoc();
-    $en_attente_rows = $row_en_attente['en_attente'];
-}
+            // Fetch rows with statut "En attente"
+            $sql_en_attente = "SELECT COUNT(*) as en_attente FROM client WHERE statut = 'En attente'";
+            $result_en_attente = $conn->query($sql_en_attente);
+            $en_attente_rows = 0;
+            if ($result_en_attente) {
+              $row_en_attente = $result_en_attente->fetch_assoc();
+              $en_attente_rows = $row_en_attente['en_attente'];
+            }
 
-// Fetch rows with statut "Nouvelles"
-$sql_nouvelles = "SELECT COUNT(*) as nouvelles FROM client WHERE statut = 'Nouvelles'";
-$result_nouvelles = $conn->query($sql_nouvelles);
-$nouvelles_rows = 0;
-if ($result_nouvelles) {
-    $row_nouvelles = $result_nouvelles->fetch_assoc();
-    $nouvelles_rows = $row_nouvelles['nouvelles'];
-}
+            // Fetch rows with statut "Nouvelles"
+            $sql_nouvelles = "SELECT COUNT(*) as nouvelles FROM client WHERE statut = 'Nouvelles'";
+            $result_nouvelles = $conn->query($sql_nouvelles);
+            $nouvelles_rows = 0;
+            if ($result_nouvelles) {
+              $row_nouvelles = $result_nouvelles->fetch_assoc();
+              $nouvelles_rows = $row_nouvelles['nouvelles'];
+            }
 
-// Fetch rows with statut "Signé"
-$sql_signe = "SELECT COUNT(*) as signe FROM client WHERE statut = 'Signé'";
-$result_signe = $conn->query($sql_signe);
-$signe_rows = 0;
-if ($result_signe) {
-    $row_signe = $result_signe->fetch_assoc();
-    $signe_rows = $row_signe['signe'];
-}
+            // Fetch rows with statut "Signé"
+            $sql_signe = "SELECT COUNT(*) as signe FROM client WHERE statut = 'Signé'";
+            $result_signe = $conn->query($sql_signe);
+            $signe_rows = 0;
+            if ($result_signe) {
+              $row_signe = $result_signe->fetch_assoc();
+              $signe_rows = $row_signe['signe'];
+            }
 
-// Close the database connection
-$conn->close();
-?>
+            // Close the database connection
+            $conn->close();
+            ?>
 
 
             <div class="col-md-6 col-lg-3">
@@ -2117,94 +2117,87 @@ $conn->close();
                         <option value="Annulé">Annulé</option>
                       </select>
                     </div>
-                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
-                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
+                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="startDate" class="form-control"></div>
+                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="endDate" class="form-control"></div>
+                    <button id="searchButton" class="btn btn-primary" style="background-color: #22825d; border-color: #22825d;">Recherche</button>
+                    <script>
+                      document.addEventListener("DOMContentLoaded", function() {
+                        // Get the elements
+                        const startDateInput = document.getElementById("startDate");
+                        const endDateInput = document.getElementById("endDate");
+                        const searchButton = document.getElementById("searchButton");
+                        const rows = Array.from(document.querySelectorAll("#clientTableBody tr"));
 
-                    <button class="btn btn-primary"
-                      style="background-color: #22825d; border-color: #22825d;">Recherche</button>
+                        searchButton.addEventListener("click", function() {
+                          const startDate = startDateInput.value ? new Date(startDateInput.value) : null;
+                          const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+
+                          rows.forEach(row => {
+                            const dateCell = row.cells[6]; // Assuming date_creation is in the 7th column (index 6)
+                            if (!dateCell) return;
+
+                            const rowDate = new Date(dateCell.textContent.trim());
+
+                            // Check if the row should be visible
+                            const inRange = (!startDate || rowDate >= startDate) && (!endDate || rowDate <= endDate);
+                            row.style.display = inRange ? "" : "none";
+                          });
+                        });
+                      });
+                    </script>
+
                   </div>
                 </div>
                 <h2>Liste demandes</h2>
                 <div class="table-container">
-                  <!-- Table -->
-                  <!-- <table class="table" id="dataTable">
-                    <thead>
-                      <tr>
-                        <th onclick="sortTable(0)">ID ↑↓</th>
-                        <th onclick="sortTable(1)">Nom ↑↓</th>
-                        <th onclick="sortTable(2)">Age ↑↓</th>
-                        <th onclick="sortTable(3)">Statut ↑↓</th>
-                        <th onclick="sortTable(4)">Salaire Brut ↑↓</th>
-                        <th onclick="sortTable(5)">Montant souhaité ↑↓</th>
-                        <th onclick="sortTable(6)">Actions ↑↓</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>0152X8</td>
-                        <td>John Doe</td>
-                        <td>30 Ans</td>
-                        <td>Nouvelles</td>
-                        <td>3600€</td>
-                        <td>151.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>
-                      <tr>
-                        <td>0152X9</td>
-                        <td>Jane Doe</td>
-                        <td>28 Ans</td>
-                        <td>En attente</td>
-                        <td>3500€</td>
-                        <td>150.000€</td>
-                        <td><button class="btn btn-info">Consulter</button></td>
-                      </tr>                      
-                    </tbody>
-                  </table> -->
+
                   <?php
                   include 'db.php'; // Include database connection
-                  
+
                   // Fetch clients from database
-                  $sql = "SELECT id, nom, age, statut, salaire_brut, montant_souhaite FROM client";
+                  $sql = "SELECT * FROM client";
                   $result = $conn->query($sql);
                   ?>
-                  
+
                   <table class="table" id="dataTable">
-                      <thead>
-                          <tr>
-                              <th onclick="sortTable(0)">ID↑↓</th>
-                              <th onclick="sortTable(1)">Nom↑↓</th>
-                              <th onclick="sortTable(2)">Age↑↓</th>
-                              <th onclick="sortTable(3)">Statut↑↓</th>
-                              <th onclick="sortTable(4)">Salaire Brut↑↓</th>
-                              <th onclick="sortTable(5)">Montant souhaité↑↓</th>
-                              <th>Actions</th>
-                          </tr>
-                      </thead>
-                      <tbody id="clientTableBody">
-                          <?php
-                          if ($result->num_rows > 0) {
-                              while ($row = $result->fetch_assoc()) {
-                                  echo "<tr>
+                    <thead>
+                      <tr>
+                        <th onclick="sortTable(0)">ID↑↓</th>
+                        <th onclick="sortTable(1)">Nom↑↓</th>
+                        <th onclick="sortTable(2)">Age↑↓</th>
+                        <th onclick="sortTable(3)">Statut↑↓</th>
+                        <th onclick="sortTable(4)">Salaire Brut↑↓</th>
+                        <th onclick="sortTable(5)">Montant souhaité↑↓</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="clientTableBody">
+                      <?php
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          echo "<tr>
                                           <td>{$row['id']}</td>
                                           <td>{$row['nom']}</td>
                                           <td>{$row['age']} Ans</td>
                                           <td>{$row['statut']}</td>
                                           <td>{$row['salaire_brut']}€</td>
                                           <td>{$row['montant_souhaite']}€</td>
+                                          <td style='display: none;'>{$row['date_creation']}</td>
                                           <td>
                                             <a href='consulter.php?id={$row['id']}' class='btn btn-info'>Consulter</a>
                                           </td>
                                         </tr>";
-                              }
-                          } else {
-                              echo "<tr><td colspan='7' class='text-center'>Aucun client trouvé</td></tr>";
-                          }
-                          ?>
-                      </tbody>
+                        }
+                      } else {
+                        echo "<tr><td colspan='7' class='text-center'>Aucun client trouvé</td></tr>";
+                      }
+                      ?>
+                    </tbody>
                   </table>
-                  
-                  <?php $conn->close(); // Close database connection ?>
-                  
+
+                  <?php $conn->close(); // Close database connection 
+                  ?>
+
                   <!-- Pagination -->
                   <nav aria-label="Page navigation">
                     <ul class="pagination" id="pagination">
@@ -2246,7 +2239,7 @@ $conn->close();
                   const li = document.createElement('li');
                   li.className = 'page-item' + (i === currentPage ? ' active' : '');
                   li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                  li.addEventListener('click', function (e) {
+                  li.addEventListener('click', function(e) {
                     e.preventDefault();
                     currentPage = i;
                     updateTable();
@@ -2270,7 +2263,10 @@ $conn->close();
                   if (!isNaN(aValue) && !isNaN(bValue)) {
                     return aValue - bValue;
                   } else {
-                    return aValue.localeCompare(bValue, undefined, { numeric: true, sensitivity: 'base' });
+                    return aValue.localeCompare(bValue, undefined, {
+                      numeric: true,
+                      sensitivity: 'base'
+                    });
                   }
                 });
 
@@ -2293,7 +2289,7 @@ $conn->close();
               }
 
               // Initialize table and pagination
-              document.addEventListener('DOMContentLoaded', function () {
+              document.addEventListener('DOMContentLoaded', function() {
                 const table = document.getElementById('dataTable');
                 const rows = Array.from(table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
