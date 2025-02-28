@@ -57,7 +57,7 @@
           <div class="sidebarmenu">
             <div class="brand-logo d-flex align-items-center nav-logo">
               <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35"/>
+                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
               </a>
 
             </div>
@@ -1224,7 +1224,7 @@
             </ul>
 
             <div class="d-block d-lg-none py-9 py-xl-0">
-              <img src="../assets/images/logos/loanislam.png"  alt="matdash-img" height="35"/>
+              <img src="../assets/images/logos/loanislam.png" alt="matdash-img" height="35" />
             </div>
             <a class="navbar-toggler p-0 border-0 nav-icon-hover-bg rounded-circle" href="javascript:void(0)"
               data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -2833,14 +2833,14 @@
             <div style="background-color: white; border-radius: 15px; padding:20px; margin-bottom: 30px;">
               <div class="datatables">
                 <div class="content">
-                  <div class="search-bar mb-3 d-flex justify-content-center">
-                    <div class="col-md-3 mb-2 mb-md-0">
+                <div class="search-bar mb-3 d-flex justify-content-center">
+                    <div class="col-md-4 mb-2 mb-md-0">
                       <input type="text" id="searchInput" class="form-control" placeholder="Demandes de prets ...">
                     </div>
 
                     <div class="vr"></div>
-                    <div class="col-md-2 mb-2 mb-md-0">
-                      <select id="statusFilter" class="form-select">
+                    <div class="col-md-2 mb-2 mb-md-0 d-none">
+                      <select id="statusFilter" class="form-select ">
                         <option value="">Tous les statuts</option>
                         <option value="Nouvelles">Nouvelles</option>
                         <option value="En attente">En attente</option>
@@ -2849,8 +2849,8 @@
                         <option value="Annulé">Annulé</option>
                       </select>
                     </div>
-                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
-                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
+                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
+                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
 
                     <button class="btn btn-primary"
                       style="background-color: #22825d; border-color: #22825d;">Recherche</button>
@@ -2945,7 +2945,7 @@
                   const li = document.createElement('li');
                   li.className = 'page-item' + (i === currentPage ? ' active' : '');
                   li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                  li.addEventListener('click', function (e) {
+                  li.addEventListener('click', function(e) {
                     e.preventDefault();
                     currentPage = i;
                     updateTable();
@@ -2969,7 +2969,10 @@
                   if (!isNaN(aValue) && !isNaN(bValue)) {
                     return aValue - bValue;
                   } else {
-                    return aValue.localeCompare(bValue, undefined, { numeric: true, sensitivity: 'base' });
+                    return aValue.localeCompare(bValue, undefined, {
+                      numeric: true,
+                      sensitivity: 'base'
+                    });
                   }
                 });
 
@@ -2992,7 +2995,7 @@
               }
 
               // Initialize table and pagination
-              document.addEventListener('DOMContentLoaded', function () {
+              document.addEventListener('DOMContentLoaded', function() {
                 const table = document.getElementById('dataTable');
                 const rows = Array.from(table.getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
@@ -3042,7 +3045,7 @@
             <!-- End table -->
 
 
-           
+
 
             <div id="settlements" style="display: none;"></div>
 

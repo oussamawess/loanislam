@@ -2833,14 +2833,14 @@
             <div style="background-color: white; border-radius: 15px; padding:20px; margin-bottom: 30px;">
               <div class="datatables">
                 <div class="content">
-                  <div class="search-bar mb-3 d-flex justify-content-center">
-                    <div class="col-md-3 mb-2 mb-md-0">
+                <div class="search-bar mb-3 d-flex justify-content-center">
+                    <div class="col-md-4 mb-2 mb-md-0">
                       <input type="text" id="searchInput" class="form-control" placeholder="Demandes de prets ...">
                     </div>
 
                     <div class="vr"></div>
-                    <div class="col-md-2 mb-2 mb-md-0">
-                      <select id="statusFilter" class="form-select">
+                    <div class="col-md-2 mb-2 mb-md-0 d-none">
+                      <select id="statusFilter" class="form-select ">
                         <option value="">Tous les statuts</option>
                         <option value="Nouvelles">Nouvelles</option>
                         <option value="En attente">En attente</option>
@@ -2849,8 +2849,8 @@
                         <option value="Annulé">Annulé</option>
                       </select>
                     </div>
-                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
-                    <div class="col-md-2 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
+                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
+                    <div class="col-md-3 mb-2 mb-md-0"><input type="date" id="" class="form-control"></div>
 
                     <button class="btn btn-primary"
                       style="background-color: #22825d; border-color: #22825d;">Recherche</button>
