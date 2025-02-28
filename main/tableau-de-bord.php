@@ -1,3 +1,7 @@
+<?php
+require_once 'auth-admin.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
@@ -28,8 +32,8 @@
     <div class="toast-body hstack align-items-start gap-6">
       <i class="ti ti-alert-circle fs-6"></i>
       <div>
-        <h5 class="text-white fs-3 mb-1">Welcome to MatDash</h5>
-        <h6 class="text-white fs-2 mb-0">Easy to costomize the Template!!!</h6>
+        <h5 class="text-white fs-3 mb-1">bienvenue <?= htmlspecialchars($admin['nom']) ?></h5>
+        <!-- <h6 class="text-white fs-2 mb-0">Easy to costomize the Template!!!</h6> -->
       </div>
       <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast"
         aria-label="Close"></button>
@@ -157,11 +161,24 @@
                 </li>
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="login.html" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
                     <iconify-icon icon="solar:logout-2-outline"></iconify-icon>
                     <span class="hide-menu">Déconnexion</span>
                   </a>
                 </li>
+                <script>
+                  // Add event listener to the logout link
+                  document.getElementById('logout-link').addEventListener('click', function() {
+                    // Make an AJAX request to logout.php to destroy the session
+                    fetch('logout.php')
+                      .then(response => response.text())
+                      .then(data => {
+                        // After the session is destroyed, redirect to the login page
+                        window.location.href = 'login.php'; // or the path to your login page
+                      })
+                      .catch(error => console.log('Error during logout:', error));
+                  });
+                </script>
               </ul>
             </nav>
 

@@ -1,3 +1,57 @@
+<?php
+session_start();
+require_once 'db.php'; // Database connection
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and retrieve login details
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Sanitize input
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $password = trim($password);
+
+    // Query to get user data by email
+    $sql = "SELECT id, id_client, email, password, role FROM user WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Fetch user data
+        $user = $result->fetch_assoc();
+
+        // Verify password
+        if (password_verify($password, $user['password'])) {
+            // Password is correct, set session variables
+            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_role'] = $user['role'];
+
+            if ($user['role'] == 'admin') {
+                $_SESSION['admin_id'] = $user['id']; // Store admin's ID in the session
+                // Redirect to the admin dashboard
+                header('Location: tableau-de-bord.php');
+            } else {
+                $_SESSION['client_id'] = $user['id_client']; // Store client's ID in the session
+                // Redirect to the client dashboard
+                header('Location: user-profile.php');
+            }
+            exit(); // Ensure to stop further script execution
+        } else {
+            // Incorrect password
+            echo "<p class='alert alert-danger'>Mot de passe incorrect.</p>";
+        }
+    } else {
+        // User not found
+        echo "<p class='alert alert-danger'>Utilisateur non trouvé.</p>";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
@@ -39,23 +93,23 @@
                           <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo" alt="Logo-Dark" />
                         </a>
                         <h4 class="lh-base mb-4">Connectez-vous</h4>
-                        
-                        <form>
+
+                        <form method="POST" action="login.php">
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" aria-describedby="emailHelp">
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" required>
                           </div>
                           <div class="mb-4">
                             <div class="d-flex align-items-center justify-content-between">
                               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-                              <a class="text-primary link-dark fs-2" href="../main/forgotpassword.html">Mot de passe oublié ?</a>
+                              <a class="text-primary link-dark fs-2" href="../main/forgotpassword.html">Mot de passe oublié ?</a>
                             </div>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe">
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe" required>
                           </div>
-                          
-                          <a href="../main/tableau-de-bord.php" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Se connecter</a>
+
+                          <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Se connecter</button>
                           <div class="d-flex align-items-center">
-                            <p class="fs-12 mb-0 fw-medium">Vous n'avez pas encore de compte ?</p>
+                            <p class="fs-12 mb-0 fw-medium">Vous n'avez pas encore de compte ?</p>
                             <a class="text-primary fw-bolder ms-2" href="../main/signup.html">Inscrivez-vous maintenant</a>
                           </div>
                         </form>
@@ -64,7 +118,7 @@
                   </div>
 
                 </div>
-                
+
               </div>
 
             </div>
