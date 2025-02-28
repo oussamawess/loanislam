@@ -1,4 +1,8 @@
 <?php
+require_once 'auth-admin.php';
+?>
+
+<?php
 include 'db.php'; // Database connection
 
 $response = ["status" => "error", "message" => "Opération échouée."];

@@ -1,4 +1,8 @@
 <?php
+require_once 'auth-admin.php';
+?>
+
+<?php
 require 'db.php'; // Ensure this file connects to your database
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
