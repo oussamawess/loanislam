@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'client') {
 $client_id = $_SESSION['client_id'];
 
 // Fetch additional data for the client
-$sql = "SELECT * FROM user WHERE id = ?";
+$sql = "SELECT * FROM user WHERE id_client = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $client_id);
 $stmt->execute();

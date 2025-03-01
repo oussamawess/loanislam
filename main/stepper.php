@@ -828,8 +828,8 @@
     $('#multiStepForm').on('submit', function(e) {
       e.preventDefault(); // Prevent the default form submission
 
-      // Serialize form data
-      const formData = $(this).serialize();
+      // Create a FormData object to handle file uploads
+      const formData = new FormData(this);
 
       // Send AJAX request
       $.ajax({
@@ -837,10 +837,11 @@
         type: 'POST',
         data: formData,
         dataType: 'json',
+        processData: false, // Required for FormData
+        contentType: false, // Required for FormData
         success: function(response) {
           if (response.status === "success") {
             // Redirect or show success message
-           
             window.location.href = "login.php"; // Redirect to login page
           } else if (response.status === "error") {
             // Display error message in step5
