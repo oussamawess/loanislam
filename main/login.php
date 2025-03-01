@@ -2,6 +2,8 @@
 session_start();
 require_once 'db.php'; // Database connection
 
+$error_message = '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and retrieve login details
     $email = $_POST['email'];
@@ -40,11 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit(); // Ensure to stop further script execution
         } else {
             // Incorrect password
-            echo "<p class='alert alert-danger'>Mot de passe incorrect.</p>";
+            $error_message = "<p class='alert alert-danger text-danger'>Mot de passe incorrect.</p>";
         }
     } else {
         // User not found
-        echo "<p class='alert alert-danger'>Utilisateur non trouvé.</p>";
+        $error_message = "<p class='alert alert-danger text-danger'>Utilisateur non trouvé.</p>";
     }
 
     $stmt->close();
@@ -72,9 +74,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
   <!-- Preloader -->
-  <div class="preloader">
+  <!-- <div class="preloader">
     <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
-  </div>
+  </div> -->
   <div id="main-wrapper">
     <div class="position-relative overflow-hidden auth-bg min-vh-100 w-100 d-flex align-items-center justify-content-center">
       <div class="d-flex align-items-center justify-content-center w-100">
@@ -99,12 +101,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" required>
                           </div>
-                          <div class="mb-4">
+                          <div class="mb-3">
                             <div class="d-flex align-items-center justify-content-between">
                               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
                               <a class="text-primary link-dark fs-2" href="../main/forgotpassword.html">Mot de passe oublié ?</a>
                             </div>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe" required>
+                             <!-- Display the error message here -->
+                             <?php if ($error_message): ?>
+                                <div class="mt-3"><?php echo $error_message; ?></div>
+                            <?php endif; ?>
                           </div>
 
                           <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Se connecter</button>
