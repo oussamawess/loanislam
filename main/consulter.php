@@ -161,11 +161,24 @@ require_once 'auth-admin.php';
                                 </li>
 
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="login.html" id="get-url" aria-expanded="false">
+                                    <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
                                         <iconify-icon icon="solar:logout-2-outline"></iconify-icon>
                                         <span class="hide-menu">Déconnexion</span>
                                     </a>
                                 </li>
+                                <script>
+                                    // Add event listener to the logout link
+                                    document.getElementById('logout-link').addEventListener('click', function() {
+                                        // Make an AJAX request to logout.php to destroy the session
+                                        fetch('logout.php')
+                                            .then(response => response.text())
+                                            .then(data => {
+                                                // After the session is destroyed, redirect to the login page
+                                                window.location.href = 'login.php'; // or the path to your login page
+                                            })
+                                            .catch(error => console.log('Error during logout:', error));
+                                    });
+                                </script>
 
                                 <li class="sidebar-item d-none">
                                     <a class="sidebar-link" href="consulter-nouvelles-demandes.php" id="get-url" aria-expanded="false">

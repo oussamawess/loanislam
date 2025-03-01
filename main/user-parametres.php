@@ -1991,15 +1991,19 @@ require_once 'auth-user.php';
                         include 'db.php'; // Ensure this connects to your database
 
                         // Fetch administrators from the database
-                        $sql = "SELECT id, nom, email, password FROM user WHERE role = 'admin'";
+                        // $sql = "SELECT id, nom, email, password FROM user WHERE role = 'client'";
+                        // $result = $conn->query($sql);
+
+                        $sql = "SELECT id, nom, email, password FROM user WHERE id_client = $client_id";
                         $result = $conn->query($sql);
                         ?>
+
 
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex mb-2 align-items-center">
                                     <div>
-                                        <h5>Liste des administrateurs</h5>
+                                        <h5>Vos informations</h5>
                                     </div>
                                 </div>
                                 <div class="table-responsive border rounded-1">
@@ -2030,8 +2034,11 @@ require_once 'auth-user.php';
                                                             <td><p class='mb-0 fw-normal fs-4 text-dark'>********</p></td>
 
                                                             <td>
-                                                                <a href='update_admin.php?id={$row['id']}' class='text-white text-decoration-none'><button class='btn btn-success'>Editer</button></a>
-                                                                <button class='btn btn-danger delete-btn' data-id='{$row['id']}'>Supprimer</button>
+                                                                <form action='update_user.php' method='POST'>
+                                                                    <input type='hidden' name='id' value='" . $row['id'] . "'> <!-- Hidden input for ID -->
+                                                                    <button type='submit' class='btn btn-success'>Editer</button>
+                                                                </form>
+                                                                
                                                             </td>
                                                         </tr>";
                                                 }
@@ -2107,131 +2114,7 @@ require_once 'auth-user.php';
                         </script>
 
                         <!-- End admins table-->
-                        <!--Start add admin -->
-                        <!-- Add the Font Awesome library for eye icons -->
-                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-3">Ajouter un administrateur</h4>
-                                <div id="errorMessage" class="alert alert-danger text-danger fs-4" style="display: none;"></div>
-
-                                <form id="adminForm" method="POST" action="add_admin.php" enctype="multipart/form-data">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="tb-fname" name="nom"
-                                                    placeholder="Enter Name here" required>
-                                                <label for="tb-fname">Nom</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" id="tb-email" name="email"
-                                                    placeholder="name@example.com" required>
-                                                <label for="tb-email">Adresse email</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-pwd" name="password"
-                                                    placeholder="Password" required>
-                                                <label for="tb-pwd">Mot de passe</label>
-                                                <i id="togglePwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword"
-                                                    placeholder="Confirm Password" required>
-                                                <label for="tb-cpwd">Confirmer le mot de passe</label>
-                                                <i id="toggleCpwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                                <small id="passwordError" class="form-text text-danger"
-                                                    style="display:none;">Les mots de passe ne correspondent pas.
-                                                    Veuillez les vérifier.</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-md-flex align-items-center">
-                                                <div class="ms-auto mt-3 mt-md-0">
-                                                    <button type="submit"
-                                                        class="btn btn-primary hstack gap-6">Ajouter</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <script>
-                            document.getElementById("adminForm").addEventListener("submit", function(event) {
-                                event.preventDefault();
-
-                                var formData = new FormData(this);
-
-                                fetch("add_admin.php", {
-                                        method: "POST",
-                                        body: formData
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.status === "success") {
-                                            document.getElementById("adminForm").reset();
-                                            window.location.href = "parametres.php";
-                                        } else {
-                                            var errorMessageDiv = document.getElementById("errorMessage");
-                                            errorMessageDiv.innerHTML = data.message;
-                                            errorMessageDiv.style.display = "block";
-                                        }
-                                    })
-                                    .catch(error => console.error("Erreur:", error));
-                            });
-                        </script>
-
-                        <script>
-                            // Toggle password visibility
-                            function togglePasswordVisibility(inputId, iconId) {
-                                var passwordInput = document.getElementById(inputId);
-                                var icon = document.getElementById(iconId);
-
-                                // Toggle the type of input and icon
-                                if (passwordInput.type === "password") {
-                                    passwordInput.type = "text";
-                                    icon.classList.remove("fa-eye-slash");
-                                    icon.classList.add("fa-eye");
-                                } else {
-                                    passwordInput.type = "password";
-                                    icon.classList.remove("fa-eye");
-                                    icon.classList.add("fa-eye-slash");
-                                }
-                            }
-
-                            // Add event listeners for both password fields
-                            document.getElementById("togglePwd").addEventListener("click", function() {
-                                togglePasswordVisibility("tb-pwd", "togglePwd");
-                            });
-                            document.getElementById("toggleCpwd").addEventListener("click", function() {
-                                togglePasswordVisibility("tb-cpwd", "toggleCpwd");
-                            });
-
-                            // Form validation on submit
-                            document.getElementById("adminForm").addEventListener("submit", function(event) {
-                                var password = document.getElementById("tb-pwd").value;
-                                var confirmPassword = document.getElementById("tb-cpwd").value;
-                                var errorMessage = document.getElementById("passwordError");
-
-                                // Check if passwords match
-                                if (password !== confirmPassword) {
-                                    event.preventDefault(); // Prevent form submission
-                                    errorMessage.style.display = "block"; // Show error message
-                                } else {
-                                    errorMessage.style.display = "none"; // Hide error message if passwords match
-                                }
-                            });
-                        </script>
-
-                        <!--End add admin-->
+                       
 
                         <div id="settlements" style="display: none;"></div>
 
