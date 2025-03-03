@@ -2832,9 +2832,10 @@ require_once 'auth-admin.php';
             <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
-                  <button type="button" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
+                  
+                  <a href="en-attente-detudes.php" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
                     Retour
-                  </button>
+                  </a>
 
                   <button type="button" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
                     Ajouter à étude en cours
@@ -2848,7 +2849,7 @@ require_once 'auth-admin.php';
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
             <script>
               $(document).ready(function() {
-                $(".btn-in-pause, .btn-in-progress").click(function() {
+                $(".btn-in-pause, .btn-in").click(function() {
                   var clientId = <?php echo $client_id; ?>;
                   var status, redirectUrl, confirmMessage;
 
@@ -2856,7 +2857,7 @@ require_once 'auth-admin.php';
                     status = "En cours";
                     confirmMessage = "Voulez-vous vraiment changer le statut en 'En cours' ?";
                     redirectUrl = "etude-en-cours.php";
-                  } else if ($(this).hasClass("btn-in-progress")) {
+                  } else if ($(this).hasClass("btn-in")) {
                     status = "Nouvelles";
                     confirmMessage = "Voulez-vous vraiment changer le statut en 'Nouvelles' ?";
                     redirectUrl = "nouvelles-demandes.php";

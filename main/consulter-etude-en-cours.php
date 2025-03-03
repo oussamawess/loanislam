@@ -2836,7 +2836,7 @@ require_once 'auth-admin.php';
                     Refusé la demande
                   </button>
                   <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Accepté la demande
+                    Accepté la demande (en attente signature)
                   </button>
                 </div>
               </div>
@@ -2854,9 +2854,9 @@ require_once 'auth-admin.php';
                     confirmMessage = "Voulez-vous vraiment refuser la demande ?";
                     redirectUrl = "contrat-annule.php";
                   } else if ($(this).hasClass("btn-in-progress")) {
-                    status = "Signé";
-                    confirmMessage = "Voulez-vous vraiment accepter la demande ?";
-                    redirectUrl = "contrat-signe.php";
+                    status = "En attente signature contrat";
+                    confirmMessage = "Voulez-vous vraiment changer le statut en 'En attente signature contrat' ?";
+                    redirectUrl = "en-attente-signature-contrat.php";
                   }
 
                   // Show confirmation alert
