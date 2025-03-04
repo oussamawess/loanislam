@@ -67,9 +67,9 @@ if ($result->num_rows > 0) {
             </div>
         </div>
         <!-- Preloader -->
-        <div class="preloader">
+        <!-- <div class="preloader">
             <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
-        </div>
+        </div> -->
         <div id="main-wrapper">
             <!-- Sidebar Start -->
             <aside class="side-mini-panel with-vertical">
@@ -122,13 +122,28 @@ if ($result->num_rows > 0) {
                                         </a>
                                     </li>
 
+                                    <?php
+                                    // Check if there are unread notifications
+                                    $notif_sql = "SELECT COUNT(*) AS unread_count FROM required_documents WHERE id_client = ? AND has_been_read = 0";
+                                    $notif_stmt = $conn->prepare($notif_sql);
+                                    $notif_stmt->bind_param("i", $client_id);
+                                    $notif_stmt->execute();
+                                    $notif_result = $notif_stmt->get_result();
+                                    $notif_data = $notif_result->fetch_assoc();
+                                    $unread_notifications = $notif_data['unread_count'] > 0;
+                                    ?>
+
                                     <li class="sidebar-item">
-                                        <a class="sidebar-link" href="user-notifications.php" id="get-url"
-                                            aria-expanded="false">
+                                        <a class="sidebar-link" href="user-notifications.php" id="get-url" aria-expanded="false">
                                             <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
                                             <span class="hide-menu">Notifications</span>
+
+                                            <?php if ($unread_notifications): ?>
+                                                <iconify-icon icon='mynaui:one-waves-solid' width='1.2em' height='1.2em' style='color: #e52727'></iconify-icon>
+                                            <?php endif; ?>
                                         </a>
                                     </li>
+
 
 
                                     <li class="sidebar-item">

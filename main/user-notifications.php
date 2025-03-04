@@ -1,6 +1,24 @@
 <?php
 require_once 'auth-user.php';
 ?>
+<?php
+require_once 'db.php'; // Database connection
+
+// Check if the user is logged in and is a client
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'client') {
+    header('Location: login.php');
+    exit();
+}
+
+// Retrieve client ID from session
+$client_id = $_SESSION['client_id'];
+
+// Update the has_been_read column for this client
+$update_sql = "UPDATE required_documents SET has_been_read = 1 WHERE id_client = ? AND has_been_read = 0";
+$update_stmt = $conn->prepare($update_sql);
+$update_stmt->bind_param("i", $client_id);
+$update_stmt->execute();
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
@@ -40,9 +58,9 @@ require_once 'auth-user.php';
         </div>
     </div>
     <!-- Preloader -->
-    <div class="preloader">
+    <!-- <div class="preloader">
         <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
-    </div>
+    </div> -->
     <div id="main-wrapper">
         <!-- Sidebar Start -->
         <aside class="side-mini-panel with-vertical">
@@ -94,11 +112,25 @@ require_once 'auth-user.php';
                                     </a>
                                 </li>
 
+                                <?php
+                                // Check if there are unread notifications
+                                $notif_sql = "SELECT COUNT(*) AS unread_count FROM required_documents WHERE id_client = ? AND has_been_read = 0";
+                                $notif_stmt = $conn->prepare($notif_sql);
+                                $notif_stmt->bind_param("i", $client_id);
+                                $notif_stmt->execute();
+                                $notif_result = $notif_stmt->get_result();
+                                $notif_data = $notif_result->fetch_assoc();
+                                $unread_notifications = $notif_data['unread_count'] > 0;
+                                ?>
+
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="user-notifications.php" id="get-url"
-                                        aria-expanded="false">
+                                    <a class="sidebar-link" href="user-notifications.php" id="get-url" aria-expanded="false">
                                         <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
                                         <span class="hide-menu">Notifications</span>
+
+                                        <?php if ($unread_notifications): ?>
+                                            <iconify-icon icon='mynaui:one-waves-solid' width='1.2em' height='1.2em' style='color: #e52727'></iconify-icon>
+                                        <?php endif; ?>
                                     </a>
                                 </li>
 
@@ -1998,7 +2030,29 @@ require_once 'auth-user.php';
                                     <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                 </form>
                             </div>
+                            
+                            <?php
+                            require_once 'db.php'; // Ensure database connection
+                            require_once 'auth-user.php'; // Ensure authentication
+
+                            $query = "SELECT id, label, created_at FROM required_documents WHERE id_client = ? ORDER BY created_at DESC";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bind_param("i", $client_id);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            $documents = [];
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $documents[] = $row;
+                                }
+                            }
+                            $stmt->close();
+                            ?>
+
+
                             <div class="d-flex">
+                                <!-- Left Side: User List -->
                                 <div class="w-25 d-none d-lg-block border-end user-chat-box">
                                     <div class="p-3 border-bottom">
                                         <form class="position-relative">
@@ -2008,396 +2062,101 @@ require_once 'auth-user.php';
                                     </div>
                                     <div class="app-invoice">
                                         <ul class="overflow-auto invoice-users simplebar-scrollable-y" data-simplebar="init">
-                                            <div class="simplebar-wrapper" style="margin: 0px;">
-                                                <div class="simplebar-height-auto-observer-wrapper">
-                                                    <div class="simplebar-height-auto-observer"></div>
-                                                </div>
-                                                <div class="simplebar-mask">
-                                                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                                        <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
-                                                            <div class="simplebar-content" style="padding: 0px;">
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light-subtle" id="invoice-123" data-invoice-id="123">
-                                                                        <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
-                                                                            <i class="ti ti-user fs-6"></i>
-                                                                        </div>
-                                                                        <div class="ms-3 d-inline-block w-75">
-                                                                            <h6 class="mb-0 invoice-customer">James Anderson</h6>
-
-                                                                            <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #123</span>
-                                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-124" data-invoice-id="124">
-                                                                        <div class="btn btn-danger round rounded-circle d-flex align-items-center justify-content-center">
-                                                                            <i class="ti ti-user fs-6"></i>
-                                                                        </div>
-                                                                        <div class="ms-3 d-inline-block w-75">
-                                                                            <h6 class="mb-0 invoice-customer">Bianca Doe</h6>
-                                                                            <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#124</span>
-                                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-125" data-invoice-id="125">
-                                                                        <div class="btn btn-info round rounded-circle d-flex align-items-center justify-content-center">
-                                                                            <i class="ti ti-user fs-6"></i>
-                                                                        </div>
-                                                                        <div class="ms-3 d-inline-block w-75">
-                                                                            <h6 class="mb-0 invoice-customer">Angelina Rhodes</h6>
-                                                                            <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#125</span>
-                                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-126" data-invoice-id="126">
-                                                                        <div class="btn btn-warning round rounded-circle d-flex align-items-center justify-content-center">
-                                                                            <i class="ti ti-user fs-6"></i>
-                                                                        </div>
-                                                                        <div class="ms-3 d-inline-block w-75">
-                                                                            <h6 class="mb-0 invoice-customer">Samuel Smith</h6>
-                                                                            <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#126</span>
-                                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-127" data-invoice-id="127">
-                                                                        <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
-                                                                            <i class="ti ti-user fs-6"></i>
-                                                                        </div>
-                                                                        <div class="ms-3 d-inline-block w-75">
-                                                                            <h6 class="mb-0 invoice-customer">Gabriel Jobs</h6>
-                                                                            <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#127</span>
-                                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
-                                                                <li></li>
+                                            <div class="simplebar-content">
+                                                <?php foreach ($documents as $doc) : ?>
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light-subtle"
+                                                            data-invoice-id="<?= $doc['id']; ?>">
+                                                            <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
+                                                                <i class="ti ti-user fs-6"></i>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="simplebar-placeholder" style="width: 238px; height: 480px;"></div>
-                                            </div>
-                                            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-                                                <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
-                                            </div>
-                                            <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-                                                <div class="simplebar-scrollbar" style="height: 236px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+                                                            <div class="ms-3 d-inline-block w-75">
+                                                                <h6 class="mb-0 invoice-customer"><?= htmlspecialchars($doc['label']); ?></h6>
+                                                                <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #<?= $doc['id']; ?></span>
+                                                                <span class="fs-3 invoice-date text-nowrap text-body-color d-block"><?= $doc['created_at']; ?></span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
                                             </div>
                                         </ul>
                                     </div>
                                 </div>
+
+                                <!-- Right Side: Notifications Content -->
                                 <div class="w-75 w-xs-100 chat-container">
                                     <div class="invoice-inner-part h-100">
                                         <div class="invoiceing-box">
                                             <div class="invoice-header d-flex align-items-center border-bottom p-3">
-                                                <h4 class=" text-uppercase mb-0">notifications</h4>
-                                                <div class="ms-auto">
-                                                    <h4 class="invoice-number"></h4>
-                                                </div>
+                                                <h4 class="text-uppercase mb-0">Notifications</h4>
                                             </div>
                                             <div class="p-3" id="custom-invoice">
-                                                <div class="invoice-123" id="printableArea" style="display: block;">
-                                                    <div class="row pt-3">
-                                                        <div class="col-md-12">
-                                                            <div>
-                                                                <address>
-                                                                    <h6>&nbsp;From,</h6>
-                                                                    <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
-                                                                    <p class="ms-1">
-                                                                        1108, Clair Street,
-                                                                        <br>Massachusetts,
-                                                                        <br>Woods Hole - 02543
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                            <div class="text-end">
-                                                                <address>
-                                                                    <h6>To,</h6>
-                                                                    <h6 class="fw-bold invoice-customer">
-                                                                        James Anderson,
-                                                                    </h6>
-                                                                    <p class="ms-4">
-                                                                        455, Shobe Lane,
-                                                                        <br>Colorado,
-                                                                        <br>Fort
-                                                                        Collins - 80524
-                                                                    </p>
-                                                                    <p class="mt-4 mb-1">
-                                                                        <span>Invoice Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        23rd Jan 2021
-                                                                    </p>
-                                                                    <p>
-                                                                        <span>Due Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        25th Jan 2021
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                        </div>
+                                                <?php foreach ($documents as $doc) : ?>
+                                                    <div class="invoice-details invoice-<?= $doc['id']; ?>" style="display: none;">
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div>
+                <address>
+                    <h6>&nbsp;<?= htmlspecialchars($doc['label']); ?></h6>
+                    <h6 class="fw-bold">&nbsp; Sent at: <?= $doc['created_at']; ?></h6>
+                </address>
+            </div>
+            <div class="text-end">
+                <form action="upload_document.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="document_id" value="<?= $doc['id']; ?>">
+                    <input class="form-control" name="file" type="file" required>
+                    <button type="submit" class="btn btn-success mt-2">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                                    </div>
-                                                </div>
-                                                <!-- 2 -->
-                                                <div class="invoice-124" id="printableArea">
-                                                    <div class="row pt-3">
-                                                        <div class="col-md-12">
-                                                            <div>
-                                                                <address>
-                                                                    <h6>&nbsp;From,</h6>
-                                                                    <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
-                                                                    <p class="ms-1">
-                                                                        1108, Clair Street,
-                                                                        <br>Massachusetts,
-                                                                        <br>Woods Hole - 02543
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                            <div class="text-end">
-                                                                <address>
-                                                                    <h6>To,</h6>
-                                                                    <h6 class="fw-bold invoice-customer">
-                                                                        Bianca Doe,
-                                                                    </h6>
-                                                                    <p class="ms-4">
-                                                                        455, Shobe Lane,
-                                                                        <br>Colorado,
-                                                                        <br>Fort
-                                                                        Collins - 80524
-                                                                    </p>
-                                                                    <p class="mt-4 mb-1">
-                                                                        <span>Invoice Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        23rd Jan 2021
-                                                                    </p>
-                                                                    <p>
-                                                                        <span>Due Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        25th Jan 2021
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 3 -->
-                                                <div class="invoice-125" id="printableArea">
-                                                    <div class="row pt-3">
-                                                        <div class="col-md-12">
-                                                            <div>
-                                                                <address>
-                                                                    <h6>&nbsp;From,</h6>
-                                                                    <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
-                                                                    <p class="ms-1">
-                                                                        1108, Clair Street,
-                                                                        <br>Massachusetts,
-                                                                        <br>Woods Hole - 02543
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                            <div class="text-end">
-                                                                <address>
-                                                                    <h6>To,</h6>
-                                                                    <h6 class="fw-bold invoice-customer">
-                                                                        Angelina Rhodes,
-                                                                    </h6>
-                                                                    <p class="ms-4">
-                                                                        455, Shobe Lane,
-                                                                        <br>Colorado,
-                                                                        <br>Fort
-                                                                        Collins - 80524
-                                                                    </p>
-                                                                    <p class="mt-4 mb-1">
-                                                                        <span>Invoice Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        23rd Jan 2021
-                                                                    </p>
-                                                                    <p>
-                                                                        <span>Due Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        25th Jan 2021
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 4 -->
-                                                <div class="invoice-126" id="printableArea">
-                                                    <div class="row pt-3">
-                                                        <div class="col-md-12">
-                                                            <div>
-                                                                <address>
-                                                                    <h6>&nbsp;From,</h6>
-                                                                    <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
-                                                                    <p class="ms-1">
-                                                                        1108, Clair Street,
-                                                                        <br>Massachusetts,
-                                                                        <br>Woods Hole - 02543
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                            <div class="text-end">
-                                                                <address>
-                                                                    <h6>To,</h6>
-                                                                    <h6 class="fw-bold invoice-customer">
-                                                                        Samuel Smith,
-                                                                    </h6>
-                                                                    <p class="ms-4">
-                                                                        455, Shobe Lane,
-                                                                        <br>Colorado,
-                                                                        <br>Fort
-                                                                        Collins - 80524
-                                                                    </p>
-                                                                    <p class="mt-4 mb-1">
-                                                                        <span>Invoice Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        23rd Jan 2021
-                                                                    </p>
-                                                                    <p>
-                                                                        <span>Due Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        25th Jan 2021
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- 5 -->
-                                                <div class="invoice-127" id="printableArea">
-                                                    <div class="row pt-3">
-                                                        <div class="col-md-12">
-                                                            <div>
-                                                                <address>
-                                                                    <h6>&nbsp;From,</h6>
-                                                                    <h6 class="fw-bold">&nbsp;Steve Jobs</h6>
-                                                                    <p class="ms-1">
-                                                                        1108, Clair Street,
-                                                                        <br>Massachusetts,
-                                                                        <br>Woods Hole - 02543
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                            <div class="text-end">
-                                                                <address>
-                                                                    <h6>To,</h6>
-                                                                    <h6 class="fw-bold invoice-customer">
-                                                                        Gabriel Jobs,
-                                                                    </h6>
-                                                                    <p class="ms-4">
-                                                                        455, Shobe Lane,
-                                                                        <br>Colorado,
-                                                                        <br>Fort
-                                                                        Collins - 80524
-                                                                    </p>
-                                                                    <p class="mt-4 mb-1">
-                                                                        <span>Invoice Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        23rd Jan 2021
-                                                                    </p>
-                                                                    <p>
-                                                                        <span>Due Date :</span>
-                                                                        <i class="ti ti-calendar"></i>
-                                                                        25th Jan 2021
-                                                                    </p>
-                                                                </address>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; ?>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="offcanvas offcanvas-start user-chat-box" tabindex="-1" id="chat-sidebar" aria-labelledby="offcanvasExampleLabel">
-                                    <div class="offcanvas-header">
-                                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-                                            Invoice
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                    </div>
-                                    <div class="p-3 border-bottom">
-                                        <form class="position-relative">
-                                            <input type="search" class="form-control search-invoice ps-5" id="text-srh" placeholder="Chercher">
-                                            <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
-                                        </form>
-                                    </div>
-                                    <div class="app-invoice overflow-auto">
-                                        <ul class="invoice-users">
-                                            <li>
-                                                <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light" id="invoice-123" data-invoice-id="123">
-                                                    <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="ti ti-user fs-6"></i>
-                                                    </div>
-                                                    <div class="ms-3 d-inline-block w-75">
-                                                        <h6 class="mb-0 invoice-customer">James Anderson</h6>
 
-                                                        <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #123</span>
-                                                        <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-124" data-invoice-id="124">
-                                                    <div class="btn btn-danger round rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="ti ti-user fs-6"></i>
-                                                    </div>
-                                                    <div class="ms-3 d-inline-block w-75">
-                                                        <h6 class="mb-0 invoice-customer">Bianca Doe</h6>
-                                                        <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#124</span>
-                                                        <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-125" data-invoice-id="125">
-                                                    <div class="btn btn-info round rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="ti ti-user fs-6"></i>
-                                                    </div>
-                                                    <div class="ms-3 d-inline-block w-75">
-                                                        <h6 class="mb-0 invoice-customer">Angelina Rhodes</h6>
-                                                        <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#125</span>
-                                                        <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-126" data-invoice-id="126">
-                                                    <div class="btn btn-warning round rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="ti ti-user fs-6"></i>
-                                                    </div>
-                                                    <div class="ms-3 d-inline-block w-75">
-                                                        <h6 class="mb-0 invoice-customer">Samuel Smith</h6>
-                                                        <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#126</span>
-                                                        <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user" id="invoice-127" data-invoice-id="127">
-                                                    <div class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
-                                                        <i class="ti ti-user fs-6"></i>
-                                                    </div>
-                                                    <div class="ms-3 d-inline-block w-75">
-                                                        <h6 class="mb-0 invoice-customer">Gabriel Jobs</h6>
-                                                        <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">#127</span>
-                                                        <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                // Hide all notification details initially
+                                let invoices = document.querySelectorAll(".invoice-details");
+                                invoices.forEach(el => el.style.display = "none");
+
+                                // Get all invoice list items
+                                let invoiceItems = document.querySelectorAll(".invoice-user");
+
+                                if (invoiceItems.length > 0) {
+                                    // Show the newest (first) notification by default
+                                    let firstInvoiceId = invoiceItems[0].getAttribute("data-invoice-id");
+                                    let firstInvoice = document.querySelector(`.invoice-${firstInvoiceId}`);
+                                    if (firstInvoice) {
+                                        firstInvoice.style.display = "block";
+                                    }
+
+                                    // Add event listener to each document list item
+                                    invoiceItems.forEach(item => {
+                                        item.addEventListener("click", function() {
+                                            // Hide all notifications
+                                            invoices.forEach(el => el.style.display = "none");
+
+                                            // Show the selected notification
+                                            let invoiceId = this.getAttribute("data-invoice-id");
+                                            let selectedInvoice = document.querySelector(`.invoice-${invoiceId}`);
+                                            if (selectedInvoice) {
+                                                selectedInvoice.style.display = "block";
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        </script>
+
+
+
                         <!--End Notifications-->
 
                         <div id="settlements" style="display: none;"></div>

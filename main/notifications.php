@@ -1,6 +1,27 @@
 <?php
 require_once 'auth-admin.php';
 ?>
+<?php
+require_once 'db.php'; // Database connection
+
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+    // Redirect to login page if the user is not an admin
+    header('Location: login.php');
+    exit();
+}
+
+// Update all unread documents (NULL or 0) to 1
+$update_sql = "UPDATE required_documents SET has_been_read_admin = 1 WHERE  has_been_read_admin = 0";
+$update_stmt = $conn->prepare($update_sql);
+
+if ($update_stmt->execute()) {
+    // Optional: Debug message (remove in production)
+    // echo "Records updated successfully";
+} else {
+    echo "Error updating records: " . $conn->error;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
