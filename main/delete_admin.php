@@ -1,5 +1,5 @@
 <?php
-require_once 'auth-admin.php';
+require_once 'auth-top-admin.php';
 ?>
 
 <?php

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 04 mars 2025 à 16:04
+-- Généré le : jeu. 06 mars 2025 à 14:42
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -168,10 +168,10 @@ CREATE TABLE `required_documents` (
 --
 
 INSERT INTO `required_documents` (`id`, `id_client`, `label`, `file_path`, `status`, `has_been_read`, `created_at`, `updated_at`, `has_been_read_admin`) VALUES
-(1, 23, 'please add contract file', NULL, 'pending', 0, '2025-03-04 02:52:26', '2025-03-04 14:52:42', NULL),
-(2, 32, 'please add the bank approval', 'files/doc_67c6fea1c00e11.09814758.pdf', 'uploaded', 1, '2025-03-04 02:52:26', '2025-03-04 14:52:38', NULL),
-(3, 32, 'second', 'files/doc_67c70858578ea9.59515068.pdf', 'uploaded', 1, '2025-03-04 12:47:32', '2025-03-04 14:52:34', NULL),
-(4, 32, 'third', 'files/doc_67c70af7a59f46.21779678.pdf', 'uploaded', 1, '2025-03-04 12:59:35', '2025-03-04 15:03:48', 0);
+(2, 32, 'please add the bank approval', 'files/doc_67c6fea1c00e11.09814758.pdf', 'pending', 1, '2025-03-04 02:52:26', '2025-03-05 13:37:10', NULL),
+(3, 32, 'second', 'files/file_67bd18ec201da2.55450901.pdf', 'uploaded', 1, '2025-03-04 12:47:32', '2025-03-06 02:06:52', 0),
+(4, 32, 'third', 'files/doc_67c70af7a59f46.21779678.pdf', 'uploaded', 1, '2025-03-04 12:59:35', '2025-03-05 14:11:05', 1),
+(5, 26, 'please add salary file', 'files/doc_67c9023dad7688.29825627.pdf', 'uploaded', 1, '2025-03-06 02:02:04', '2025-03-06 02:02:47', 1);
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,7 @@ CREATE TABLE `user` (
   `nom` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` enum('admin','client','partner') NOT NULL
+  `role` enum('admin','client','partner','topadmin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -206,7 +206,6 @@ INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUE
 (17, 27, 'wess', 'asssa@gmail.com', '$2y$10$nycemjU/9iBO1hvKebBipu5XA6IkPhC8ByvJnzbuyg4uVJf5TBvTO', 'client'),
 (18, 28, 'wess', 'wessd@gmail.com', '$2y$10$D21Cqfrq6EM9X9tRlk9eS.sJgazqX3mUaIstD.HhQFABb.uighWuK', 'client'),
 (19, 29, 'wess', 'wessa@gmail.com', '$2y$10$vJIWv8JadpF6nW2tYMqhGOM0UnqKXoutAVfzMoOhpM7nxMgkItW5K', 'client'),
-(21, NULL, 'wees', 'wescss@gmail.com', '$2y$10$cbmlwTOrDAkdC8KU4lyOsuUAWnEiZOEs3JQHPp4GKiaImyexPR0oa', 'admin'),
 (26, 30, 'wess', 'wessa12@gmail.com', '$2y$10$UZE95sCGHWYHBgnpjSLH8u5riOazr5d310X/gp27HsI8MzjZhWRd6', 'client'),
 (27, 31, 'aaa', 'bb@gmail.com', '$2y$10$ZPtSjqpqFFlBYf2EUr8nDOeKocDs5ZNNs6CXpaNXcxIBfbKiP3E16', 'client'),
 (28, 32, 'qqq', 'qqq@ll.com', '$2y$10$DXBUcwhSsZAvXjlK23EeoeZvFVZtfAjQcv1rdvGB4fN/lWeXUZGpK', 'client'),
@@ -215,12 +214,13 @@ INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUE
 (31, 35, 'qq', 'qq@kk.com', '$2y$10$sSsQA1gbnHyiFLowQLTtueonxXIs6bH2m4hoHJoPAKS37NSLDFDD6', 'client'),
 (32, 36, 'Allistair Boone', 'ruqodiba@mailinator.com', '$2y$10$Ts7.xetXAJvsHi6dzLlyTu/ggoMOosHMQIlaGc0o0XNe5hWtJ9RI6', 'client'),
 (33, 37, 'Sopoline Abbott', 'roxymoqy@mailinator.com', '$2y$10$ie/CE5MYFyqmQ.OuNoxwmOZCR/4bdOh7f9tpci9UvXCcUOezbIrMi', 'client'),
-(34, NULL, 'wessess', 'wessess@gmail.com', '$2y$10$A/MhaKLtWx9KPy5Cz3fHzutvLLX54/jAxo6zgptNNWltV9DYINvxu', 'admin'),
 (35, 38, 'Elmo Carey', 'vecaqojy@mailinator.com', '$2y$10$JRo5k/DE3jtvlfcUxXLEQueNFhusKWI3g3tHuz8m5eQBp2lmjLazm', 'client'),
 (36, 39, 'Wang Cortez', 'beke@mailinator.com', '$2y$10$9qPGufFIdyr6fiMLw0Y4..rJ8EGtjOQzQtXdTeI8detTxP4KyRra6', 'client'),
 (37, 40, 'Aladdin Callahan', 'rohegag@mailinator.com', '$2y$10$no68wfteZ7neVdADQKQiW.SGzyuOfNWYLB1B2VBokfA8KjSPEI/US', 'client'),
 (38, 41, 'Georgia James', 'besywif@mailinator.com', '$2y$10$G6CcteNoKNnAYp6CLLXBlei0tCsf0qdinOgVOEfbOW/AYJTnNEliK', 'client'),
-(39, 42, 'oussama ammar', 'lohud@mailinator.com', '$2y$10$X22hGgnvMoVjLfazdwqPW.6armlX/TCPTbEqYt3Cam/8706mFxo8O', 'client');
+(39, 42, 'oussama ammar', 'lohud@mailinator.com', '$2y$10$X22hGgnvMoVjLfazdwqPW.6armlX/TCPTbEqYt3Cam/8706mFxo8O', 'client'),
+(40, NULL, 'topp', 'topp@gmail.com', '$2y$10$DNDmc2OEY.5Y7pxa.o/RN.w2EeJgHM3uwqLayWdYSOND9PZs2qUrW', 'topadmin'),
+(42, NULL, 'wesss', 'wesss@gmail.com', '$2y$10$kfu0By5fqf3NhEHmflx5v.unRVJFg1dp5BasVSL6Mkf1fqi49QUZm', 'admin');
 
 --
 -- Index pour les tables déchargées
@@ -289,13 +289,13 @@ ALTER TABLE `partner`
 -- AUTO_INCREMENT pour la table `required_documents`
 --
 ALTER TABLE `required_documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- Contraintes pour les tables déchargées

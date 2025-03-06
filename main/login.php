@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = $user['role'];
 
-            if ($user['role'] == 'admin') {
+            if ($user['role'] == 'admin' || $user['role'] == 'topadmin') {
                 $_SESSION['admin_id'] = $user['id']; // Store admin's ID in the session
                 // Redirect to the admin dashboard
                 header('Location: tableau-de-bord.php');

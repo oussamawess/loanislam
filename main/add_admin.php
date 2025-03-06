@@ -1,4 +1,7 @@
 <?php
+require_once 'auth-top-admin.php';
+?>
+<?php
 include 'db.php'; // Include database connection
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -114,18 +114,31 @@
                 </li> -->
 
                 <li class="sidebar-item">
-                  <a class="sidebar-link" href="profil.tml" id="get-url" aria-expanded="false">
+                  <a class="sidebar-link" href="profile.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="gg:profile"></iconify-icon>
                     <span class="hide-menu">Profil</span>
                   </a>
                 </li>
 
-                <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                   <a class="sidebar-link" href="parametres.php" id="get-url" aria-expanded="false">
                     <iconify-icon icon="solar:settings-outline"></iconify-icon>
                     <span class="hide-menu">Paramètres</span>
                   </a>
-                </li>
+                </li> -->
+                <?php
+                // Check if the user role is 'topadmin'
+                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'topadmin'): 
+                ?>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="parametres.php" id="get-url" aria-expanded="false">
+                            <iconify-icon icon="solar:settings-outline"></iconify-icon>
+                            <span class="hide-menu">Paramètres</span>
+                        </a>
+                    </li>
+                <?php
+                endif; 
+                ?>
 
                 <li class="sidebar-item">
                   <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
@@ -158,6 +171,8 @@
 
 
                 <li class="sidebar-item d-none">
+                  <a class="sidebar-link" href="update_admin.php" id="get-url" aria-expanded="false"></a>
+
                   <a style="display: none;" href="consulter-nouvelles-demandes.php?id=<?= htmlspecialchars($client_id_link); ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
                   <a class="sidebar-link" href="consulter-nouvelles-demandes.php" id="get-url" aria-expanded="false"></a>
 

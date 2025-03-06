@@ -1,6 +1,7 @@
 <?php
 require_once 'auth-top-admin.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 
@@ -68,6 +69,171 @@ require_once 'auth-top-admin.php';
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
+                        <nav class="sidebar-nav" id="menu-right-mini-1" data-simplebar>
+                            <ul class="sidebar-menu" id="sidebarnav">
+                                <!-- ---------------------------------- -->
+                                <!-- Home -->
+                                <!-- ---------------------------------- -->
+                                <li class="nav-small-cap">
+                                    <span class="hide-menu"></span>
+                                </li>
+                                <!-- ---------------------------------- -->
+                                <!-- Dashboard -->
+                                <!-- ---------------------------------- -->
+                                <li class="sidebar-item" style="display: none;">
+                                    <a class="sidebar-link" href="tableau-de-bord.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="solar:atom-line-duotone"></iconify-icon>
+                                        <span class="hide-menu">Tableau de bord</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="tableau-de-bord.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="mage:dashboard-fill"></iconify-icon>
+                                        <span class="hide-menu">Tableau de bord</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="nouvelles-demandes.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
+                                        <span class="hide-menu">Nouvelles demandes</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="en-attente-detudes.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="solar:calendar-linear"></iconify-icon>
+                                        <span class="hide-menu">En attente d'études</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="etude-en-cours.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="solar:server-2-outline"></iconify-icon>
+                                        <span class="hide-menu">Étude en cours</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="en-attente-signature-contrat.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="solar:chart-2-outline"></iconify-icon>
+                                        <span class="hide-menu">En Attente signature<br> contrat</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="contrat-signe.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="mingcute:bubble-line" width="1.2em"
+                                            height="1.2em"></iconify-icon>
+                                        <span class="hide-menu">Contrat signé</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="contrat-annule.php" id="get-url"
+                                        aria-expanded="false">
+                                        <iconify-icon icon="mynaui:credit-card-minus" width="1.2em"
+                                            height="1.2em"></iconify-icon>
+                                        <span class="hide-menu">Contrat annulé</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <span class="sidebar-divider"></span>
+                                </li>
+
+                                <?php
+                                include 'db.php';
+
+                                // Check if any document is unread
+                                $query = "SELECT COUNT(*) as unread_count FROM required_documents WHERE has_been_read_admin = 0";
+                                $result = $conn->query($query);
+                                $row = $result->fetch_assoc();
+                                $hasUnread = ($row['unread_count'] > 0);
+                                ?>
+                                <li class="sidebar-item">
+                                <a class="sidebar-link" href="notifications.php" id="get-url" aria-expanded="false">
+                                    <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
+                                    <span class="hide-menu">Notifications</span>
+
+                                    <?php if ($hasUnread) : ?>
+                                    <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
+                                    <?php endif; ?>
+                                </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="profil.tml" id="get-url" aria-expanded="false">
+                                        <iconify-icon icon="gg:profile"></iconify-icon>
+                                        <span class="hide-menu">Profil</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="parametres.php" id="get-url" aria-expanded="false">
+                                        <iconify-icon icon="solar:settings-outline"></iconify-icon>
+                                        <span class="hide-menu">Paramètres</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
+                                        <iconify-icon icon="solar:logout-2-outline"></iconify-icon>
+                                        <span class="hide-menu">Déconnexion</span>
+                                    </a>
+                                </li>
+                                <script>
+                                    // Add event listener to the logout link
+                                    document.getElementById('logout-link').addEventListener('click', function() {
+                                        // Make an AJAX request to logout.php to destroy the session
+                                        fetch('logout.php')
+                                            .then(response => response.text())
+                                            .then(data => {
+                                                // After the session is destroyed, redirect to the login page
+                                                window.location.href = 'login.php'; // or the path to your login page
+                                            })
+                                            .catch(error => console.log('Error during logout:', error));
+                                    });
+                                </script>
+
+                                <?php
+include 'db.php';
+
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // Get user ID from URL
+
+    // Fetch user details from the database
+    $sql = "SELECT id FROM user WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc(); // Store user data
+    } else {
+        echo "User not found.";
+        exit;
+    }
+} else {
+    echo "Invalid request.";
+    exit;
+}
+?>
+<!-- Corrected HTML with PHP embedded in href -->
+<a style="display: none;" href="update_admins.php?id=<?php echo $user['id']; ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
+
+                                
+                            </ul>
+                        </nav>
                         <?php include "sidebar.php"?>
 
                         <!-- ---------------------------------- -->
@@ -1918,183 +2084,78 @@ require_once 'auth-top-admin.php';
                 <!-- End Sidebar scroll-->
             </aside>
 
+
+            <?php
+            include 'db.php';
+
+            if (isset($_GET['id'])) {
+                $id = intval($_GET['id']); // Get user ID from URL
+
+                // Fetch user details from the database
+                $sql = "SELECT id, nom, email, password FROM user WHERE id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $user = $result->fetch_assoc(); // Store user data
+                } else {
+                    echo "User not found.";
+                    exit;
+                }
+            } else {
+                echo "Invalid request.";
+                exit;
+            }
+            ?>
+
             <div class="body-wrapper">
                 <div class="container-fluid">
                     <div class="row">
-
-
-
-                        <!-- Start admins table -->
-                        <?php
-                        include 'db.php'; // Ensure this connects to your database
-
-                        // Fetch administrators from the database
-                        $sql = "SELECT id, nom, email, password FROM user WHERE role = 'admin'";
-                        $result = $conn->query($sql);
-                        ?>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex mb-2 align-items-center">
-                                    <div>
-                                        <h5>Liste des administrateurs</h5>
-                                    </div>
-                                </div>
-                                <div class="table-responsive border rounded-1">
-                                    <table class="table text-nowrap customize-table mb-0 align-middle">
-                                        <thead class="text-dark fs-4">
-                                            <tr>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Nom</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Adresse email</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Mot de passe</h6>
-                                                </th>
-                                                <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Action</h6>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            if ($result->num_rows > 0) {
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo "<tr>
-                                                            <td><p class='mb-0 fw-normal fs-4 text-dark'>{$row['nom']}</p></td>
-                                                            <td><p class='mb-0 fw-normal fs-4 text-dark'>{$row['email']}</p></td>
-                                                            <td><p class='mb-0 fw-normal fs-4 text-dark'>********</p></td>
-
-                                                            <td>
-                                                                <a href='update_admins.php?id={$row['id']}' class='text-white text-decoration-none'><button class='btn btn-success'>Editer</button></a>
-                                                                <button class='btn btn-danger delete-btn' data-id='{$row['id']}'>Supprimer</button>
-                                                            </td>
-                                                        </tr>";
-                                                }
-                                            } else {
-                                                echo "<tr><td colspan='4' class='text-center'>Aucun administrateur trouvé.</td></tr>";
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- DELETE ADMIN script START-->
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function() {
-                                document.querySelectorAll(".delete-btn").forEach(button => {
-                                    button.addEventListener("click", function() {
-                                        let userId = this.getAttribute("data-id");
-
-                                        if (confirm("Voulez-vous vraiment supprimer cet administrateur?")) {
-                                            fetch("delete_admin.php", {
-                                                    method: "POST",
-                                                    headers: {
-                                                        "Content-Type": "application/x-www-form-urlencoded"
-                                                    },
-                                                    body: "id=" + userId
-                                                })
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    if (data.status === "success") {
-
-                                                        location.reload(); // Refresh the page
-                                                    } else {
-                                                        alert("Erreur: " + data.message);
-                                                    }
-                                                })
-                                                .catch(error => console.error("Erreur:", error));
-                                        }
-                                    });
-                                });
-                            });
-                        </script>
-                        <!-- DELETE ADMIN script END-->
-
-                        <script>
-                            function fetchAdmins() {
-                                fetch('fetch_admins.php')
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        let tableBody = document.getElementById("adminTableBody");
-                                        tableBody.innerHTML = ""; // Clear existing data
-
-                                        data.forEach(admin => {
-                                            let row = `
-                        <tr>
-                            <td><p class="mb-0 fw-normal fs-4 text-dark">${admin.nom}</p></td>
-                            <td><p class="mb-0 fw-normal fs-4 text-dark">${admin.email}</p></td>
-                            <td><p class="mb-0 fw-normal fs-4 text-dark">${admin.password}</p></td>
-                            <td>
-                                <button class="btn btn-success">Editer</button>
-                                <button class="btn btn-danger">Supprimer</button>
-                            </td>
-                        </tr>`;
-                                            tableBody.innerHTML += row;
-                                        });
-                                    })
-                                    .catch(error => console.error("Erreur lors de la récupération des administrateurs:", error));
-                            }
-
-                            // Fetch administrators when the page loads
-                            document.addEventListener("DOMContentLoaded", fetchAdmins);
-                        </script>
-
-                        <!-- End admins table-->
                         <!--Start add admin -->
                         <!-- Add the Font Awesome library for eye icons -->
                         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-3">Ajouter un administrateur</h4>
+                                <h4 class="card-title mb-3">Modifier un administrateur</h4>
                                 <div id="errorMessage" class="alert alert-danger text-danger fs-4" style="display: none;"></div>
 
-                                <form id="adminForm" method="POST" action="add_admin.php" enctype="multipart/form-data">
+                                <form id="adminForm" method="POST" action="update_admins_process.php" enctype="multipart/form-data">
+                                    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="tb-fname" name="nom"
-                                                    placeholder="Enter Name here" required>
+                                                <input type="text" class="form-control" id="tb-fname" name="nom" value="<?php echo $user['nom']; ?>" placeholder="Enter Name here" required>
                                                 <label for="tb-fname">Nom</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="email" class="form-control" id="tb-email" name="email"
-                                                    placeholder="name@example.com" required>
+                                                <input type="email" class="form-control" id="tb-email" name="email" value="<?php echo $user['email']; ?>" placeholder="name@example.com" required>
                                                 <label for="tb-email">Adresse email</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-pwd" name="password"
-                                                    placeholder="Password" required>
-                                                <label for="tb-pwd">Mot de passe</label>
-                                                <i id="togglePwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+                                                <input type="password" class="form-control" id="tb-pwd" name="password" placeholder="Password" required>
+                                                <label for="tb-pwd">Nouveau mot de passe</label>
+                                                <i id="togglePwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword"
-                                                    placeholder="Confirm Password" required>
-                                                <label for="tb-cpwd">Confirmer le mot de passe</label>
-                                                <i id="toggleCpwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                                <small id="passwordError" class="form-text text-danger"
-                                                    style="display:none;">Les mots de passe ne correspondent pas.
-                                                    Veuillez les vérifier.</small>
+                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword" placeholder="Confirm Password" required>
+                                                <label for="tb-cpwd">Confirmer le nouveau mot de passe</label>
+                                                <i id="toggleCpwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+                                                <small id="passwordError" class="form-text text-danger" style="display:none;">Les mots de passe ne correspondent pas. Veuillez les vérifier.</small>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-md-flex align-items-center">
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <button type="submit"
-                                                        class="btn btn-primary hstack gap-6">Ajouter</button>
+                                                    <button type="submit" class="btn btn-success hstack gap-6">Modifier</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -2102,28 +2163,38 @@ require_once 'auth-top-admin.php';
                                 </form>
                             </div>
                         </div>
+
                         <script>
-                            document.getElementById("adminForm").addEventListener("submit", function(event) {
-                                event.preventDefault();
+                            document.addEventListener("DOMContentLoaded", function() {
+                                document.querySelector("#adminForm").addEventListener("submit", function(event) {
+                                    event.preventDefault(); // Prevent form from submitting normally
 
-                                var formData = new FormData(this);
+                                    // Get form data
+                                    var formData = new FormData(this);
 
-                                fetch("add_admin.php", {
-                                        method: "POST",
-                                        body: formData
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.status === "success") {
-                                            document.getElementById("adminForm").reset();
-                                            window.location.href = "parametres.php";
-                                        } else {
-                                            var errorMessageDiv = document.getElementById("errorMessage");
-                                            errorMessageDiv.innerHTML = data.message;
-                                            errorMessageDiv.style.display = "block";
-                                        }
-                                    })
-                                    .catch(error => console.error("Erreur:", error));
+                                    fetch('update_admins_process.php', {
+                                            method: 'POST',
+                                            body: formData
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Hide the error message initially
+                                            document.getElementById("errorMessage").style.display = "none";
+
+                                            if (data.status === "error") {
+                                                // Show the error message if there's an error
+                                                document.getElementById("errorMessage").innerHTML = data.message;
+                                                document.getElementById("errorMessage").style.display = "block";
+                                            } else {
+                                                // Success message (you can show a success message or redirect)
+                                                
+                                                window.location.href = 'parametres.php'; 
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error("Error:", error);
+                                        });
+                                });
                             });
                         </script>
 

@@ -2120,7 +2120,7 @@ require_once 'auth-user.php';
                                             tableBody.innerHTML += row;
                                         });
                                     })
-                                    .catch(error => console.error("Erreur lors de la récupération des administrateurs:", error));
+                                    .catch(error => console.error("Erreur lors de la récupération des utilisateurs:", error));
                             }
 
                             // Fetch administrators when the page loads

@@ -3,7 +3,7 @@ session_start();
 require_once 'db.php'; // Database connection
 
 // Check if the user is logged in and is an admin
-if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin', 'topadmin'])) {
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'topadmin') {
   // Redirect to login page if the user is not an admin
   header('Location: login.php');
   exit();

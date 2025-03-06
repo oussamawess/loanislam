@@ -69,172 +69,7 @@ require_once 'auth-admin.php';
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
-                        <nav class="sidebar-nav" id="menu-right-mini-1" data-simplebar>
-                            <ul class="sidebar-menu" id="sidebarnav">
-                                <!-- ---------------------------------- -->
-                                <!-- Home -->
-                                <!-- ---------------------------------- -->
-                                <li class="nav-small-cap">
-                                    <span class="hide-menu"></span>
-                                </li>
-                                <!-- ---------------------------------- -->
-                                <!-- Dashboard -->
-                                <!-- ---------------------------------- -->
-                                <li class="sidebar-item" style="display: none;">
-                                    <a class="sidebar-link" href="tableau-de-bord.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="solar:atom-line-duotone"></iconify-icon>
-                                        <span class="hide-menu">Tableau de bord</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="tableau-de-bord.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="mage:dashboard-fill"></iconify-icon>
-                                        <span class="hide-menu">Tableau de bord</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="nouvelles-demandes.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="solar:users-group-rounded-linear"></iconify-icon>
-                                        <span class="hide-menu">Nouvelles demandes</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="en-attente-detudes.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="solar:calendar-linear"></iconify-icon>
-                                        <span class="hide-menu">En attente d'études</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="etude-en-cours.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="solar:server-2-outline"></iconify-icon>
-                                        <span class="hide-menu">Étude en cours</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="en-attente-signature-contrat.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="solar:chart-2-outline"></iconify-icon>
-                                        <span class="hide-menu">En Attente signature<br> contrat</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="contrat-signe.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="mingcute:bubble-line" width="1.2em"
-                                            height="1.2em"></iconify-icon>
-                                        <span class="hide-menu">Contrat signé</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="contrat-annule.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="mynaui:credit-card-minus" width="1.2em"
-                                            height="1.2em"></iconify-icon>
-                                        <span class="hide-menu">Contrat annulé</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <span class="sidebar-divider"></span>
-                                </li>
-
-                                <?php
-                                include 'db.php';
-
-                                // Check if any document is unread
-                                $query = "SELECT COUNT(*) as unread_count FROM required_documents WHERE has_been_read_admin = 0";
-                                $result = $conn->query($query);
-                                $row = $result->fetch_assoc();
-                                $hasUnread = ($row['unread_count'] > 0);
-                                ?>
-                                <li class="sidebar-item">
-                                <a class="sidebar-link" href="notifications.php" id="get-url" aria-expanded="false">
-                                    <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
-                                    <span class="hide-menu">Notifications</span>
-
-                                    <?php if ($hasUnread) : ?>
-                                    <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
-                                    <?php endif; ?>
-                                </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="profil.tml" id="get-url" aria-expanded="false">
-                                        <iconify-icon icon="gg:profile"></iconify-icon>
-                                        <span class="hide-menu">Profil</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="parametres.php" id="get-url" aria-expanded="false">
-                                        <iconify-icon icon="solar:settings-outline"></iconify-icon>
-                                        <span class="hide-menu">Paramètres</span>
-                                    </a>
-                                </li>
-
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
-                                        <iconify-icon icon="solar:logout-2-outline"></iconify-icon>
-                                        <span class="hide-menu">Déconnexion</span>
-                                    </a>
-                                </li>
-                                <script>
-                                    // Add event listener to the logout link
-                                    document.getElementById('logout-link').addEventListener('click', function() {
-                                        // Make an AJAX request to logout.php to destroy the session
-                                        fetch('logout.php')
-                                            .then(response => response.text())
-                                            .then(data => {
-                                                // After the session is destroyed, redirect to the login page
-                                                window.location.href = 'login.php'; // or the path to your login page
-                                            })
-                                            .catch(error => console.log('Error during logout:', error));
-                                    });
-                                </script>
-
-                                <?php
-include 'db.php';
-
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']); // Get user ID from URL
-
-    // Fetch user details from the database
-    $sql = "SELECT id FROM user WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc(); // Store user data
-    } else {
-        echo "User not found.";
-        exit;
-    }
-} else {
-    echo "Invalid request.";
-    exit;
-}
-?>
-<!-- Corrected HTML with PHP embedded in href -->
-<a style="display: none;" href="update_admin.php?id=<?php echo $user['id']; ?>" id="get-url" class="sidebar-link" aria-expanded="false"></a>
-
-                                
-                            </ul>
-                        </nav>
-                        <?php include "sidebar.php"?>
+                        <?php include "sidebar.php" ?>
 
                         <!-- ---------------------------------- -->
 
@@ -2085,16 +1920,18 @@ if (isset($_GET['id'])) {
             </aside>
 
 
+
             <?php
-            include 'db.php';
+            include 'db.php'; // Database connection
 
-            if (isset($_GET['id'])) {
-                $id = intval($_GET['id']); // Get user ID from URL
+            // Use the client_id from session instead of the URL parameter
+            if (isset($_SESSION['admin_id'])) {
+                $client_id = $_SESSION['admin_id']; // Retrieve client ID from the session
 
-                // Fetch user details from the database
+                // Fetch user details based on the client_id from session
                 $sql = "SELECT id, nom, email, password FROM user WHERE id = ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $id);
+                $stmt->bind_param("i", $admin_id); // Use the client_id from session
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -2105,7 +1942,7 @@ if (isset($_GET['id'])) {
                     exit;
                 }
             } else {
-                echo "Invalid request.";
+                echo "Invalid request. Client ID not found in session.";
                 exit;
             }
             ?>
@@ -2118,11 +1955,12 @@ if (isset($_GET['id'])) {
                         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-3">Modifier un administrateur</h4>
+                                <h4 class="card-title mb-3">Modifier vos informations</h4>
                                 <div id="errorMessage" class="alert alert-danger text-danger fs-4" style="display: none;"></div>
 
-                                <form id="adminForm" method="POST" action="update_admin_process.php" enctype="multipart/form-data">
+                                <form id="adminForm" method="POST" action="update_user_process.php" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                                    
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -2187,8 +2025,8 @@ if (isset($_GET['id'])) {
                                                 document.getElementById("errorMessage").style.display = "block";
                                             } else {
                                                 // Success message (you can show a success message or redirect)
-                                                
-                                                window.location.href = 'parametres.php'; 
+
+                                                window.location.href = 'profile.php';
                                             }
                                         })
                                         .catch(error => {
