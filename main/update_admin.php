@@ -150,12 +150,24 @@ require_once 'auth-admin.php';
                                     <span class="sidebar-divider"></span>
                                 </li>
 
+                                <?php
+                                include 'db.php';
+
+                                // Check if any document is unread
+                                $query = "SELECT COUNT(*) as unread_count FROM required_documents WHERE has_been_read_admin = 0";
+                                $result = $conn->query($query);
+                                $row = $result->fetch_assoc();
+                                $hasUnread = ($row['unread_count'] > 0);
+                                ?>
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="notifications.php" id="get-url"
-                                        aria-expanded="false">
-                                        <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
-                                        <span class="hide-menu">Notifications</span>
-                                    </a>
+                                <a class="sidebar-link" href="notifications.php" id="get-url" aria-expanded="false">
+                                    <iconify-icon icon="cuida:notification-bell-outline"></iconify-icon>
+                                    <span class="hide-menu">Notifications</span>
+
+                                    <?php if ($hasUnread) : ?>
+                                    <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
+                                    <?php endif; ?>
+                                </a>
                                 </li>
 
                                 <li class="sidebar-item">
@@ -222,6 +234,7 @@ if (isset($_GET['id'])) {
                                 
                             </ul>
                         </nav>
+                        <?php include "sidebar.php"?>
 
                         <!-- ---------------------------------- -->
 
