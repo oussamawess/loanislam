@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 06 mars 2025 à 14:42
+-- Généré le : ven. 07 mars 2025 à 16:48
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -86,6 +86,24 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `age`, `telephone`, `email`, `adres
 (40, 'Eaque eius duis odio', 'Expedita ullamco sed', 26, '+1 (534) 183-7302', 'jelok@mailinator.com', 'Quam reprehenderit', 'Ut autem temporibus', '42.00', 'Hic elit hic incidu', '150000.00', 12, 'Neuve', '156371.18', '2025-03-01 00:26:23', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
 (41, 'Cum temporibus omnis', 'Totam quaerat in ips', 29, '+1 (138) 621-7786', 'bakivigise@mailinator.com', 'Et amet ea lorem qu', 'Ullam voluptas aliqu', '31.00', 'Pariatur Neque dele', '150000.00', 12, 'Neuve', '156371.18', '2025-03-01 00:35:10', 'Nouvelles', 0, 'files/file_67c2482e76dc18.81864463.pdf', 'files/file_67c2482e77a8e7.80540217.pdf', 'files/file_67c2482e77dc44.71319732.pdf', 'files/file_67c2482e780b82.32070791.pdf'),
 (42, 'Repellendus Dolor o', 'Quo id dolores omni', 29, '+1 (609) 667-2517', 'xuwuzaruha@mailinator.com', 'Consequatur Autem a', 'Accusamus est vel vo', '23.00', 'Placeat velit labor', '150000.00', 12, 'Neuve', '156371.18', '2025-03-01 00:52:42', 'Nouvelles', 1, 'files/file_67c24c4a9e6996.26822755.pdf', 'files/file_67c24c4a9e9562.37391839.pdf', 'files/file_67c24c4a9eb762.96879533.pdf', 'files/file_67c24c4a9ed5b8.19525091.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fees`
+--
+
+CREATE TABLE `fees` (
+  `id` int(11) NOT NULL,
+  `fees` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `fees`
+--
+
+INSERT INTO `fees` (`id`, `fees`) VALUES
+(1, 500);
 
 -- --------------------------------------------------------
 
@@ -220,7 +238,7 @@ INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUE
 (38, 41, 'Georgia James', 'besywif@mailinator.com', '$2y$10$G6CcteNoKNnAYp6CLLXBlei0tCsf0qdinOgVOEfbOW/AYJTnNEliK', 'client'),
 (39, 42, 'oussama ammar', 'lohud@mailinator.com', '$2y$10$X22hGgnvMoVjLfazdwqPW.6armlX/TCPTbEqYt3Cam/8706mFxo8O', 'client'),
 (40, NULL, 'topp', 'topp@gmail.com', '$2y$10$DNDmc2OEY.5Y7pxa.o/RN.w2EeJgHM3uwqLayWdYSOND9PZs2qUrW', 'topadmin'),
-(42, NULL, 'wesss', 'wesss@gmail.com', '$2y$10$kfu0By5fqf3NhEHmflx5v.unRVJFg1dp5BasVSL6Mkf1fqi49QUZm', 'admin');
+(42, NULL, 'wesss', 'wesss@gmail.com', '$2y$10$u3wp5FqC33QiJR63oOci7e7IoDS47Cq5CucWUKOXvOrH6xjXj8qJq', 'admin');
 
 --
 -- Index pour les tables déchargées
@@ -232,6 +250,12 @@ INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUE
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Index pour la table `fees`
+--
+ALTER TABLE `fees`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `notification`
@@ -272,6 +296,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `client`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT pour la table `fees`
+--
+ALTER TABLE `fees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `notification`
