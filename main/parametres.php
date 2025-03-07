@@ -22,6 +22,7 @@ require_once 'auth-top-admin.php';
 
 
     <link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-okaidia.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </head>
 
@@ -68,7 +69,7 @@ require_once 'auth-top-admin.php';
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
-                        <?php include "sidebar.php"?>
+                        <?php include "sidebar.php" ?>
 
                         <!-- ---------------------------------- -->
 
@@ -1922,6 +1923,161 @@ require_once 'auth-top-admin.php';
                 <div class="container-fluid">
                     <div class="row">
 
+
+                        <!-- start fees table -->
+
+                        <div class="card">
+                            <style>
+                                /* Message container */
+                                #message {
+                                    position: fixed;
+                                    top: 20px;
+                                    right: 20px;
+                                    padding: 15px 20px;
+                                    border-radius: 5px;
+                                    font-size: 16px;
+                                    font-weight: bold;
+                                    color: white;
+                                    opacity: 0;
+                                    transform: translateX(100%);
+                                    transition: opacity 0.5s ease, transform 0.5s ease;
+                                    z-index: 1000;
+                                }
+
+                                /* Success message style */
+                                #message.success {
+                                    background-color: #4CAF50;
+                                    /* Green */
+                                    opacity: 1;
+                                    transform: translateX(0);
+                                }
+
+                                /* Error message style */
+                                #message.error {
+                                    background-color: #F44336;
+                                    /* Red */
+                                    opacity: 1;
+                                    transform: translateX(0);
+                                }
+
+                                /* Animation to hide the message after 3 seconds */
+                                @keyframes fadeOut {
+                                    from {
+                                        opacity: 1;
+                                        transform: translateX(0);
+                                    }
+
+                                    to {
+                                        opacity: 0;
+                                        transform: translateX(100%);
+                                    }
+                                }
+
+                                .hide-message {
+                                    animation: fadeOut 0.5s ease forwards;
+                                }
+                            </style>
+                            <div class="card-body">
+                                <div class="d-flex mb-2 align-items-center">
+                                    <div>
+                                        <h5>Frais de dossier</h5>
+                                    </div>
+                                </div>
+                                <div class="table-responsive border rounded-1">
+                                    <table class="table text-nowrap customize-table mb-0 align-middle">
+                                        <thead class="text-dark fs-4">
+                                            <tr>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Current Fees</h6>
+                                                </th>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0">New Fees</h6>
+                                                </th>
+                                                <th>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Action</h6>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="current-fees" class="text-dark fw-bold">Loading...</td>
+                                                <td><input class="form-control" type="number" id="new-fees" step="0.01" placeholder="saisir de nouveaux frais"></td>
+                                                <td><button id="update-fees-btn" class="btn btn-success">Editer</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p id="message"></p>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            // Fetch and display the current fees
+                                            function fetchCurrentFees() {
+                                                $.ajax({
+                                                    url: 'fetch_fees.php',
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    success: function(response) {
+                                                        if (response.status === "success") {
+                                                            $('#current-fees').text(response.fees+' €');
+                                                        } else {
+                                                            $('#current-fees').text("Error loading fees.");
+                                                        }
+                                                    },
+                                                    error: function() {
+                                                        $('#current-fees').text("Error loading fees.");
+                                                    }
+                                                });
+                                            }
+
+                                            // Fetch fees on page load
+                                            fetchCurrentFees();
+
+                                            // Handle update button click
+                                            $('#update-fees-btn').on('click', function() {
+                                                const newFees = $('#new-fees').val();
+
+                                                if (!newFees || isNaN(newFees)) {
+                                                    showMessage("Veuillez entrer un numéro valide.", "error");
+                                                    return;
+                                                }
+
+                                                $.ajax({
+                                                    url: 'update_fees.php',
+                                                    type: 'POST',
+                                                    data: {
+                                                        fees: newFees
+                                                    },
+                                                    dataType: 'json',
+                                                    success: function(response) {
+                                                        if (response.status === "success") {
+                                                            showMessage(response.message, "success");
+                                                            fetchCurrentFees(); // Refresh the current fees
+                                                        } else {
+                                                            showMessage(response.message, "error");
+                                                        }
+                                                    },
+                                                    error: function() {
+                                                        showMessage("Une erreur s'est produite. Veuillez réessayer.", "error");
+                                                    }
+                                                });
+                                            });
+
+                                            // Function to show and hide messages
+                                            function showMessage(message, type) {
+                                                const messageElement = $('#message');
+                                                messageElement.text(message).removeClass("success error hide-message").addClass(type);
+
+                                                // Show the message
+                                                setTimeout(() => {
+                                                    messageElement.addClass("hide-message");
+                                                }, 3000); // Hide after 3 seconds
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end fees table -->
 
 
                         <!-- Start admins table -->
