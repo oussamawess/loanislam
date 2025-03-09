@@ -12,13 +12,19 @@ require_once 'auth-admin.php';
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+  <!-- <link rel="shortcut icon" type="image/png" href="../assets/images/logos/loanislam.png" width="16" height="auto" /> -->
+
+  <link rel="icon" type="image/png" href="../assets/images/logos/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="../assets/images/logos/favicon.svg" />
+  <link rel="shortcut icon" href="../assets/images/logos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/logos/apple-touch-icon.png" />
+  <link rel="manifest" href="../assets/images/logos/site.webmanifest" />
 
   <!-- Core Css -->
   <link rel="stylesheet" href="../assets/css/styles.css" />
 
 
-  <title>MatDash Bootstrap Admin</title>
+  <title>Loanislam</title>
   <link rel="stylesheet" href="../assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
 
 
@@ -27,18 +33,18 @@ require_once 'auth-admin.php';
 
 <body>
   <!-- Toast -->
-  <div class="toast toast-onload align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
+  <!-- <div class="toast toast-onload align-items-center text-bg-primary border-0" role="alert" aria-live="assertive"
     aria-atomic="true">
     <div class="toast-body hstack align-items-start gap-6">
       <i class="ti ti-alert-circle fs-6"></i>
       <div>
-        <h5 class="text-white fs-3 mb-1">Welcome to MatDash</h5>
+        <h5 class="text-white fs-3 mb-1">bienvenue <!?= htmlspecialchars($admin['nom']) ?></h5>
         <h6 class="text-white fs-2 mb-0">Easy to costomize the Template!!!</h6>
       </div>
       <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast"
         aria-label="Close"></button>
     </div>
-  </div>
+  </div> -->
   <!-- Preloader -->
   <div class="preloader">
     <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
