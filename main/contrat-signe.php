@@ -2818,7 +2818,9 @@ require_once 'auth-admin.php';
                                           <td>{$row['salaire_brut']}€</td>
                                           <td>{$row['montant_souhaite']}€</td>
                                           <td style='display: none;'>{$row['date_creation']}</td>
-                                          <td><button class='btn btn-info'>Consulter</button></td>
+                                          <td>
+                                            <a href='consulter.php?id={$row['id']}' class='btn btn-info'>Consulter</a>
+                                          </td>s
                                         </tr>";
                         }
                       } else {

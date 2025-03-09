@@ -2072,7 +2072,7 @@ $update_stmt->execute();
                                                             </div>
                                                             <div class="ms-3 d-inline-block w-75">
                                                                 <h6 class="mb-0 invoice-customer"><?= htmlspecialchars($doc['label']); ?></h6>
-                                                                <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #<?= $doc['id']; ?></span>
+                                                                <!-- <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #<!?= $doc['id']; ?></span> -->
                                                                 <span class="fs-3 invoice-date text-nowrap text-body-color d-block"><?= $doc['created_at']; ?></span>
                                                             </div>
                                                         </a>
@@ -2098,7 +2098,7 @@ $update_stmt->execute();
             <div>
                 <address>
                     <h6>&nbsp;<?= htmlspecialchars($doc['label']); ?></h6>
-                    <h6 class="fw-bold">&nbsp; Sent at: <?= $doc['created_at']; ?></h6>
+                    <h6 class="fw-bold">&nbsp; Demande envoyée le : <?= $doc['created_at']; ?></h6>
                 </address>
             </div>
             <div class="text-end">

@@ -1988,10 +1988,10 @@ require_once 'auth-top-admin.php';
                                         <thead class="text-dark fs-4">
                                             <tr>
                                                 <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">Current Fees</h6>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Tarifs actuels</h6>
                                                 </th>
                                                 <th>
-                                                    <h6 class="fs-4 fw-semibold mb-0">New Fees</h6>
+                                                    <h6 class="fs-4 fw-semibold mb-0">Nouveaux frais</h6>
                                                 </th>
                                                 <th>
                                                     <h6 class="fs-4 fw-semibold mb-0">Action</h6>

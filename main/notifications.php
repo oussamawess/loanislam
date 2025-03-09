@@ -90,7 +90,7 @@ if ($update_stmt->execute()) {
                         <!-- ---------------------------------- -->
                         <!-- Dashboard -->
                         <!-- ---------------------------------- -->
-                        <?php include "sidebar.php"?>
+                        <?php include "sidebar.php" ?>
 
                         <!-- ---------------------------------- -->
 
@@ -1965,7 +1965,7 @@ if ($update_stmt->execute()) {
 
                             // Modified query to join required_documents and client table and select the 'nom' field
                             $query = "
-                                SELECT rd.id, rd.id_client, rd.label, rd.file_path, rd.status, rd.created_at, rd.updated_at, c.nom 
+                                SELECT rd.id, rd.id_client, rd.label, rd.file_path, rd.status, rd.created_at, rd.updated_at, c.nom, c.statut AS client_status 
                                 FROM required_documents rd
                                 LEFT JOIN client c ON rd.id_client = c.id
                                 WHERE rd.status = 'uploaded'
@@ -2021,76 +2021,92 @@ if ($update_stmt->execute()) {
 
                                 <!-- Right Side: Notifications Content -->
                                 <div class="w-75 w-xs-100 chat-container">
-    <div class="invoice-inner-part h-100">
-        <div class="invoiceing-box">
-            <div class="invoice-header d-flex align-items-center border-bottom p-3">
-                <h4 class="text-uppercase mb-0">Notifications</h4>
-            </div>
-            <div class="p-3" id="custom-invoice">
-                <?php foreach ($documents as $doc) : ?>
-                    <div class="invoice-details invoice-<?= $doc['id']; ?>" style="display: none;">
-                        <div class="row pt-3">
-                            <div class="col-md-12">
-                                <div>
-                                    <address>
-                                        <h6>&nbsp;Demande : <?= htmlspecialchars($doc['label']); ?></h6>
-                                        <h6>&nbsp;Nom : <?= htmlspecialchars($doc['nom']); ?></h6>
-                                        <h6>&nbsp;ID Client : <?= htmlspecialchars($doc['id_client']); ?></h6>
-                                        <h6 class="fw-bold">&nbsp; Demande envoyée le <span class="text-success"><?= $doc['created_at']; ?></span></h6>
-                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $doc['updated_at']; ?></span></h6>
-                                        <h6 class="fw-bold">&nbsp; File: <?= $doc['file_path']; ?></h6>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal-<?= $doc['id']; ?>" data-pdf-path="<?= $doc['file_path']; ?>">
-                                            Afficher PDF
-                                        </button>
-                                        <!-- Bootstrap Modal -->
-                                        <div class="modal fade" id="pdfModal-<?= $doc['id']; ?>" tabindex="-1" aria-labelledby="pdfModalLabel-<?= $doc['id']; ?>" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="pdfModalLabel-<?= $doc['id']; ?>">PDF Viewer</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="invoice-inner-part h-100">
+                                        <div class="invoiceing-box">
+                                            <div class="invoice-header d-flex align-items-center border-bottom p-3">
+                                                <h4 class="text-uppercase mb-0">Notifications</h4>
+                                            </div>
+                                            <div class="p-3" id="custom-invoice">
+                                                <?php foreach ($documents as $doc) : ?>
+                                                    <div class="invoice-details invoice-<?= $doc['id']; ?>" style="display: none;">
+                                                        <div class="row pt-3">
+                                                            <div class="col-md-12">
+                                                                <div>
+                                                                    <address>
+                                                                        <h6>&nbsp;Demande : <?= htmlspecialchars($doc['label']); ?></h6>
+                                                                        <h6>&nbsp;Nom : <?= htmlspecialchars($doc['nom']); ?></h6>
+                                                                        <h6>&nbsp;ID Client : <?= htmlspecialchars($doc['id_client']); ?></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Demande envoyée le <span class="text-success"><?= $doc['created_at']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $doc['updated_at']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $doc['client_status']; ?></span></h6>
+
+                                                                        <!-- <h6 class="fw-bold">&nbsp; File: <!?= $doc['file_path']; ?></h6> -->
+                                                                        <?php
+                                                                        if ($doc['client_status'] == "En cours") {
+                                                                            echo "<a href='consulter-etude-en-cours.php?id=" . htmlspecialchars($doc["id_client"]) . "' class='btn btn-info'>Consulter</a>";
+                                                                        } else if ($doc['client_status'] == "En attente signature contrat") {
+                                                                            echo "<a href='consulter-en-attente-signature-contrat.php?id=" . htmlspecialchars($doc["id_client"]) . "' class='btn btn-info'>Consulter</a>";
+                                                                        } else{
+                                                                            echo "<a href='consulter.php?id=" . htmlspecialchars($doc["id_client"]) . "' class='btn btn-info'>Consulter</a>";
+                                                                        }
+                                                                        ?>
+
+                                                                        <!-- <td>
+                                                                            <a href="consulter-etude-en-cours.php?id=<!?= htmlspecialchars($doc['id_client']); ?>" class='btn btn-info'>Consulter</a>
+                                                                        </td> -->
+
+                                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pdfModal-<?= $doc['id']; ?>" data-pdf-path="<?= $doc['file_path']; ?>">
+                                                                            Afficher PDF
+                                                                        </button>
+                                                                        <!-- Bootstrap Modal -->
+                                                                        <div class="modal fade" id="pdfModal-<?= $doc['id']; ?>" tabindex="-1" aria-labelledby="pdfModalLabel-<?= $doc['id']; ?>" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-lg">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h5 class="modal-title" id="pdfModalLabel-<?= $doc['id']; ?>">PDF Viewer</h5>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <!-- PDF Display -->
+                                                                                        <iframe id="pdfViewer-<?= $doc['id']; ?>" src="" width="100%" height="400px" style="border: none;"></iframe>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <!-- Download Button -->
+                                                                                        <a id="downloadPdf-<?= $doc['id']; ?>" href="" class="btn btn-success" download>
+                                                                                            <i class="fas fa-download"></i> Télécharger PDF
+                                                                                        </a>
+                                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <script>
+                                                                            // Add an event listener to the modal to set the PDF path
+                                                                            document.getElementById('pdfModal-<?= $doc['id']; ?>').addEventListener('show.bs.modal', function(event) {
+                                                                                // Get the button that triggered the modal
+                                                                                const button = event.relatedTarget;
+
+                                                                                // Get the PDF path from the data-pdf-path attribute
+                                                                                const pdfPath = button.getAttribute('data-pdf-path');
+
+                                                                                // Set the PDF path in the iframe and download link
+                                                                                const pdfViewer = document.getElementById('pdfViewer-<?= $doc['id']; ?>');
+                                                                                const downloadPdf = document.getElementById('downloadPdf-<?= $doc['id']; ?>');
+
+                                                                                pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
+                                                                                downloadPdf.href = pdfPath; // Set the PDF file path in the download link
+                                                                            });
+                                                                        </script>
+                                                                    </address>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <!-- PDF Display -->
-                                                        <iframe id="pdfViewer-<?= $doc['id']; ?>" src="" width="100%" height="400px" style="border: none;"></iframe>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <!-- Download Button -->
-                                                        <a id="downloadPdf-<?= $doc['id']; ?>" href="" class="btn btn-success" download>
-                                                            <i class="fas fa-download"></i> Télécharger PDF
-                                                        </a>
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                    </div>
-                                                </div>
+                                                <?php endforeach; ?>
                                             </div>
                                         </div>
-                                        <script>
-                                            // Add an event listener to the modal to set the PDF path
-                                            document.getElementById('pdfModal-<?= $doc['id']; ?>').addEventListener('show.bs.modal', function(event) {
-                                                // Get the button that triggered the modal
-                                                const button = event.relatedTarget;
-
-                                                // Get the PDF path from the data-pdf-path attribute
-                                                const pdfPath = button.getAttribute('data-pdf-path');
-
-                                                // Set the PDF path in the iframe and download link
-                                                const pdfViewer = document.getElementById('pdfViewer-<?= $doc['id']; ?>');
-                                                const downloadPdf = document.getElementById('downloadPdf-<?= $doc['id']; ?>');
-
-                                                pdfViewer.src = pdfPath; // Set the PDF file path in the iframe
-                                                downloadPdf.href = pdfPath; // Set the PDF file path in the download link
-                                            });
-                                        </script>
-                                    </address>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-</div>
 
                             </div>
                         </div>

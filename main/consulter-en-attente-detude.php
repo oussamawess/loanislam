@@ -2668,72 +2668,7 @@ require_once 'auth-admin.php';
             <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
-                  <!-- Required Document Button -->
-                  <a href="#" class="bg-warning btn text-white fw-bold m-2 col-lg-3 col-12"
-                    data-bs-toggle="modal" data-bs-target="#documentModal"
-                    data-client-id="<?php echo $client['id']; ?>">
-                    Required Document
-                  </a>
-
-                  <!-- POPUP MODAL FOR DOCUMENT -->
-                  <!-- Modal -->
-                  <div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="documentModalLabel">Add Required Document</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form id="documentForm">
-                            <input type="hidden" id="client_id" name="client_id">
-                            <div class="mb-3">
-                              <label for="documentLabel" class="form-label">Document Label</label>
-                              <input type="text" class="form-control" id="documentLabel" name="documentLabel" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                  <script>
-                    $(document).ready(function() {
-                      // When the button is clicked, set the client ID in the modal
-                      $('[data-bs-toggle="modal"]').click(function() {
-                        let clientId = $(this).data('client-id');
-                        $("#client_id").val(clientId);
-                      });
-
-                      // Handle form submission
-                      $("#documentForm").submit(function(e) {
-                        e.preventDefault();
-
-                        let client_id = $("#client_id").val();
-                        let documentLabel = $("#documentLabel").val();
-
-                        $.ajax({
-                          url: "save_document.php",
-                          type: "POST",
-                          data: {
-                            client_id: client_id,
-                            documentLabel: documentLabel
-                          },
-                          success: function(response) {
-                            alert(response); // Show success message
-                            $("#documentModal").modal("hide"); // Close modal
-                            $("#documentForm")[0].reset(); // Reset form
-                          },
-                          error: function() {
-                            alert("Error saving document.");
-                          }
-                        });
-                      });
-                    });
-                  </script>
-
-                  <!-- END POPUP MODAL FOR DOCUMENT -->
+                  
 
 
                   <a href="en-attente-detudes.php" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">

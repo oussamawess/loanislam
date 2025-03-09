@@ -68,7 +68,7 @@ require_once 'auth-admin.php';
             <!-- ---------------------------------- -->
             <!-- Dashboard -->
             <!-- ---------------------------------- -->
-            <?php include "sidebar.php"?>
+            <?php include "sidebar.php" ?>
 
             <!-- ---------------------------------- -->
 
@@ -2205,6 +2205,108 @@ require_once 'auth-admin.php';
                               </div>
                             </div>
                           </div>
+                          <!-- START required documents -->
+                          <hr>
+                          <?php
+                          include 'db.php'; // Include database connection
+
+                          // Check if 'id' is set in the URL
+                          if (isset($_GET['id']) && !empty($_GET['id'])) {
+                            $client_id = intval($_GET['id']); // Convert to integer for security
+
+                            // Fetch client details
+                            $sql = "SELECT * FROM client WHERE id = ?";
+                            $stmt = $conn->prepare($sql);
+                            $stmt->bind_param("i", $client_id);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            if ($result->num_rows > 0) {
+                              $client = $result->fetch_assoc(); // Fetch client details
+
+                              // Fetch required documents where status = 'uploaded'
+                              $doc_sql = "SELECT * FROM required_documents WHERE id_client = ? AND status = 'uploaded'";
+                              $doc_stmt = $conn->prepare($doc_sql);
+                              $doc_stmt->bind_param("i", $client_id);
+                              $doc_stmt->execute();
+                              $doc_result = $doc_stmt->get_result();
+
+                              // Display documents if found
+                              if ($doc_result->num_rows > 0) {
+                                echo "<h3>Documents requis</h3>";
+                                echo "<ul>";
+                                while ($doc = $doc_result->fetch_assoc()) {
+                                  $doc_id = htmlspecialchars($doc['id']);
+                                  $file_path = htmlspecialchars($doc['file_path']);
+                                  $label = htmlspecialchars($doc['label']);
+
+                                  echo "<div class='mb-3'>
+                            <div class='row align-items-center'>
+                              <label class='col-lg-6 form-label'>$label</label>
+                              <div class='col-lg-6'>
+                                <div class='row'>
+                                  <div class='col-md-12 mb-2 mb-md-0'>
+                                    <!-- Button to trigger the modal -->
+<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#pdfModal-$doc_id' data-pdf-path='$file_path'>Afficher PDF</button>
+
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>";
+
+
+                                  // Modal for each document
+                                  echo "<div class='modal fade' id='pdfModal-$doc_id' tabindex='-1' aria-labelledby='pdfModalLabel-$doc_id' aria-hidden='true'>
+                        <div class='modal-dialog modal-lg'>
+                          <div class='modal-content'>
+                            <div class='modal-header'>
+                              <h5 class='modal-title' id='pdfModalLabel-$doc_id'>PDF Viewer</h5>
+                              <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                            </div>
+                            <div class='modal-body'>
+                              <iframe id='pdfViewer-$doc_id' src='' width='100%' height='400px' style='border: none;'></iframe>
+                            </div>
+                            <div class='modal-footer'>
+                              <a id='downloadPdf-$doc_id' href='' class='btn btn-success' download>
+                                <i class='fas fa-download'></i> Télécharger PDF
+                              </a>
+                              <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fermer</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>";
+                                }
+                                echo "</ul>";
+                              } else {
+                                echo "<p>Aucun document requis n'a été téléchargé.</p>";
+                              }
+                            } else {
+                              echo "<p>Client not found.</p>";
+                            }
+                          } else {
+                            echo "<p>Invalid request.</p>";
+                          }
+                          ?>
+
+                          <script>
+                            // Ensure JavaScript runs after the DOM is fully loaded
+                            document.addEventListener("DOMContentLoaded", function() {
+                              document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
+                                button.addEventListener("click", function() {
+                                  let pdfPath = this.getAttribute("data-pdf-path");
+                                  let modalId = this.getAttribute("data-bs-target");
+                                  let modal = document.querySelector(modalId);
+                                  let pdfViewer = modal.querySelector("iframe");
+                                  let downloadPdf = modal.querySelector("a[download]");
+
+                                  pdfViewer.src = pdfPath; // Set PDF file path in iframe
+                                  downloadPdf.href = pdfPath; // Set PDF file path in download link
+                                });
+                              });
+                            });
+                          </script>
+                          <!-- END required documents -->
                         </div>
                       </div>
                     </form>
@@ -2668,11 +2770,77 @@ require_once 'auth-admin.php';
             <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
+                  <!-- Required Document Button -->
+                  <a href="#" class="bg-warning btn text-white fw-bold m-2 col-lg-3 col-12"
+                    data-bs-toggle="modal" data-bs-target="#documentModal"
+                    data-client-id="<?php echo $client['id']; ?>">
+                    Demande de documents
+                  </a>
+
+                  <!-- POPUP MODAL FOR DOCUMENT -->
+                  <!-- Modal -->
+                  <div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="documentModalLabel">Ajouter le nom du document requis</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="documentForm">
+                            <input type="hidden" id="client_id" name="client_id">
+                            <div class="mb-3">
+                              <!-- <label for="documentLabel" class="form-label">Document Label</label> -->
+                              <input type="text" class="form-control" id="documentLabel" name="documentLabel" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                  <script>
+                    $(document).ready(function() {
+                      // When the button is clicked, set the client ID in the modal
+                      $('[data-bs-toggle="modal"]').click(function() {
+                        let clientId = $(this).data('client-id');
+                        $("#client_id").val(clientId);
+                      });
+
+                      // Handle form submission
+                      $("#documentForm").submit(function(e) {
+                        e.preventDefault();
+
+                        let client_id = $("#client_id").val();
+                        let documentLabel = $("#documentLabel").val();
+
+                        $.ajax({
+                          url: "save_document.php",
+                          type: "POST",
+                          data: {
+                            client_id: client_id,
+                            documentLabel: documentLabel
+                          },
+                          success: function(response) {
+                            alert(response); // Show success message
+                            $("#documentModal").modal("hide"); // Close modal
+                            $("#documentForm")[0].reset(); // Reset form
+                          },
+                          error: function() {
+                            alert("Error saving document.");
+                          }
+                        });
+                      });
+                    });
+                  </script>
+
+                  <!-- END POPUP MODAL FOR DOCUMENT -->
                   <button type="submit" class="btn-declined btn text-white fw-bold m-2 col-lg-3 col-12">
                     Refusé la demande
                   </button>
                   <button type="submit" class="btn-in-progress btn text-white fw-bold m-2 col-lg-3 col-12">
-                    Accepté la demande (en attente signature)
+                    Accepté la demande
                   </button>
                 </div>
               </div>
