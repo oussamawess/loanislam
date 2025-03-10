@@ -11,12 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("is", $client_id, $documentLabel);
 
         if ($stmt->execute()) {
-            echo "Document added successfully!";
+            echo "Document ajouté avec succès!";
         } else {
             echo "Error: " . $stmt->error;
         }
     } else {
-        echo "All fields are required!";
+        echo "Tous les champs sont obligatoires!";
     }
 }
 ?>
