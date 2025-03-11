@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 07 mars 2025 à 16:48
+-- Généré le : mar. 11 mars 2025 à 02:19
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -60,7 +60,7 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `age`, `telephone`, `email`, `adres
 (10, 'Ut aut ', 'Ut consequatur verit', 45, '+1 (722) 745-3003', 'megodahe@mailinator.com', 'Unde similique asper', 'Libero illum dolor', '37.00', 'Eu magni qui non et', '85000.00', 12, 'Ancienne', '88610.34', '2025-02-22 17:01:59', 'Signé', 0, '', '', '', ''),
 (11, 'nostrum dolore', 'Et non eos optio p', 15, '+1 (375) 271-2817', 'zibosunyku@mailinator.com', 'Hic quidem culpa per', 'Corrupti fugit err', '82.00', 'Optio numquam non q', '85000.00', 12, 'Ancienne', '88610.34', '2025-02-22 17:03:29', 'Signé', 0, '', '', '', ''),
 (12, 'labore au', 'Ullam pariatur Omni', 59, '+1 (353) 966-2419', 'myhe@mailinator.com', 'Magnam id dolorum sa', 'Nesciunt voluptatem', '23.00', 'Omnis occaecat ad sa', '85000.00', 24, 'Ancienne', '92031.25', '2025-02-22 17:05:10', 'Annulé', 1, '', '', '', ''),
-(13, 'est quaerat q', 'Commodo ut sapiente', 17, '+1 (801) 804-6717', 'nylylytuq@mailinator.com', 'Consequatur Explica', 'Est commodi quaerat', '96.00', 'Cupidatat quam vero', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-22 17:20:26', 'En cours', 1, '', '', '', ''),
+(13, 'Mark', 'Bolk', 17, '+1 (801) 804-6717', 'markbolk@mailinator.com', 'Consequatur Explica', 'Est commodi quaerat', '96.00', 'Cupidatat quam vero', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-22 17:20:26', 'En cours', 1, '', '', '', ''),
 (14, 'oussama', 'ammar', 98, '+1 (445) 587-1382', 'pimutetegu@mailinator.com', 'Ipsum cumque quo inc', 'Quas temporibus repe', '5.00', 'Aut et et rem odio c', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:48:50', 'En cours', 0, '', '', '', ''),
 (15, 'ammar', 'oussama', 30, '+1 (585) 177-8787', 'dafa@mailinator.com', 'Velit laborum Quis', 'Quo architecto atque', '15.00', 'Non eum rerum amet', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:50:48', 'En cours', 1, '', '', '', ''),
 (16, 'nom1', 'Blanditiis enim expl', 27, '+1 (303) 211-9536', 'harok@mailinator.com', 'Sit incididunt ex u', 'Et consequuntur reru', '34.00', 'Atque consectetur re', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 01:55:58', 'En cours', 0, '', '', '', ''),
@@ -69,13 +69,13 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `age`, `telephone`, `email`, `adres
 (20, 'cupidatat', 'Dolor sint unde inci', 84, '+1 (731) 706-7169', 'wury@mailinator.com', 'Accusamus dolores es', 'Sed nemo voluptatem', '41.00', 'Ut repudiandae magni', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 02:19:07', 'En cours', 0, NULL, NULL, NULL, NULL),
 (22, 'Sequi blandit', 'Commodo aperiam pers', 85, '+1 (951) 193-9161', 'fufibasobe@mailinator.com', 'Placeat qui nihil a', 'Occaecat qui rerum o', '98.00', 'Sunt sint aliquip u', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 02:20:37', 'Signé', 0, 'files/file_67bd1ae54865e6.68147745.pdf', 'files/file_67bd1ae5488ca1.46884316.pdf', 'files/file_67bd1ae548b1d4.94085631.pdf', 'files/file_67bd1ae548e227.94195540.pdf'),
 (23, 'quia en', 'Aperiam omnis sit c', 84, '+1 (758) 415-2946', 'roweqosuse@mailinator.com', 'Nobis fugiat amet a', 'Velit aliquam lorem', '93.00', 'Laboris soluta exped', '100000.00', 36, 'Ancienne', '112396.19', '2025-02-25 11:39:32', 'En attente', 0, NULL, NULL, NULL, NULL),
-(26, 'fb', 'Inventore corporis e', 77, '+1 (685) 361-8959', 'wexyfive@mailinator.com', 'Et quasi quidem rati', 'Aut aut dicta quam a', '82.00', 'Eiusmod dolor rerum', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:42:01', 'En attente', 0, NULL, NULL, NULL, NULL),
+(26, 'fb', 'Inventore corporis e', 77, '+1 (685) 361-8959', 'wexyfive@mailinator.com', 'Et quasi quidem rati', 'Aut aut dicta quam a', '82.00', 'Eiusmod dolor rerum', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:42:01', 'En attente signature contrat', 0, NULL, NULL, NULL, NULL),
 (27, 'Eligendi i', 'Quibusdam dolorem in', 37, '+1 (613) 174-6538', 'gywu@mailinator.com', 'Id esse sed beatae', 'Accusamus cupiditate', '20.00', 'Qui cupidatat sapien', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:43:33', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
 (28, 'sit aperiam', 'Cupiditate aut aliqu', 67, '+1 (955) 288-7325', 'retoze@mailinator.com', 'Praesentium veniam', 'Consequuntur ex eum', '3.00', 'Consequat Vel tempo', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:44:14', 'En attente signature contrat', 0, NULL, NULL, NULL, NULL),
 (29, 'Qui possimu', 'Quia tenetur quia la', 5, '+1 (361) 744-6847', 'micahic@mailinator.com', 'Soluta numquam odio', 'Non ipsum facere do', '21.00', 'Illum culpa est ei', '125000.00', 12, 'Neuve', '130309.32', '2025-02-25 12:45:45', 'Annulé', 1, NULL, NULL, NULL, NULL),
 (30, 'Laborum Exercitatio', 'Qui commodo cupidita', 65, '+1 (429) 217-3804', 'gacav@mailinator.com', 'Nam lorem qui ullamc', 'Tempor enim sit in a', '97.00', 'Aliquip magna cupida', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 13:04:45', 'En attente signature contrat', 1, NULL, NULL, NULL, NULL),
 (31, 'Aut ut velit aperiam', 'Quia doloribus delen', 33, '+1 (778) 101-7124', 'kazyso@mailinator.com', 'Sequi facilis qui fa', 'In dolore aute saepe', '73.00', 'Eu nisi deserunt tot', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 16:55:39', 'Nouvelles', 1, NULL, NULL, NULL, NULL),
-(32, 'Nostrud quae qui est', 'Voluptatibus est par', 19, '+1 (155) 472-1036', 'sixij@mailinator.com', 'Quae perspiciatis d', 'Ratione neque corpor', '90.00', 'Ea distinctio Volup', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 16:59:22', 'En attente', 0, NULL, NULL, NULL, NULL),
+(32, 'Nostrud quae qui est', 'Voluptatibus est par', 19, '+1 (155) 472-1036', 'sixij@mailinator.com', 'Quae perspiciatis d', 'Ratione neque corpor', '90.00', 'Ea distinctio Volup', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 16:59:22', 'signé', 0, NULL, NULL, NULL, NULL),
 (33, 'Et placeat qui sit', 'Commodi est dolor es', 64, '+1 (804) 615-4809', 'liwufe@mailinator.com', 'Alias nesciunt face', 'Sint similique nihil', '97.00', 'Voluptate tempore i', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 17:08:20', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
 (34, 'Et voluptate earum s', 'Rerum ab explicabo', 96, '+1 (469) 466-9238', 'qijudu@mailinator.com', 'Qui consequatur dol', 'Vero occaecat dolor', '34.00', 'Natus sunt qui in no', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 17:12:09', 'Signé', 0, NULL, NULL, NULL, NULL),
 (35, 'Dolore blanditiis ni', 'Non fugiat non eveni', 82, '+1 (187) 617-9879', 'zyjany@mailinator.com', 'Quae dicta voluptatu', 'Non est consectetur', '5.00', 'Eos sint non laboris', '150000.00', 12, 'Neuve', '156371.18', '2025-02-27 17:18:55', 'Nouvelles', 0, NULL, NULL, NULL, NULL),
@@ -103,7 +103,7 @@ CREATE TABLE `fees` (
 --
 
 INSERT INTO `fees` (`id`, `fees`) VALUES
-(1, 500);
+(1, 0.03);
 
 -- --------------------------------------------------------
 
@@ -186,10 +186,20 @@ CREATE TABLE `required_documents` (
 --
 
 INSERT INTO `required_documents` (`id`, `id_client`, `label`, `file_path`, `status`, `has_been_read`, `created_at`, `updated_at`, `has_been_read_admin`) VALUES
-(2, 32, 'please add the bank approval', 'files/doc_67c6fea1c00e11.09814758.pdf', 'pending', 1, '2025-03-04 02:52:26', '2025-03-05 13:37:10', NULL),
-(3, 32, 'second', 'files/file_67bd18ec201da2.55450901.pdf', 'uploaded', 1, '2025-03-04 12:47:32', '2025-03-06 02:06:52', 0),
-(4, 32, 'third', 'files/doc_67c70af7a59f46.21779678.pdf', 'uploaded', 1, '2025-03-04 12:59:35', '2025-03-05 14:11:05', 1),
-(5, 26, 'please add salary file', 'files/doc_67c9023dad7688.29825627.pdf', 'uploaded', 1, '2025-03-06 02:02:04', '2025-03-06 02:02:47', 1);
+(2, 32, 'please add the bank approval', NULL, 'pending', 1, '2025-03-04 02:52:26', '2025-03-08 12:25:17', NULL),
+(5, 26, 'please add salary file', 'files/doc_67c9023dad7688.29825627.pdf', 'uploaded', 1, '2025-03-06 02:02:04', '2025-03-06 02:02:47', 1),
+(6, 23, 'please add contract file', NULL, 'pending', 0, '2025-03-07 16:34:29', '2025-03-07 16:34:29', NULL),
+(7, 32, 'please add the bank approval', 'files/doc_67cb207c7576f3.33906697.pdf', 'uploaded', 1, '2025-03-07 16:35:11', '2025-03-07 16:38:07', 1),
+(8, 13, 'please add contract file', 'files/doc_67cc37f8954d47.17619161.pdf', 'uploaded', 1, '2025-03-08 10:32:28', '2025-03-09 13:55:26', 1),
+(9, 13, 'hi', 'files/doc_67cc39a31690c1.62208636.pdf', 'uploaded', 1, '2025-03-08 12:35:28', '2025-03-09 13:55:26', 1),
+(10, 13, 'the new file', 'files/doc_67cc3f3fad69b5.69341324.pdf', 'uploaded', 1, '2025-03-08 12:59:20', '2025-03-09 13:55:26', 1),
+(11, 13, '1', 'files/doc_67cc3f758d3a05.23954241.pdf', 'uploaded', 1, '2025-03-08 13:00:19', '2025-03-09 13:55:26', 1),
+(12, 13, 'add house plan', 'files/doc_67cee9ce51b9c5.97022551.pdf', 'uploaded', 1, '2025-03-10 13:31:30', '2025-03-10 13:32:18', 1),
+(13, 13, 'new house plan', NULL, 'pending', 1, '2025-03-10 13:33:08', '2025-03-10 13:41:58', NULL),
+(14, 13, 'add your salary file', 'files/doc_67ceed3467a523.17179908.pdf', 'uploaded', 1, '2025-03-10 13:41:38', '2025-03-10 13:48:13', 1),
+(15, 13, 'add any file', 'files/doc_67cf7fbc7ee5e3.49371009.pdf', 'uploaded', 1, '2025-03-10 13:48:44', '2025-03-11 00:11:40', 0),
+(16, 13, 'please add contract file 2', 'files/doc_67cf6eedef6a11.64295689.pdf', 'uploaded', 1, '2025-03-10 14:53:52', '2025-03-10 23:00:08', 1),
+(17, 13, 'please add contract file', 'files/doc_67cf7892dc0694.10779436.pdf', 'uploaded', 1, '2025-03-10 23:39:01', '2025-03-10 23:41:50', 1);
 
 -- --------------------------------------------------------
 
@@ -212,7 +222,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUES
 (3, 9, 'wess', 'wess1@gmail.com', '$2y$10$dvABSzpmiwCy1zEN7xz9cua5IPjb.mw8ls/kLZXqGIcKc3IZFLGn.', 'client'),
-(4, 10, 'wess', 'wess@gmail.com', '$2y$10$Z8sg1nRwhKK7G9W3Vhib0eZPX1AFbly5gmB8o5s/CeGx5NKPb/u9e', 'client'),
+(4, 10, 'wess12', 'wess12@gmail.com', '$2y$10$xMpVv0VR6QggtHYIsUVQxO.zV7f01hgeMv0OYug/4Y1RDxu1gcRYq', 'client'),
 (5, 11, 'wedd', 'wedd@gmail.com', '$2y$10$68ZiSiScJ3uMCUcicJ85T.lqq3EzW71m7ZQA0DSUh5q7gR6Y1iGGO', 'client'),
 (6, 13, 'deff', 'deff@gmail.com', '$2y$10$7YCilK.X.Mdkfv16hElcyuBPmP0sy.mwe8mZBRDNyG8fOGK2XtfAu', 'client'),
 (7, 14, 'oussama', 'oussama@gmail.com', '$2y$10$gvcBZxf9sjuQbwR1nnmEpuYcSkGPsQD8RBWjsvcGB3zjSCbgtUwHu', 'client'),
@@ -319,7 +329,7 @@ ALTER TABLE `partner`
 -- AUTO_INCREMENT pour la table `required_documents`
 --
 ALTER TABLE `required_documents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `user`
