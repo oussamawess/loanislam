@@ -8,5 +8,7 @@ session_unset();
 session_destroy();
 
 // Respond with a success message (you can modify this if needed)
-echo 'Logged out successfully';
+// Redirect to the login page
+header("Location: login.php"); // Redirect to login page
+exit(); // Make sure no further code is executed
 ?>

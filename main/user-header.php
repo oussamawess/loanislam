@@ -23,7 +23,8 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    $client = $result->fetch_assoc();}
+    $client = $result->fetch_assoc();
+}
 
 ?>
 
@@ -69,7 +70,7 @@ if ($result->num_rows > 0) {
                                             <h5 class="mb-0 fs-12"><?= htmlspecialchars($client['nom']); ?> <?= htmlspecialchars($client['prenom']); ?>
                                             </h5>
                                             <p class="mb-0 text-dark">
-                                            <?= htmlspecialchars($client['email']); ?>
+                                                <?= htmlspecialchars($client['email']); ?>
                                             </p>
                                         </div>
                                     </div>
@@ -78,60 +79,38 @@ if ($result->num_rows > 0) {
                                             Profil
                                         </a>
                                         <a href="../main/page-pricing.html" class="p-2 dropdown-item h6 rounded-1">
-                                            My Subscription
+                                            Paiement
                                         </a>
 
                                         <?php
-        // Check if there are unread notifications
-        $notif_sql = "SELECT COUNT(*) AS unread_count FROM required_documents WHERE id_client = ? AND has_been_read = 0";
-        $notif_stmt = $conn->prepare($notif_sql);
-        $notif_stmt->bind_param("i", $client_id);
-        $notif_stmt->execute();
-        $notif_result = $notif_stmt->get_result();
-        $notif_data = $notif_result->fetch_assoc();
-        $unread_notifications = $notif_data['unread_count'] > 0;
-        ?>
+                                        // Check if there are unread notifications
+                                        $notif_sql = "SELECT COUNT(*) AS unread_count FROM required_documents WHERE id_client = ? AND has_been_read = 0";
+                                        $notif_stmt = $conn->prepare($notif_sql);
+                                        $notif_stmt->bind_param("i", $client_id);
+                                        $notif_stmt->execute();
+                                        $notif_result = $notif_stmt->get_result();
+                                        $notif_data = $notif_result->fetch_assoc();
+                                        $unread_notifications = $notif_data['unread_count'] > 0;
+                                        ?>
                                         <a href="user-notifications.php" class="p-2 dropdown-item h6 rounded-1">
                                             Notifications <?php if ($unread_notifications): ?>
-                    <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
-                <?php endif; ?>
+                                                <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
+                                            <?php endif; ?>
                                         </a>
                                         <a href="user-parametres.php" class="p-2 dropdown-item h6 rounded-1">
                                             Paramètres
                                         </a>
-                                        <a href="javascript:void(0);" id="logout-link" class="p-2 dropdown-item h6 rounded-1">
+                                        <a href="logout.php" class="p-2 dropdown-item h6 rounded-1">
                                             Déconnexion
                                         </a>
-
-                                        <script>
-                                            // Add event listener to the logout link
-                                            document.getElementById('logout-link').addEventListener('click', function() {
-                                                // Make an AJAX request to logout.php to destroy the session
-                                                fetch('logout.php')
-                                                    .then(response => response.text())
-                                                    .then(data => {
-                                                        // After the session is destroyed, redirect to the login page
-                                                        window.location.href = 'login.php'; // or the path to your login page
-                                                    })
-                                                    .catch(error => console.log('Error during logout:', error));
-                                            });
-                                        </script>
-
-                                        
-                        <!-- <li class="sidebar-item">
-                            <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
-                                <iconify-icon icon="solar:logout-2-outline"></iconify-icon>
-                                <span class="hide-menu">Déconnexion</span>
-                            </a>
-                        </li> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
-    </div>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </nav>
+        </nav>
     </div>
 
 </header>
