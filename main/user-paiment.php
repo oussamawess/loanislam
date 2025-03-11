@@ -48,8 +48,8 @@ $update_stmt->execute();
 
     <link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-okaidia.min.css">
 
-     <!-- Payment -->
-     <script src="https://www.paypal.com/sdk/js?client-id=AYuYNXowI1SlZzFLnX2NYVq4eG66seES1yPxMKcc3tWdvd6LDk0yuCOfpXkaNmkE0ojKXsinhQWsyJSz&currency=EUR"></script>
+    <!-- Payment -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZXF0jhL5MrKuQKqyls4XlZPOGVF1GCEKFH56vu0h9qpcK2euVJ2pIiAmW_pnhiMOZb8V9G39_VIHi7r&currency=EUR"></script>
 </head>
 
 <body>
@@ -194,10 +194,10 @@ $update_stmt->execute();
                                                             <div class="col-md-12">
                                                                 <div>
                                                                     <address>
-                                                                    <h6 class="text-muted fs-2 text-end"><?= $pay['created_at']; ?></h6>
-                                                                    <h6>Demande de paiement des frais de traitement</h6>
-                                                                    <p class="text-muted">Bonjour, veuillez régler les frais de <span class="fw-bold text-dark"><?= htmlspecialchars($pay['fees']); ?>€</span> pour le traitement de votre demande. Merci de procéder au paiement dans les plus brefs délais.</p>
-                                                                        
+                                                                        <h6 class="text-muted fs-2 text-end"><?= $pay['created_at']; ?></h6>
+                                                                        <h6>Demande de paiement des frais de traitement</h6>
+                                                                        <p class="text-muted">Bonjour, veuillez régler les frais de <span class="fw-bold text-dark"><?= htmlspecialchars($pay['fees']); ?>€</span> pour le traitement de votre demande. Merci de procéder au paiement dans les plus brefs délais.</p>
+
                                                                     </address>
                                                                 </div>
                                                                 <div class="text-end">
@@ -205,36 +205,57 @@ $update_stmt->execute();
                                                                         <input type="hidden" name="document_id" value="<?= $pay['id']; ?>">
                                                                         <div id="paypal-button-container"></div>
 
-<script>
-  // Render PayPal Button
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      // Set up the transaction details
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: <?= htmlspecialchars($pay['fees']); ?> // The amount to be paid (example: 400 EUR)
-          }
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      // Capture the payment when the buyer approves
-      return actions.order.capture().then(function(details) {
-        // You can display a success message here
-        alert('Payment successful, ' + details.payer.name.given_name);
-        
-        // Optionally, you can redirect the user to a success page or update the database
-        window.location.href = "success.php"; // Redirect to success page
-      });
-    },
-    onError: function(err) {
-      // Handle any errors here
-      console.error('Error:', err);
-      alert('An error occurred. Please try again.');
-    }
-  }).render('#paypal-button-container'); // Render the button in the container
-</script>
+                                                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                                        <script>
+                                                                            paypal.Buttons({
+                                                                                createOrder: function(data, actions) {
+                                                                                    return actions.order.create({
+                                                                                        purchase_units: [{
+                                                                                            amount: {
+                                                                                                value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
+                                                                                            }
+                                                                                        }]
+                                                                                    });
+                                                                                },
+                                                                                onApprove: function(data, actions) {
+                                                                                    return actions.order.capture().then(function(details) {
+                                                                                        // Display a modern success message
+                                                                                        $("body").append(`
+                                                                                        <div id="payment-success" style="
+                                                                                            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                                                                                            background: #28a745; color: white; padding: 20px; border-radius: 10px;
+                                                                                            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; text-align: center; z-index: 1000;">
+                                                                                            ✅ Paiement réussi, ${details.payer.name.given_name}!<br>
+                                                                                            Merci pour votre paiement.
+                                                                                        </div>
+                                                                                        `);
+                                                                                        setTimeout(() => {
+                                                                                            $("#payment-success").fadeOut();
+                                                                                        }, 4000); // Hide after 4 sec
+
+                                                                                        // Send AJAX request to update the database
+                                                                                        $.ajax({
+                                                                                            url: "update_payment.php",
+                                                                                            type: "POST",
+                                                                                            data: {
+                                                                                                client_id: <?= $client_id; ?>
+                                                                                            },
+                                                                                            success: function(response) {
+                                                                                                console.log(response); // Debugging message
+                                                                                            },
+                                                                                            error: function() {
+                                                                                                alert("Erreur lors de la mise à jour du paiement.");
+                                                                                            }
+                                                                                        });
+                                                                                    });
+                                                                                },
+                                                                                onError: function(err) {
+                                                                                    console.error('Error:', err);
+                                                                                    alert('An error occurred. Please try again.');
+                                                                                }
+                                                                            }).render('#paypal-button-container');
+                                                                        </script>
+
 
                                                                         <!-- <button type="button" class="btn btn-primary">Paypal <iconify-icon icon="uil:paypal"></iconify-icon></button>
                                                                         <button type="button" class="btn btn-primary">Stripe <iconify-icon icon="hugeicons:stripe"></iconify-icon></button> -->
@@ -361,7 +382,7 @@ $update_stmt->execute();
     <script src="../assets/js/apps/invoice.js"></script>
     <script src="../assets/js/apps/jquery.PrintArea.js"></script>
 
-   
+
 </body>
 
 </html>
