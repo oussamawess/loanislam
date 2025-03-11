@@ -78,8 +78,21 @@ if ($result->num_rows > 0) {
                                         <a href="user-profile.php" class="p-2 dropdown-item h6 rounded-1">
                                             Profil
                                         </a>
-                                        <a href="../main/page-pricing.html" class="p-2 dropdown-item h6 rounded-1">
-                                            Paiement
+
+                                        <?php
+        // Check if there are unread notifications
+        $pay_notif_sql = "SELECT COUNT(*) AS unread_count FROM payment WHERE id_client = ? AND has_been_read = 0";
+        $pay_notif_stmt = $conn->prepare($pay_notif_sql);
+        $pay_notif_stmt->bind_param("i", $client_id);
+        $pay_notif_stmt->execute();
+        $pay_notif_result = $pay_notif_stmt->get_result();
+        $pay_notif_data = $pay_notif_result->fetch_assoc();
+        $unread_payments = $pay_notif_data['unread_count'] > 0;
+        ?>
+                                        <a href="user-paiment.php" class="p-2 dropdown-item h6 rounded-1">
+                                            Paiement <?php if ($unread_payments): ?>
+                                                <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
+                                            <?php endif; ?>
                                         </a>
 
                                         <?php

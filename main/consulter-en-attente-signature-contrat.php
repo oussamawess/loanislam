@@ -1087,6 +1087,34 @@ require_once 'auth-admin.php';
             <div class="form-actions">
               <div class="text-end">
                 <div class="card-body p-2 col-12">
+                <a href="#" class="bg-info btn text-white fw-bold m-2 col-lg-3 col-12 payment-request"                    
+   data-client-id="<?php echo $client['id']; ?>">
+   Demande de paiment
+</a>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".payment-request").on("click", function(e) {
+      e.preventDefault(); // Prevent default link behavior
+
+      let clientId = $(this).data("client-id");
+
+      $.ajax({
+        url: "save_payment.php",
+        type: "POST",
+        data: { id_client: clientId },
+        success: function(response) {
+          alert(response); // Show success or error message
+        },
+        error: function() {
+          alert("Erreur lors de l'enregistrement du paiement.");
+        }
+      });
+    });
+  });
+</script>
+
                   
                   <a href="en-attente-signature-contrat.php" class="btn-in-pause btn text-white fw-bold m-2 col-lg-3 col-12">
                     Retour

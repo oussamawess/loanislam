@@ -60,6 +60,26 @@ require_once 'auth-user.php';
             </a>
         </li>
 
+        <?php
+        // Check if there are unread notifications
+        $pay_notif_sql = "SELECT COUNT(*) AS unread_count FROM payment WHERE id_client = ? AND has_been_read = 0";
+        $pay_notif_stmt = $conn->prepare($pay_notif_sql);
+        $pay_notif_stmt->bind_param("i", $client_id);
+        $pay_notif_stmt->execute();
+        $pay_notif_result = $pay_notif_stmt->get_result();
+        $pay_notif_data = $pay_notif_result->fetch_assoc();
+        $unread_payments = $pay_notif_data['unread_count'] > 0;
+        ?>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="user-paiment.php" id="get-url" aria-expanded="false">
+                <iconify-icon icon="ic:baseline-payment"></iconify-icon>
+                <span class="hide-menu">Paiment</span>
+                <?php if ($unread_payments): ?>
+                    <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
+                <?php endif; ?>
+            </a>
+        </li>
+
         <li class="sidebar-item">
             <a class="sidebar-link" href="javascript:void(0);" id="logout-link" aria-expanded="false">
                 <iconify-icon icon="solar:logout-2-outline"></iconify-icon>

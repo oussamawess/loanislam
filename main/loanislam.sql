@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 11 mars 2025 à 02:19
+-- Généré le : mar. 11 mars 2025 à 05:53
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -103,7 +103,7 @@ CREATE TABLE `fees` (
 --
 
 INSERT INTO `fees` (`id`, `fees`) VALUES
-(1, 0.03);
+(1, 350.36);
 
 -- --------------------------------------------------------
 
@@ -166,6 +166,30 @@ INSERT INTO `partner` (`id`, `id_client`, `nom`, `prenom`, `age`, `telephone`, `
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `id_client` int(11) NOT NULL,
+  `fees` float NOT NULL,
+  `status` enum('paid','notpaid') DEFAULT 'notpaid',
+  `has_been_read` tinyint(1) DEFAULT 0,
+  `has_been_read_admin` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `payment`
+--
+
+INSERT INTO `payment` (`id`, `id_client`, `fees`, `status`, `has_been_read`, `has_been_read_admin`, `created_at`, `updated_at`) VALUES
+(1, 26, 456, 'notpaid', 1, NULL, '2025-03-11 01:25:06', '2025-03-11 03:08:24');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `required_documents`
 --
 
@@ -197,7 +221,7 @@ INSERT INTO `required_documents` (`id`, `id_client`, `label`, `file_path`, `stat
 (12, 13, 'add house plan', 'files/doc_67cee9ce51b9c5.97022551.pdf', 'uploaded', 1, '2025-03-10 13:31:30', '2025-03-10 13:32:18', 1),
 (13, 13, 'new house plan', NULL, 'pending', 1, '2025-03-10 13:33:08', '2025-03-10 13:41:58', NULL),
 (14, 13, 'add your salary file', 'files/doc_67ceed3467a523.17179908.pdf', 'uploaded', 1, '2025-03-10 13:41:38', '2025-03-10 13:48:13', 1),
-(15, 13, 'add any file', 'files/doc_67cf7fbc7ee5e3.49371009.pdf', 'uploaded', 1, '2025-03-10 13:48:44', '2025-03-11 00:11:40', 0),
+(15, 13, 'add any file', 'files/doc_67cf7fbc7ee5e3.49371009.pdf', 'uploaded', 1, '2025-03-10 13:48:44', '2025-03-11 02:26:08', 1),
 (16, 13, 'please add contract file 2', 'files/doc_67cf6eedef6a11.64295689.pdf', 'uploaded', 1, '2025-03-10 14:53:52', '2025-03-10 23:00:08', 1),
 (17, 13, 'please add contract file', 'files/doc_67cf7892dc0694.10779436.pdf', 'uploaded', 1, '2025-03-10 23:39:01', '2025-03-10 23:41:50', 1);
 
@@ -283,6 +307,13 @@ ALTER TABLE `partner`
   ADD KEY `id_client` (`id_client`);
 
 --
+-- Index pour la table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_client` (`id_client`);
+
+--
 -- Index pour la table `required_documents`
 --
 ALTER TABLE `required_documents`
@@ -326,6 +357,12 @@ ALTER TABLE `partner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT pour la table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT pour la table `required_documents`
 --
 ALTER TABLE `required_documents`
@@ -352,6 +389,12 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `partner`
   ADD CONSTRAINT `partner_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `fk_client` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `required_documents`
