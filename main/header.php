@@ -52,8 +52,20 @@ require_once 'auth-admin.php';
                                         <a href="profile.php" class="p-2 dropdown-item h6 rounded-1">
                                             Profil
                                         </a>
-                                        <a href="../main/page-pricing.html" class="p-2 dropdown-item h6 rounded-1">
-                                            Paiement
+
+                                        <?php
+                                        include 'db.php';
+
+                                        // Check if any document is unread
+                                        $query = "SELECT COUNT(*) as unread_count_payment FROM payment WHERE has_been_read_admin = 0";
+                                        $result = $conn->query($query);
+                                        $row = $result->fetch_assoc();
+                                        $hasUnreadPayment = ($row['unread_count_payment'] > 0);
+                                        ?>
+                                        <a href="paiment.php" class="p-2 dropdown-item h6 rounded-1">
+                                        Paiements<?php if ($hasUnreadPayment) : ?>
+                                                <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
+                                            <?php endif; ?>
                                         </a>
 
                                         <?php

@@ -1,23 +1,26 @@
 <?php
-require_once 'auth-user.php';
+require_once 'auth-admin.php';
 ?>
 <?php
 require_once 'db.php'; // Database connection
 
-// Check if the user is logged in and is a client
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'client') {
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin', 'topadmin'])) {
+    // Redirect to login page if the user is not an admin
     header('Location: login.php');
     exit();
 }
 
-// Retrieve client ID from session
-$client_id = $_SESSION['client_id'];
-
-// Update the has_been_read column for this client
-$update_sql = "UPDATE payment SET has_been_read = 1 WHERE id_client = ? AND has_been_read = 0";
+// Update all unread documents (NULL or 0) to 1
+$update_sql = "UPDATE payment SET has_been_read_admin = 1 WHERE  has_been_read_admin = 0";
 $update_stmt = $conn->prepare($update_sql);
-$update_stmt->bind_param("i", $client_id);
-$update_stmt->execute();
+
+if ($update_stmt->execute()) {
+    // Optional: Debug message (remove in production)
+    // echo "Records updated successfully";
+} else {
+    echo "Error updating records: " . $conn->error;
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,8 +51,6 @@ $update_stmt->execute();
 
     <link rel="stylesheet" href="../assets/libs/prismjs/themes/prism-okaidia.min.css">
 
-    <!-- Payment -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AZXF0jhL5MrKuQKqyls4XlZPOGVF1GCEKFH56vu0h9qpcK2euVJ2pIiAmW_pnhiMOZb8V9G39_VIHi7r&currency=EUR"></script>
 </head>
 
 <body>
@@ -87,18 +88,12 @@ $update_stmt->execute();
                     </div>
                     <div class="sidebarmenu">
                         <div class="brand-logo d-flex align-items-center nav-logo">
-                            <a href="../main/user-profile.php" class="text-nowrap logo-img">
+                            <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img">
                                 <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
                             </a>
-
                         </div>
-                        <!-- ---------------------------------- -->
                         <!-- Dashboard -->
-                        <!-- ---------------------------------- -->
-                        <?php include "user-sidebar.php" ?>
-
-                        <!-- ---------------------------------- -->
-
+                        <?php include "sidebar.php" ?>
                     </div>
                 </div>
             </div>
@@ -106,7 +101,7 @@ $update_stmt->execute();
         <!--  Sidebar End -->
         <div class="page-wrapper">
             <!--  Header Start -->
-            <?php include "user-header.php" ?>
+            <?php include "header.php" ?>
             <!--  Header End -->
 
             <div class="body-wrapper">
@@ -130,11 +125,18 @@ $update_stmt->execute();
 
                             <?php
                             require_once 'db.php'; // Ensure database connection
-                            require_once 'auth-user.php'; // Ensure authentication
+                            require_once 'auth-admin.php'; // Ensure authentication
 
-                            $query = "SELECT id, fees, status, created_at FROM payment WHERE id_client = ? ORDER BY created_at DESC";
+                            // Modified query to join required_documents and client table and select the 'nom' field
+                            $query = "
+                                SELECT rd.id, rd.id_client, rd.fees, rd.status, rd.created_at, rd.updated_at, c.nom, c.prenom, c.statut AS client_status 
+                                FROM payment rd
+                                LEFT JOIN client c ON rd.id_client = c.id
+                                WHERE rd.status = 'paid'
+                                ORDER BY rd.updated_at DESC
+                            ";
+
                             $stmt = $conn->prepare($query);
-                            $stmt->bind_param("i", $client_id);
                             $stmt->execute();
                             $result = $stmt->get_result();
 
@@ -146,6 +148,7 @@ $update_stmt->execute();
                             }
                             $stmt->close();
                             ?>
+
 
 
                             <div class="d-flex">
@@ -168,9 +171,10 @@ $update_stmt->execute();
                                                                 <i class="ti ti-user fs-6"></i>
                                                             </div>
                                                             <div class="ms-3 d-inline-block w-75">
-                                                                <h6 class="mb-0 invoice-customer">Frais à payer : <?= htmlspecialchars($pay['fees']); ?>€</h6>
+                                                                <h6 class="mb-0 invoice-customer"><?= htmlspecialchars($pay['nom']); ?>&nbsp<?= htmlspecialchars($pay['prenom']); ?></h6>
+                                                                <h6 class="mb-0 text-success">Paiement réussi de <?= htmlspecialchars($pay['fees']); ?>€</h6>
                                                                 <!-- <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #<!?= $pay['id']; ?></span> -->
-                                                                <span class="fs-3 invoice-date text-nowrap text-body-color d-block"><?= $pay['created_at']; ?></span>
+                                                                <span class="fs-3 invoice-date text-nowrap text-body-color d-block"><?= $pay['updated_at']; ?></span>
                                                             </div>
                                                         </a>
                                                     </li>
@@ -185,7 +189,7 @@ $update_stmt->execute();
                                     <div class="invoice-inner-part h-100">
                                         <div class="invoiceing-box">
                                             <div class="invoice-header d-flex align-items-center border-bottom p-3">
-                                                <h4 class="text-uppercase mb-0">Paiement</h4>
+                                                <h4 class="text-uppercase mb-0">Paiements</h4>
                                             </div>
                                             <div class="p-3" id="custom-invoice">
                                                 <?php foreach ($payment as $pay) : ?>
@@ -194,88 +198,47 @@ $update_stmt->execute();
                                                             <div class="col-md-12">
                                                                 <div>
                                                                     <address>
-                                                                        <h6 class="text-muted fs-2 text-end"><?= $pay['created_at']; ?></h6>
-                                                                        <h6>Demande de paiement des frais de traitement</h6>
-                                                                        <p class="text-muted">Bonjour, veuillez régler les frais de <span class="fw-bold text-dark"><?= htmlspecialchars($pay['fees']); ?>€</span> pour le traitement de votre demande. Merci de procéder au paiement dans les plus brefs délais.</p>
+                                                                        <h6>&nbsp;Frais : <?= htmlspecialchars($pay['fees']); ?>€</h6>
+                                                                        <h6>&nbsp;Nom : <?= htmlspecialchars($pay['nom']); ?>&nbsp<?= htmlspecialchars($pay['prenom']); ?></h6>
+                                                                        <h6>&nbsp;ID Client : <?= htmlspecialchars($pay['id_client']); ?></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Demande envoyée le <span class="text-success"><?= $pay['created_at']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $pay['updated_at']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $pay['client_status']; ?></span></h6>
+
+                                                                        <!-- <h6 class="fw-bold">&nbsp; File: <!?= $pay['file_path']; ?></h6> -->
+                                                                        <?php
+                                                                        if ($pay['client_status'] == "En cours") {
+                                                                            echo "<a href='consulter-etude-en-cours.php?id=" . htmlspecialchars($pay["id_client"]) . "' class='btn btn-info'>Consulter</a>";
+                                                                        } else if ($pay['client_status'] == "En attente signature contrat") {
+                                                                            echo "<a href='consulter-en-attente-signature-contrat.php?id=" . htmlspecialchars($pay["id_client"]) . "' class='btn btn-info'>Consulter</a>";
+                                                                        } else {
+                                                                            echo "<a href='consulter.php?id=" . htmlspecialchars($pay["id_client"]) . "' class='btn btn-info'>Consulter</a>";
+                                                                        }
+                                                                        ?>
+
+                                                                        <!-- <td>
+                                                                            <a href="consulter-etude-en-cours.php?id=<!?= htmlspecialchars($pay['id_client']); ?>" class='btn btn-info'>Consulter</a>
+                                                                        </td> -->
+
+                                                                        <button type="button" class="btn btn-success d-inline-flex align-items-center">
+                                                                            Paiement effectué avec succès
+                                                                            <iconify-icon icon="ooui:success" width="1em" height="1em" class="ms-2"></iconify-icon>
+                                                                        </button>
+
 
                                                                     </address>
-                                                                </div>
-                                                                <div class="text-end">
-                                                                    <form action="upload_document.php" method="POST" enctype="multipart/form-data">
-                                                                        <input type="hidden" name="document_id" value="<?= $pay['id']; ?>">
-                                                                        <div id="paypal-button-container"></div>
-
-                                                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                        <script>
-                                                                            paypal.Buttons({
-                                                                                createOrder: function(data, actions) {
-                                                                                    return actions.order.create({
-                                                                                        purchase_units: [{
-                                                                                            amount: {
-                                                                                                value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
-                                                                                            }
-                                                                                        }]
-                                                                                    });
-                                                                                },
-                                                                                onApprove: function(data, actions) {
-                                                                                    return actions.order.capture().then(function(details) {
-                                                                                        // Display a modern success message
-                                                                                        $("body").append(`
-                                                                                        <div id="payment-success" style="
-                                                                                            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                                                                                            background: #28a745; color: white; padding: 20px; border-radius: 10px;
-                                                                                            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; text-align: center; z-index: 1000;">
-                                                                                            ✅ Paiement réussi, ${details.payer.name.given_name}!<br>
-                                                                                            Merci pour votre paiement.
-                                                                                        </div>
-                                                                                        `);
-                                                                                        setTimeout(() => {
-                                                                                            $("#payment-success").fadeOut();
-                                                                                        }, 4000); // Hide after 4 sec
-
-                                                                                        // Send AJAX request to update the database
-                                                                                        $.ajax({
-                                                                                            url: "update_payment.php",
-                                                                                            type: "POST",
-                                                                                            data: {
-                                                                                                client_id: <?= $client_id; ?>
-                                                                                            },
-                                                                                            success: function(response) {
-                                                                                                console.log(response); // Debugging message
-                                                                                            },
-                                                                                            error: function() {
-                                                                                                alert("Erreur lors de la mise à jour du paiement.");
-                                                                                            }
-                                                                                        });
-                                                                                    });
-                                                                                },
-                                                                                onError: function(err) {
-                                                                                    console.error('Error:', err);
-                                                                                    alert('An error occurred. Please try again.');
-                                                                                }
-                                                                            }).render('#paypal-button-container');
-                                                                        </script>
-
-
-                                                                        <!-- <button type="button" class="btn btn-primary">Paypal <iconify-icon icon="uil:paypal"></iconify-icon></button>
-                                                                        <button type="button" class="btn btn-primary">Stripe <iconify-icon icon="hugeicons:stripe"></iconify-icon></button> -->
-
-
-                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 <?php endforeach; ?>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                                 <div class="offcanvas offcanvas-start user-chat-box" tabindex="-1" id="chat-sidebar" aria-labelledby="offcanvasExampleLabel">
                                     <div class="offcanvas-header">
-                                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Notifications</h5>
+                                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Paiements</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <div class="p-3 border-bottom">
@@ -294,8 +257,9 @@ $update_stmt->execute();
                                                             <i class="ti ti-user fs-6"></i>
                                                         </div>
                                                         <div class="ms-3 d-inline-block w-75">
-                                                            <h6 class="mb-0 invoice-customer">Frais à payer : <?= htmlspecialchars($pay['fees']); ?>€</h6>
-                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block"><?= $pay['created_at']; ?></span>
+                                                            <h6 class="mb-0 invoice-customer"><?= htmlspecialchars($pay['nom']); ?>&nbsp<?= htmlspecialchars($pay['prenom']); ?></h6>
+                                                            <h6 class="mb-0 text-success">Paiement réussi de <?= htmlspecialchars($pay['fees']); ?>€</h6>
+                                                            <span class="fs-3 invoice-date text-nowrap text-body-color d-block"><?= $pay['updated_at']; ?></span>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -339,9 +303,6 @@ $update_stmt->execute();
                                 }
                             });
                         </script>
-
-
-
                         <!--End Notifications-->
 
                         <div id="settlements" style="display: none;"></div>
@@ -377,12 +338,12 @@ $update_stmt->execute();
     <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="../assets/js/dashboards/dashboard1.js"></script>
     <script src="../assets/libs/fullcalendar/index.global.min.js"></script>
+
+
     <!-- solar icons -->
 
     <script src="../assets/js/apps/invoice.js"></script>
     <script src="../assets/js/apps/jquery.PrintArea.js"></script>
-
-
 </body>
 
 </html>

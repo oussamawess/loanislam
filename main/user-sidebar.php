@@ -73,7 +73,7 @@ require_once 'auth-user.php';
         <li class="sidebar-item">
             <a class="sidebar-link" href="user-paiment.php" id="get-url" aria-expanded="false">
                 <iconify-icon icon="ic:baseline-payment"></iconify-icon>
-                <span class="hide-menu">Paiment</span>
+                <span class="hide-menu">Paiement</span>
                 <?php if ($unread_payments): ?>
                     <iconify-icon icon="material-symbols:notifications-unread-rounded" width="1.2em" height="1.2em" style="color: #e52727"></iconify-icon>
                 <?php endif; ?>
