@@ -50,6 +50,9 @@ $update_stmt->execute();
 
     <!-- Payment -->
     <script src="https://www.paypal.com/sdk/js?client-id=AZXF0jhL5MrKuQKqyls4XlZPOGVF1GCEKFH56vu0h9qpcK2euVJ2pIiAmW_pnhiMOZb8V9G39_VIHi7r&currency=EUR"></script>
+    <!-- stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+
 </head>
 
 <body>
@@ -203,58 +206,10 @@ $update_stmt->execute();
                                                                 <div class="text-end">
                                                                     <form action="upload_document.php" method="POST" enctype="multipart/form-data">
                                                                         <input type="hidden" name="document_id" value="<?= $pay['id']; ?>">
-                                                                        <div id="paypal-button-container"></div>
 
-                                                                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                        <script>
-                                                                            paypal.Buttons({
-                                                                                createOrder: function(data, actions) {
-                                                                                    return actions.order.create({
-                                                                                        purchase_units: [{
-                                                                                            amount: {
-                                                                                                value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
-                                                                                            }
-                                                                                        }]
-                                                                                    });
-                                                                                },
-                                                                                onApprove: function(data, actions) {
-                                                                                    return actions.order.capture().then(function(details) {
-                                                                                        // Display a modern success message
-                                                                                        $("body").append(`
-                                                                                        <div id="payment-success" style="
-                                                                                            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                                                                                            background: #28a745; color: white; padding: 20px; border-radius: 10px;
-                                                                                            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; text-align: center; z-index: 1000;">
-                                                                                            ✅ Paiement réussi, ${details.payer.name.given_name}!<br>
-                                                                                            Merci pour votre paiement.
-                                                                                        </div>
-                                                                                        `);
-                                                                                        setTimeout(() => {
-                                                                                            $("#payment-success").fadeOut();
-                                                                                        }, 4000); // Hide after 4 sec
 
-                                                                                        // Send AJAX request to update the database
-                                                                                        $.ajax({
-                                                                                            url: "update_payment.php",
-                                                                                            type: "POST",
-                                                                                            data: {
-                                                                                                client_id: <?= $client_id; ?>
-                                                                                            },
-                                                                                            success: function(response) {
-                                                                                                console.log(response); // Debugging message
-                                                                                            },
-                                                                                            error: function() {
-                                                                                                alert("Erreur lors de la mise à jour du paiement.");
-                                                                                            }
-                                                                                        });
-                                                                                    });
-                                                                                },
-                                                                                onError: function(err) {
-                                                                                    console.error('Error:', err);
-                                                                                    alert('An error occurred. Please try again.');
-                                                                                }
-                                                                            }).render('#paypal-button-container');
-                                                                        </script>
+
+
 
 
                                                                         <!-- <button type="button" class="btn btn-primary">Paypal <iconify-icon icon="uil:paypal"></iconify-icon></button>
@@ -262,6 +217,209 @@ $update_stmt->execute();
 
 
                                                                     </form>
+
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-md-12">
+                                                                                <!-- Content for the first half -->
+                                                                                <div id="paypal-button-container"></div>
+
+                                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                                                                <script>
+                                                                                    paypal.Buttons({
+                                                                                        createOrder: function(data, actions) {
+                                                                                            return actions.order.create({
+                                                                                                purchase_units: [{
+                                                                                                    amount: {
+                                                                                                        value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
+                                                                                                    }
+                                                                                                }]
+                                                                                            });
+                                                                                        },
+                                                                                        onApprove: function(data, actions) {
+                                                                                            return actions.order.capture().then(function(details) {
+                                                                                                // Display a modern success message
+                                                                                                $("body").append(`
+                                                                                        <div id="payment-success" style="
+                                                                                            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                                                                                            background: #28a745; color: white; padding: 20px; border-radius: 10px;
+                                                                                            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; text-align: center; z-index: 1000;">
+                                                                                            ✅ Paiement réussi!<br>
+                                                                                            Merci pour votre paiement.
+                                                                                        </div>
+                                                                                        `);
+                                                                                                setTimeout(() => {
+                                                                                                    $("#payment-success").fadeOut();
+                                                                                                }, 4000); // Hide after 4 sec
+
+                                                                                                // Send AJAX request to update the database
+                                                                                                $.ajax({
+                                                                                                    url: "update_payment.php",
+                                                                                                    type: "POST",
+                                                                                                    data: {
+                                                                                                        client_id: <?= $client_id; ?>
+                                                                                                    },
+                                                                                                    success: function(response) {
+                                                                                                        console.log(response); // Debugging message
+                                                                                                    },
+                                                                                                    error: function() {
+                                                                                                        alert("Erreur lors de la mise à jour du paiement.");
+                                                                                                    }
+                                                                                                });
+                                                                                            });
+                                                                                        },
+                                                                                        onError: function(err) {
+                                                                                            console.error('Error:', err);
+                                                                                            alert('An error occurred. Please try again.');
+                                                                                        }
+                                                                                    }).render('#paypal-button-container');
+                                                                                </script>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-md-12">
+                                                                                <!-- Content for the second half -->
+                                                                                <!-- STRIPE CODE -->
+                                                                                <style>
+                                                                                    #payment-form {
+                                                                                        max-width: 400px;
+                                                                                        margin: auto;
+                                                                                        padding: 20px;
+                                                                                        background: #f9f9f9;
+                                                                                        border-radius: 8px;
+                                                                                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                                                                                        text-align: center;
+                                                                                    }
+
+                                                                                    #card-element {
+                                                                                        padding: 10px;
+                                                                                        background: white;
+                                                                                        border-radius: 5px;
+                                                                                        border: 1px solid #ccc;
+                                                                                    }
+
+                                                                                    #submit {
+                                                                                        width: 100%;
+                                                                                        padding: 10px;
+                                                                                        background: #4CAF50;
+                                                                                        color: white;
+                                                                                        border: none;
+                                                                                        border-radius: 5px;
+                                                                                        font-size: 16px;
+                                                                                        cursor: pointer;
+                                                                                        transition: 0.3s;
+                                                                                    }
+
+                                                                                    #submit:hover {
+                                                                                        background: #45a049;
+                                                                                    }
+
+                                                                                    #card-errors,
+                                                                                    #payment-message {
+                                                                                        margin-top: 10px;
+                                                                                        text-align: center;
+                                                                                    }
+
+                                                                                    #payment-message {
+                                                                                        padding: 15px;
+                                                                                        font-size: 16px;
+                                                                                        color: white;
+                                                                                        border-radius: 5px;
+                                                                                        display: none;
+                                                                                    }
+
+                                                                                    /* Loader (spinner) */
+                                                                                    .spinner {
+                                                                                        display: none;
+                                                                                        margin: 10px auto;
+                                                                                        width: 20px;
+                                                                                        height: 20px;
+                                                                                        border: 4px solid rgba(255, 255, 255, 0.3);
+                                                                                        border-radius: 50%;
+                                                                                        border-top: 4px solid white;
+                                                                                        animation: spin 1s linear infinite;
+                                                                                    }
+
+                                                                                    @keyframes spin {
+                                                                                        0% {
+                                                                                            transform: rotate(0deg);
+                                                                                        }
+
+                                                                                        100% {
+                                                                                            transform: rotate(360deg);
+                                                                                        }
+                                                                                    }
+                                                                                </style>
+
+                                                                                <form id="payment-form">
+                                                                                    <div id="card-element"></div>
+                                                                                    <div id="card-errors" role="alert"></div>
+                                                                                    <button id="submit">
+                                                                                        💳 Pay Now
+                                                                                        <div class="spinner-border spinner-border-sm ms-2" id="loading-spinner" style="display:none;" role="status">
+                                                                                            <span class="visually-hidden">Loading...</span>
+                                                                                        </div>
+                                                                                    </button>
+
+                                                                                    <div id="payment-message"></div> <!-- Success message container -->
+                                                                                </form>
+
+                                                                                <script>
+                                                                                    var stripe = Stripe('pk_test_51R1cUNQrKQxJd0p5SPTW8eoZg2XGiyu8iO8cFFa5PNYALZ7aXIxeem7THpgQiTM0aUFPy1SjskUhVt3onLa1W8Av00W3v3m9lI');
+                                                                                    var elements = stripe.elements();
+                                                                                    var card = elements.create('card');
+                                                                                    card.mount('#card-element');
+
+                                                                                    document.getElementById('payment-form').addEventListener('submit', async function(event) {
+                                                                                        event.preventDefault();
+
+                                                                                        let submitButton = document.getElementById('submit');
+                                                                                        let spinner = document.getElementById('loading-spinner');
+                                                                                        let messageContainer = document.getElementById('payment-message');
+
+                                                                                        // Show loading spinner
+                                                                                        submitButton.disabled = true;
+                                                                                        spinner.style.display = "inline-block";
+
+                                                                                        const {
+                                                                                            token,
+                                                                                            error
+                                                                                        } = await stripe.createToken(card);
+
+                                                                                        if (error) {
+                                                                                            document.getElementById('card-errors').innerHTML = `<div style="padding: 10px; background: #ff4d4d; color: white; border-radius: 5px;">❌ ${error.message}</div>`;
+                                                                                            spinner.style.display = "none"; // Hide spinner on error
+                                                                                            submitButton.disabled = false;
+                                                                                        } else {
+                                                                                            const response = await fetch('charge.php', {
+                                                                                                method: 'POST',
+                                                                                                headers: {
+                                                                                                    'Content-Type': 'application/json'
+                                                                                                },
+                                                                                                body: JSON.stringify({
+                                                                                                    token: token.id
+                                                                                                })
+                                                                                            });
+
+                                                                                            const result = await response.json();
+
+                                                                                            spinner.style.display = "none"; // Hide spinner after response
+                                                                                            submitButton.disabled = false;
+
+                                                                                            if (result.success) {
+                                                                                                messageContainer.innerHTML = result.message;
+                                                                                                messageContainer.style.display = "block";
+                                                                                                messageContainer.style.background = "#4CAF50"; // Green for success
+                                                                                            } else {
+                                                                                                document.getElementById('card-errors').innerHTML = `<div style="padding: 10px; background: #ff4d4d; color: white; border-radius: 5px;">❌ ${result.error}</div>`;
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                </script>
+
+                                                                                <!-- STRIPE CODE -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
