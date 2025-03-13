@@ -202,7 +202,7 @@ if ($update_stmt->execute()) {
                                                                         <h6>&nbsp;ID Client : <?= htmlspecialchars($doc['id_client']); ?></h6>
                                                                         <h6 class="fw-bold">&nbsp; Demande envoyée le <span class="text-success"><?= $doc['created_at']; ?></span></h6>
                                                                         <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $doc['updated_at']; ?></span></h6>
-                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $doc['client_status']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Statut de demande <span class="text-primary"><?= $doc['client_status']; ?></span></h6>
 
                                                                         <!-- <h6 class="fw-bold">&nbsp; File: <!?= $doc['file_path']; ?></h6> -->
                                                                         <?php

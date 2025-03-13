@@ -202,8 +202,8 @@ if ($update_stmt->execute()) {
                                                                         <h6>&nbsp;Nom : <?= htmlspecialchars($pay['nom']); ?>&nbsp<?= htmlspecialchars($pay['prenom']); ?></h6>
                                                                         <h6>&nbsp;ID Client : <?= htmlspecialchars($pay['id_client']); ?></h6>
                                                                         <h6 class="fw-bold">&nbsp; Demande envoyée le <span class="text-success"><?= $pay['created_at']; ?></span></h6>
-                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $pay['updated_at']; ?></span></h6>
-                                                                        <h6 class="fw-bold">&nbsp; Fichier téléchargé le <span class="text-primary"><?= $pay['client_status']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Paiement réussi le <span class="text-primary"><?= $pay['updated_at']; ?></span></h6>
+                                                                        <h6 class="fw-bold">&nbsp; Statut de demande <span class="text-primary"><?= $pay['client_status']; ?></span></h6>
 
                                                                         <!-- <h6 class="fw-bold">&nbsp; File: <!?= $pay['file_path']; ?></h6> -->
                                                                         <?php
