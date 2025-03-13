@@ -50553,13 +50553,16 @@ body pre[class*=language-] {
 }
 
 .auth-bg {
-    background: url(../images/backgrounds/login-bg.jpg);
+    /* background: url(../images/backgrounds/login-bg.jpg); */
     background-size: cover;
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    background-color: #f6f6f6;
 }
 
 .auth-login {
-    max-width: 1160px
+    max-width: 1160px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
 }
 
 .auth-carousel.carousel .carousel-indicators {
