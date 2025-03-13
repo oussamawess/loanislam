@@ -53,6 +53,11 @@ $update_stmt->execute();
     <!-- stripe -->
     <script src="https://js.stripe.com/v3/"></script>
 
+    <style>
+        iframe {
+            z-index: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -195,87 +200,159 @@ $update_stmt->execute();
                                                     <div class="invoice-details invoice-<?= $pay['id']; ?>" style="display: none;">
                                                         <div class="row pt-3">
                                                             <div class="col-md-12">
-                                                                <div>
-                                                                    <address>
-                                                                        <h6 class="text-muted fs-2 text-end"><?= $pay['created_at']; ?></h6>
-                                                                        <h6>Demande de paiement des frais de traitement</h6>
-                                                                        <p class="text-muted">Bonjour, veuillez régler les frais de <span class="fw-bold text-dark"><?= htmlspecialchars($pay['fees']); ?>€</span> pour le traitement de votre demande. Merci de procéder au paiement dans les plus brefs délais.</p>
+                                                                <h6 class="text-muted fs-2 text-end mb-4"><?= $pay['created_at']; ?></h6>
 
-                                                                    </address>
-                                                                </div>
                                                                 <div class="text-end">
-                                                                    <form action="upload_document.php" method="POST" enctype="multipart/form-data">
-                                                                        <input type="hidden" name="document_id" value="<?= $pay['id']; ?>">
-
-
-
-
-
-
-                                                                        <!-- <button type="button" class="btn btn-primary">Paypal <iconify-icon icon="uil:paypal"></iconify-icon></button>
-                                                                        <button type="button" class="btn btn-primary">Stripe <iconify-icon icon="hugeicons:stripe"></iconify-icon></button> -->
-
-
-                                                                    </form>
-
                                                                     <div class="container">
                                                                         <div class="row">
+
+                                                                            <style>
+                                                                                ._failed {
+                                                                                    border-bottom: solid 4px red !important;
+                                                                                }
+
+                                                                                ._failed i {
+                                                                                    color: red !important;
+                                                                                }
+
+                                                                                ._success {
+                                                                                    box-shadow: 0 15px 25px #00000019;
+                                                                                    padding: 20px;
+                                                                                    width: 100%;
+                                                                                    text-align: center;
+                                                                                    margin: 40px auto;
+                                                                                    border-bottom: solid 4px #28a745;
+                                                                                }
+
+                                                                                ._success i {
+                                                                                    font-size: 55px;
+                                                                                    color: #28a745;
+                                                                                }
+
+                                                                                ._success h2 {
+                                                                                    margin-bottom: 12px;
+                                                                                    font-size: 40px;
+                                                                                    font-weight: 500;
+                                                                                    line-height: 1.2;
+                                                                                    margin-top: 10px;
+                                                                                }
+
+                                                                                ._success p {
+                                                                                    margin-bottom: 0px;
+                                                                                    font-size: 18px;
+                                                                                    color: #495057;
+                                                                                    font-weight: 500;
+                                                                                }
+                                                                            </style>
+
+
                                                                             <div class="col-lg-6 col-md-12">
-                                                                                <!-- Content for the first half -->
-                                                                                <div id="paypal-button-container"></div>
-
-                                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                                                                <script>
-                                                                                    paypal.Buttons({
-                                                                                        createOrder: function(data, actions) {
-                                                                                            return actions.order.create({
-                                                                                                purchase_units: [{
-                                                                                                    amount: {
-                                                                                                        value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
-                                                                                                    }
-                                                                                                }]
-                                                                                            });
-                                                                                        },
-                                                                                        onApprove: function(data, actions) {
-                                                                                            return actions.order.capture().then(function(details) {
-                                                                                                // Display a modern success message
-                                                                                                $("body").append(`
-                                                                                        <div id="payment-success" style="
-                                                                                            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                                                                                            background: #28a745; color: white; padding: 20px; border-radius: 10px;
-                                                                                            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; text-align: center; z-index: 1000;">
-                                                                                            ✅ Paiement réussi!<br>
-                                                                                            Merci pour votre paiement.
-                                                                                        </div>
-                                                                                        `);
-                                                                                                setTimeout(() => {
-                                                                                                    $("#payment-success").fadeOut();
-                                                                                                }, 4000); // Hide after 4 sec
-
-                                                                                                // Send AJAX request to update the database
-                                                                                                $.ajax({
-                                                                                                    url: "update_payment.php",
-                                                                                                    type: "POST",
-                                                                                                    data: {
-                                                                                                        client_id: <?= $client_id; ?>
-                                                                                                    },
-                                                                                                    success: function(response) {
-                                                                                                        console.log(response); // Debugging message
-                                                                                                    },
-                                                                                                    error: function() {
-                                                                                                        alert("Erreur lors de la mise à jour du paiement.");
-                                                                                                    }
-                                                                                                });
-                                                                                            });
-                                                                                        },
-                                                                                        onError: function(err) {
-                                                                                            console.error('Error:', err);
-                                                                                            alert('An error occurred. Please try again.');
-                                                                                        }
-                                                                                    }).render('#paypal-button-container');
-                                                                                </script>
+                                                                                <div>
+                                                                                    <address class="text-start">
+                                                                                        <h6>Demande de paiement des frais de traitement</h6>
+                                                                                        <p class="text-muted">Bonjour, veuillez régler les frais de <span class="fw-bold text-dark"><?= htmlspecialchars($pay['fees']); ?>€</span> pour le traitement de votre demande. Merci de procéder au paiement dans les plus brefs délais.</p>
+                                                                                    </address>
+                                                                                </div>
                                                                             </div>
                                                                             <div class="col-lg-6 col-md-12">
+                                                                                <!-- Content for the first half -->
+                                                                                <?php
+                                                                                include 'db.php';
+
+                                                                                $status = ''; // Initialize status
+
+                                                                                $update_payment = "SELECT status FROM payment WHERE id_client = ?";
+                                                                                $stmt = $conn->prepare($update_payment);
+
+                                                                                if ($stmt) {
+                                                                                    $stmt->bind_param("i", $client_id);
+                                                                                    $stmt->execute();
+                                                                                    $result = $stmt->get_result();
+
+                                                                                    if ($result->num_rows > 0) {
+                                                                                        $row = $result->fetch_assoc();
+                                                                                        $status = strtolower($row['status']); // Convert to lowercase for consistency
+                                                                                    }
+
+                                                                                    $stmt->close();
+                                                                                } else {
+                                                                                    die("Erreur lors de la préparation de la requête.");
+                                                                                }
+
+                                                                                // Display success message if paid, otherwise display PayPal button container
+                                                                                if ($status === 'paid') {
+                                                                                    echo '<div id="payment-success" style="
+        width: 100%; max-width: 400px; margin: auto;
+        background: rgb(255, 255, 255); color: #28a745; border: 2px solid #28a745; 
+        padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; 
+        text-align: center; border-radius: 8px;">
+        <iconify-icon icon="ooui:success" width="2em" height="2em" style="color: #28a745"></iconify-icon>
+        <h4>Paiement réussi!</h4>
+        <p style="color: black">Merci pour votre paiement. <br>
+        Vous pouvez télécharger le reçu de paiement.</p>
+    </div>';
+                                                                                } else {
+                                                                                    echo '<div id="paypal-button-container"></div>';
+                                                                                }
+                                                                                ?>
+
+                                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                                                                                <?php if ($status !== 'paid'): ?>
+                                                                                    <!-- Only load PayPal script if the user hasn't paid -->
+                                                                                    <script>
+                                                                                        paypal.Buttons({
+                                                                                            createOrder: function(data, actions) {
+                                                                                                return actions.order.create({
+                                                                                                    purchase_units: [{
+                                                                                                        amount: {
+                                                                                                            value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
+                                                                                                        }
+                                                                                                    }]
+                                                                                                });
+                                                                                            },
+                                                                                            onApprove: function(data, actions) {
+                                                                                                return actions.order.capture().then(function(details) {
+                                                                                                    // Replace PayPal button with success message
+                                                                                                    $("#paypal-button-container").html(`
+                    <div id="payment-success" style="
+                        width: 100%; max-width: 400px; margin: auto;
+                        background: rgb(255, 255, 255); color: #28a745; border: 2px solid #28a745; 
+                        padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; 
+                        text-align: center; border-radius: 8px;">
+                        <iconify-icon icon="ooui:success" width="2em" height="2em" style="color: #28a745"></iconify-icon>
+                        <h4>Paiement réussi!</h4>
+                        <p style="color: black">Merci pour votre paiement. <br>
+                        Vous pouvez télécharger le reçu de paiement.</p>
+                    </div>
+                `);
+
+                                                                                                    // Send AJAX request to update payment status in DB
+                                                                                                    $.ajax({
+                                                                                                        url: "update_payment.php",
+                                                                                                        type: "POST",
+                                                                                                        data: {
+                                                                                                            client_id: <?= $client_id; ?>
+                                                                                                        },
+                                                                                                        success: function(response) {
+                                                                                                            console.log(response);
+                                                                                                        },
+                                                                                                        error: function() {
+                                                                                                            alert("Erreur lors de la mise à jour du paiement.");
+                                                                                                        }
+                                                                                                    });
+                                                                                                });
+                                                                                            },
+                                                                                            onError: function(err) {
+                                                                                                console.error('Error:', err);
+                                                                                                alert('Une erreur s\'est produite. Veuillez réessayer.');
+                                                                                            }
+                                                                                        }).render('#paypal-button-container');
+                                                                                    </script>
+                                                                                <?php endif; ?>
+
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-md-12 d-none">
                                                                                 <!-- Content for the second half -->
                                                                                 <!-- STRIPE CODE -->
                                                                                 <style>
