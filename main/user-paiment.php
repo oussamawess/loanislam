@@ -257,99 +257,118 @@ $update_stmt->execute();
                                                                             <div class="col-lg-6 col-md-12">
                                                                                 <!-- Content for the first half -->
                                                                                 <?php
-                                                                                include 'db.php';
+include 'db.php';
 
-                                                                                $status = ''; // Initialize status
+$status = ''; // Initialize status
 
-                                                                                $update_payment = "SELECT status FROM payment WHERE id_client = ?";
-                                                                                $stmt = $conn->prepare($update_payment);
+$update_payment = "SELECT status FROM payment WHERE id_client = ?";
+$stmt = $conn->prepare($update_payment);
 
-                                                                                if ($stmt) {
-                                                                                    $stmt->bind_param("i", $client_id);
-                                                                                    $stmt->execute();
-                                                                                    $result = $stmt->get_result();
+if ($stmt) {
+    $stmt->bind_param("i", $client_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-                                                                                    if ($result->num_rows > 0) {
-                                                                                        $row = $result->fetch_assoc();
-                                                                                        $status = strtolower($row['status']); // Convert to lowercase for consistency
-                                                                                    }
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $status = strtolower($row['status']); // Convert to lowercase for consistency
+    }
 
-                                                                                    $stmt->close();
-                                                                                } else {
-                                                                                    die("Erreur lors de la préparation de la requête.");
-                                                                                }
+    $stmt->close();
+} else {
+    die("Erreur lors de la préparation de la requête.");
+}
 
-                                                                                // Display success message if paid, otherwise display PayPal button container
-                                                                                if ($status === 'paid') {
-                                                                                    echo '<div id="payment-success" style="
+// Display success message if paid, otherwise display PayPal button container
+if ($status === 'paid') {
+    echo '<div id="payment-success" style="
         width: 100%; max-width: 400px; margin: auto;
         background: rgb(255, 255, 255); color: #28a745; border: 2px solid #28a745; 
         padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; 
         text-align: center; border-radius: 8px;">
         <iconify-icon icon="ooui:success" width="2em" height="2em" style="color: #28a745"></iconify-icon>
         <h4>Paiement réussi!</h4>
-        <p style="color: black">Merci pour votre paiement. <br>
-        Vous pouvez télécharger le reçu de paiement.</p>
+        <p style="color: black">Merci pour votre paiement.</p>
+        <button onclick="openReceiptPopup()" style="
+            background: #007bff; color: white; padding: 10px 15px; 
+            border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+            Télécharger le reçu
+        </button>
     </div>';
-                                                                                } else {
-                                                                                    echo '<div id="paypal-button-container"></div>';
-                                                                                }
-                                                                                ?>
 
-                                                                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    echo "<script>
+        function openReceiptPopup() {
+            window.open('generate_receipt.php?client_id={$client_id}&amount=" . htmlspecialchars($pay['fees']) . "', '_blank');
+        }
+    </script>";
+} else {
+    echo '<div id="paypal-button-container"></div>';
+}
+?>
 
-                                                                                <?php if ($status !== 'paid'): ?>
-                                                                                    <!-- Only load PayPal script if the user hasn't paid -->
-                                                                                    <script>
-                                                                                        paypal.Buttons({
-                                                                                            createOrder: function(data, actions) {
-                                                                                                return actions.order.create({
-                                                                                                    purchase_units: [{
-                                                                                                        amount: {
-                                                                                                            value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
-                                                                                                        }
-                                                                                                    }]
-                                                                                                });
-                                                                                            },
-                                                                                            onApprove: function(data, actions) {
-                                                                                                return actions.order.capture().then(function(details) {
-                                                                                                    // Replace PayPal button with success message
-                                                                                                    $("#paypal-button-container").html(`
-                    <div id="payment-success" style="
-                        width: 100%; max-width: 400px; margin: auto;
-                        background: rgb(255, 255, 255); color: #28a745; border: 2px solid #28a745; 
-                        padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; 
-                        text-align: center; border-radius: 8px;">
-                        <iconify-icon icon="ooui:success" width="2em" height="2em" style="color: #28a745"></iconify-icon>
-                        <h4>Paiement réussi!</h4>
-                        <p style="color: black">Merci pour votre paiement. <br>
-                        Vous pouvez télécharger le reçu de paiement.</p>
-                    </div>
-                `);
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-                                                                                                    // Send AJAX request to update payment status in DB
-                                                                                                    $.ajax({
-                                                                                                        url: "update_payment.php",
-                                                                                                        type: "POST",
-                                                                                                        data: {
-                                                                                                            client_id: <?= $client_id; ?>
-                                                                                                        },
-                                                                                                        success: function(response) {
-                                                                                                            console.log(response);
-                                                                                                        },
-                                                                                                        error: function() {
-                                                                                                            alert("Erreur lors de la mise à jour du paiement.");
-                                                                                                        }
-                                                                                                    });
-                                                                                                });
-                                                                                            },
-                                                                                            onError: function(err) {
-                                                                                                console.error('Error:', err);
-                                                                                                alert('Une erreur s\'est produite. Veuillez réessayer.');
-                                                                                            }
-                                                                                        }).render('#paypal-button-container');
-                                                                                    </script>
-                                                                                <?php endif; ?>
+<?php if ($status !== 'paid'): ?>
+    <!-- Only load PayPal script if the user hasn't paid -->
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: <?= htmlspecialchars($pay['fees']); ?> // Payment amount
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Replace PayPal button with success message
+                    $("#paypal-button-container").html(`
+                        <div id="payment-success" style="
+                            width: 100%; max-width: 400px; margin: auto;
+                            background: rgb(255, 255, 255); color: #28a745; border: 2px solid #28a745; 
+                            padding: 20px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); font-size: 18px; 
+                            text-align: center; border-radius: 8px;">
+                            <iconify-icon icon="ooui:success" width="2em" height="2em" style="color: #28a745"></iconify-icon>
+                            <h4>Paiement réussi!</h4>
+                            <p style="color: black">Merci pour votre paiement.</p>
+                            <button onclick="openReceiptPopup()" style="
+                                background: #007bff; color: white; padding: 10px 15px; 
+                                border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+                                Télécharger le reçu
+                            </button>
+                        </div>
+                    `);
+
+                    // Define the openReceiptPopup function
+                    window.openReceiptPopup = function() {
+                        window.open('generate_receipt.php?client_id=<?= $client_id; ?>&amount=<?= htmlspecialchars($pay['fees']); ?>', '_blank');
+                    };
+
+                    // Send AJAX request to update payment status in DB
+                    $.ajax({
+                        url: "update_payment.php",
+                        type: "POST",
+                        data: {
+                            client_id: <?= $client_id; ?>
+                        },
+                        success: function(response) {
+                            console.log(response);
+                        },
+                        error: function() {
+                            alert("Erreur lors de la mise à jour du paiement.");
+                        }
+                    });
+                });
+            },
+            onError: function(err) {
+                console.error('Error:', err);
+                alert('Une erreur s\'est produite. Veuillez réessayer.');
+            }
+        }).render('#paypal-button-container');
+    </script>
+<?php endif; ?>
 
                                                                             </div>
                                                                             <div class="col-lg-6 col-md-12 d-none">
