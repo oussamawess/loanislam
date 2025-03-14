@@ -389,34 +389,77 @@ require_once 'auth-top-admin.php';
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-pwd" name="password"
-                                                    placeholder="Password" required>
-                                                <label for="tb-pwd">Mot de passe</label>
-                                                <i id="togglePwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword"
-                                                    placeholder="Confirm Password" required>
-                                                <label for="tb-cpwd">Confirmer le mot de passe</label>
-                                                <i id="toggleCpwd" class="fas fa-eye-slash"
-                                                    style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                                <small id="passwordError" class="form-text text-danger"
-                                                    style="display:none;">Les mots de passe ne correspondent pas.
-                                                    Veuillez les vérifier.</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-md-flex align-items-center">
-                                                <div class="ms-auto mt-3 mt-md-0">
-                                                    <button type="submit"
-                                                        class="btn btn-primary hstack gap-6">Ajouter</button>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="tb-pwd" name="password" placeholder="Password" required>
+        <label for="tb-pwd">Mot de passe</label>
+        <i id="togglePwd" class="fas fa-eye-slash"
+           style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+        <small id="lengthError" class="form-text text-danger" style="display: none;">
+            Le mot de passe doit contenir au moins 8 caractères.
+        </small>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="tb-cpwd" name="repassword" placeholder="Confirm Password" required>
+        <label for="tb-cpwd">Confirmer le mot de passe</label>
+        <i id="toggleCpwd" class="fas fa-eye-slash"
+           style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+        <small id="passwordError" class="form-text text-danger" style="display: none;">
+            Les mots de passe ne correspondent pas.
+        </small>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="d-md-flex align-items-center">
+        <div class="ms-auto mt-3 mt-md-0">
+            <button type="submit" class="btn btn-primary hstack gap-6" id="submitBtn">Ajouter</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById("submitBtn").addEventListener("click", function(event) {
+    let password = document.getElementById("tb-pwd").value;
+    let confirmPassword = document.getElementById("tb-cpwd").value;
+    let lengthError = document.getElementById("lengthError");
+    let passwordError = document.getElementById("passwordError");
+
+    // Check password length
+    if (password.length < 8) {
+        event.preventDefault();
+        lengthError.style.display = "block";
+    } else {
+        lengthError.style.display = "none";
+    }
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+        event.preventDefault();
+        passwordError.style.display = "block";
+    } else {
+        passwordError.style.display = "none";
+    }
+});
+
+// Toggle password visibility
+document.getElementById("togglePwd").addEventListener("click", function() {
+    let passwordInput = document.getElementById("tb-pwd");
+    this.classList.toggle("fa-eye");
+    this.classList.toggle("fa-eye-slash");
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+});
+
+document.getElementById("toggleCpwd").addEventListener("click", function() {
+    let confirmPasswordInput = document.getElementById("tb-cpwd");
+    this.classList.toggle("fa-eye");
+    this.classList.toggle("fa-eye-slash");
+    confirmPasswordInput.type = confirmPasswordInput.type === "password" ? "text" : "password";
+});
+</script>
+
                                     </div>
                                 </form>
                             </div>
@@ -446,7 +489,7 @@ require_once 'auth-top-admin.php';
                             });
                         </script>
 
-                        <script>
+                        <!-- <script>
                             // Toggle password visibility
                             function togglePasswordVisibility(inputId, iconId) {
                                 var passwordInput = document.getElementById(inputId);
@@ -486,7 +529,7 @@ require_once 'auth-top-admin.php';
                                     errorMessage.style.display = "none"; // Hide error message if passwords match
                                 }
                             });
-                        </script>
+                        </script> -->
 
                         <!--End add admin-->
 

@@ -141,14 +141,14 @@ require_once 'auth-admin.php';
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-pwd" name="password" placeholder="Password" required>
+                                                <input type="password" class="form-control" id="tb-pwd" name="password" placeholder="Password" required minlength="8">
                                                 <label for="tb-pwd">Nouveau mot de passe</label>
                                                 <i id="togglePwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword" placeholder="Confirm Password" required>
+                                                <input type="password" class="form-control" id="tb-cpwd" name="repassword" placeholder="Confirm Password" required minlength="8">
                                                 <label for="tb-cpwd">Confirmer le nouveau mot de passe</label>
                                                 <i id="toggleCpwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
                                                 <small id="passwordError" class="form-text text-danger" style="display:none;">Les mots de passe ne correspondent pas. Veuillez les vérifier.</small>
