@@ -14,11 +14,11 @@ require_once 'auth-user.php';
     <!-- Favicon icon-->
     <!-- <link rel="shortcut icon" type="image/png" href="../assets/images/logos/loanislam.png" width="16" height="auto" /> -->
 
-  <link rel="icon" type="image/png" href="../assets/images/logos/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="../assets/images/logos/favicon.svg" />
-  <link rel="shortcut icon" href="../assets/images/logos/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/logos/apple-touch-icon.png" />
-  <link rel="manifest" href="../assets/images/logos/site.webmanifest" />
+    <link rel="icon" type="image/png" href="../assets/images/logos/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/logos/favicon.svg" />
+    <link rel="shortcut icon" href="../assets/images/logos/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/logos/apple-touch-icon.png" />
+    <link rel="manifest" href="../assets/images/logos/site.webmanifest" />
 
     <!-- Core Css -->
     <link rel="stylesheet" href="../assets/css/styles.css" />
@@ -48,46 +48,46 @@ require_once 'auth-user.php';
     </div> -->
     <!-- Preloader -->
     <div class="preloader">
-            <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
-        </div>
-        <div id="main-wrapper">
-            <!-- Sidebar Start -->
-            <aside class="side-mini-panel with-vertical">
-                <!-- ---------------------------------- -->
-                <!-- Start Vertical Layout Sidebar -->
-                <!-- ---------------------------------- -->
-                <div class="iconbar">
-                    <div>
-                        <div class="mini-nav">
-                            <div class="brand-logo d-flex align-items-center justify-content-center">
-                                <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
-                                    <iconify-icon icon="solar:hamburger-menu-line-duotone" class="fs-7"></iconify-icon>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="sidebarmenu">
-                            <div class="brand-logo d-flex align-items-center nav-logo">
-                                <a href="../main/user-profile.php" class="text-nowrap logo-img">
-                                    <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
-                                </a>
-
-                            </div>
-                            <!-- ---------------------------------- -->
-                            <!-- Dashboard -->
-                            <!-- ---------------------------------- -->
-                            <?php include "user-sidebar.php" ?>
-
-                            <!-- ---------------------------------- -->
-
+        <img src="../assets/images/logos/loanislam.png" alt="loader" class="lds-ripple img-fluid" />
+    </div>
+    <div id="main-wrapper">
+        <!-- Sidebar Start -->
+        <aside class="side-mini-panel with-vertical">
+            <!-- ---------------------------------- -->
+            <!-- Start Vertical Layout Sidebar -->
+            <!-- ---------------------------------- -->
+            <div class="iconbar">
+                <div>
+                    <div class="mini-nav">
+                        <div class="brand-logo d-flex align-items-center justify-content-center">
+                            <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                                <iconify-icon icon="solar:hamburger-menu-line-duotone" class="fs-7"></iconify-icon>
+                            </a>
                         </div>
                     </div>
+                    <div class="sidebarmenu">
+                        <div class="brand-logo d-flex align-items-center nav-logo">
+                            <a href="../main/user-profile.php" class="text-nowrap logo-img">
+                                <img src="../assets/images/logos/loanislam.png" alt="Logo" height="35" />
+                            </a>
+
+                        </div>
+                        <!-- ---------------------------------- -->
+                        <!-- Dashboard -->
+                        <!-- ---------------------------------- -->
+                        <?php include "user-sidebar.php" ?>
+
+                        <!-- ---------------------------------- -->
+
+                    </div>
                 </div>
-            </aside>
-            <!--  Sidebar End -->
-            <div class="page-wrapper">
-                <!--  Header Start -->
-                <?php include "user-header.php" ?>
-                <!--  Header End -->
+            </div>
+        </aside>
+        <!--  Sidebar End -->
+        <div class="page-wrapper">
+            <!--  Header Start -->
+            <?php include "user-header.php" ?>
+            <!--  Header End -->
 
 
             <?php
@@ -129,7 +129,7 @@ require_once 'auth-user.php';
 
                                 <form id="adminForm" method="POST" action="update_user_process.php" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                                    
+
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -149,29 +149,111 @@ require_once 'auth-user.php';
                                                 <input type="password" class="form-control" id="tb-pwd" name="password" placeholder="Password" required>
                                                 <label for="tb-pwd">Nouveau mot de passe</label>
                                                 <i id="togglePwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
+                                                <small id="lengthError" class="form-text text-danger" style="display: none;">
+                                                    Le mot de passe doit contenir au moins 8 caractères.
+                                                </small>
                                             </div>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <input type="password" class="form-control" id="tb-cpwd" name="repassword" placeholder="Confirm Password" required>
                                                 <label for="tb-cpwd">Confirmer le nouveau mot de passe</label>
                                                 <i id="toggleCpwd" class="fas fa-eye-slash" style="position: absolute; right: 10px; top: 10px; cursor: pointer;"></i>
-                                                <small id="passwordError" class="form-text text-danger" style="display:none;">Les mots de passe ne correspondent pas. Veuillez les vérifier.</small>
+                                                <small id="passwordError" class="form-text text-danger" style="display:none;">
+                                                    Les mots de passe ne correspondent pas. Veuillez les vérifier.
+                                                </small>
                                             </div>
                                         </div>
+
                                         <div class="col-12">
                                             <div class="d-md-flex align-items-center">
                                                 <div class="ms-auto mt-3 mt-md-0">
-                                                    <button type="submit" class="btn btn-success hstack gap-6">Modifier</button>
+                                                    <button type="submit" class="btn btn-success hstack gap-6" id="updateBtn">Modifier</button>
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </form>
                             </div>
                         </div>
 
                         <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const form = document.querySelector("#adminForm");
+                                const errorMessage = document.getElementById("passwordError");
+                                const lengthError = document.createElement("small");
+                                lengthError.classList.add("form-text", "text-danger");
+                                lengthError.style.display = "none";
+                                lengthError.innerText = "Le mot de passe doit contenir au moins 8 caractères.";
+                                document.getElementById("tb-pwd").parentNode.appendChild(lengthError);
+
+                                // Password visibility toggle
+                                function togglePasswordVisibility(inputId, iconId) {
+                                    let passwordInput = document.getElementById(inputId);
+                                    let icon = document.getElementById(iconId);
+
+                                    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+                                    icon.classList.toggle("fa-eye");
+                                    icon.classList.toggle("fa-eye-slash");
+                                }
+
+                                document.getElementById("togglePwd").addEventListener("click", function() {
+                                    togglePasswordVisibility("tb-pwd", "togglePwd");
+                                });
+                                document.getElementById("toggleCpwd").addEventListener("click", function() {
+                                    togglePasswordVisibility("tb-cpwd", "toggleCpwd");
+                                });
+
+                                // Form validation before submission
+                                form.addEventListener("submit", function(event) {
+                                    let password = document.getElementById("tb-pwd").value;
+                                    let confirmPassword = document.getElementById("tb-cpwd").value;
+
+                                    // Validate password length
+                                    if (password.length < 8) {
+                                        event.preventDefault();
+                                        lengthError.style.display = "block";
+                                        return;
+                                    } else {
+                                        lengthError.style.display = "none";
+                                    }
+
+                                    // Check if passwords match
+                                    if (password !== confirmPassword) {
+                                        event.preventDefault();
+                                        errorMessage.style.display = "block";
+                                    } else {
+                                        errorMessage.style.display = "none";
+                                    }
+
+                                    // If no errors, proceed with AJAX submission
+                                    event.preventDefault();
+                                    let formData = new FormData(form);
+                                    fetch("update_user_process.php", {
+                                            method: "POST",
+                                            body: formData
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            document.getElementById("errorMessage").style.display = "none";
+
+                                            if (data.status === "error") {
+                                                document.getElementById("errorMessage").innerHTML = data.message;
+                                                document.getElementById("errorMessage").style.display = "block";
+                                            } else {
+                                                window.location.href = "user-parametres.php";
+                                            }
+                                        })
+                                        .catch(error => console.error("Error:", error));
+                                });
+                            });
+                        </script>
+
+
+                        <!-- <script>
                             document.addEventListener("DOMContentLoaded", function() {
                                 document.querySelector("#adminForm").addEventListener("submit", function(event) {
                                     event.preventDefault(); // Prevent form from submitting normally
@@ -245,7 +327,7 @@ require_once 'auth-user.php';
                                     errorMessage.style.display = "none"; // Hide error message if passwords match
                                 }
                             });
-                        </script>
+                        </script> -->
 
                         <!--End add admin-->
 
@@ -255,7 +337,7 @@ require_once 'auth-user.php';
                     </div>
                 </div>
             </div>
-            
+
 
             <script>
                 function handleColorTheme(e) {
@@ -265,7 +347,7 @@ require_once 'auth-user.php';
         </div>
 
         <!--  Search Bar -->
-        
+
     </div>
     <div class="dark-transparent sidebartoggler"></div>
     <!-- Import Js Files -->
