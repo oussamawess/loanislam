@@ -822,9 +822,26 @@
   </div>
   <div class="mb-4">
     <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-    <input type="password" name="password_user" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe" required>
-  </div>
-  <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1">S'inscrire</button>
+    <input type="password" name="password_user" class="form-control" id="exampleInputPassword1" 
+           placeholder="Entrez votre mot de passe" required minlength="8">
+    <small id="passwordError" style="color: red; display: none;">Le mot de passe doit contenir au moins 8 caractères.</small>
+</div>
+<button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1" id="submitBtn">S'inscrire</button>
+
+<script>
+document.getElementById("submitBtn").addEventListener("click", function(event) {
+    let passwordInput = document.getElementById("exampleInputPassword1");
+    let passwordError = document.getElementById("passwordError");
+
+    if (passwordInput.value.length < 8) {
+        event.preventDefault(); // Prevent form submission
+        passwordError.style.display = "block"; // Show error message
+    } else {
+        passwordError.style.display = "none"; // Hide error message
+    }
+});
+</script>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
