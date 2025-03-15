@@ -52,7 +52,7 @@
                           </div>
 
                           <a href="../main/tableau-de-bord.php" class="btn btn-dark w-100 py-8 mb-4 rounded-1">Mot de passe oublié</a>
-                          <a href="../main/login.html" class="btn bg-primary-subtle text-primary w-100 py-8 mb-4 rounded-1">Retour à la connexion</a>
+                          <a href="../main/login.php" class="btn bg-primary-subtle text-primary w-100 py-8 mb-4 rounded-1">Retour à la connexion</a>
 
                         </form>
                       </div>

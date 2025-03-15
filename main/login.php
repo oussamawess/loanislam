@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                           <div class="mb-3">
                             <div class="d-flex align-items-center justify-content-between">
                               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-                              <a class="text-primary link-dark fs-2" href="../main/forgotpassword.html">Mot de passe oublié ?</a>
+                              <a class="text-primary link-dark fs-2" href="../main/forgotpassword.php">Mot de passe oublié ?</a>
                             </div>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe" required>
                              <!-- Display the error message here -->
