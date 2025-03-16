@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <div class="row justify-content-center py-4">
                     <div class="col-lg-11">
                       <div class="card-body">
-                        <a href="../main/tableau-de-bord.php" class="text-nowrap logo-img d-block mb-4 w-100">
+                        <a href="../main/login.php" class="text-nowrap logo-img d-block mb-4 w-100">
                           <img src="../assets/images/logos/loanislam.png" width="200" class="dark-logo" alt="Logo-Dark" />
                         </a>
                         <h4 class="lh-base mb-4">Connectez-vous</h4>
