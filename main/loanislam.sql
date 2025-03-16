@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 15 mars 2025 à 01:21
+-- Généré le : dim. 16 mars 2025 à 02:43
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -167,6 +167,47 @@ INSERT INTO `partner` (`id`, `id_client`, `nom`, `prenom`, `age`, `telephone`, `
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `expires_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `password_resets`
+--
+
+INSERT INTO `password_resets` (`id`, `email`, `token`, `expires_at`) VALUES
+(1, 'oammar03@gmail.com', 'f318f6f5542ad02f507ca58338928ca26d6658271461cbc778c5d9f098510e7206bfb4cbd4f869031655616b62f1bab547fb', '2025-03-15 02:39:19'),
+(2, 'oammar03@gmail.com', '446dcc4442b6c118cb09dcb64a5200c0287c42a6bd7115b49409545b2c0a588d8b3ed5da54016e3311354901e16e5af903d3', '2025-03-15 02:42:09'),
+(3, 'oammar03@gmail.com', '51890eeb33ffe86ec0b97141a6ab83aa96bf6d8440dc2b1fc6f1e7dd9e2e1c1435962cffc7236373858d43e5cbf24454ad6c', '2025-03-15 02:47:31'),
+(4, 'oammar03@gmail.com', '7f56cdc5bc31bf65b291bc9e7725e14bddf05d82086b175cf5234518933ed1140a26095d5fd4ddc22c1336001d5af93e1781', '2025-03-15 03:10:08'),
+(5, 'oammar03@gmail.com', '67e3df96006b633155c2fceadd07c2f5e7d85094831ca6967bbb15586bbfdd307249b306efee44c9b4b8007252e8b79e181c', '2025-03-15 03:34:30'),
+(6, 'oammar03@gmail.com', 'b4b993d7e6908640e496cad7766be2c2915406a36a07e859cb093a498fab8d0280cb209c706dfdf6eec8f2542f1f013e791b', '2025-03-15 03:40:06'),
+(7, 'oammar03@gmail.com', '75e70d120d4b388730a32af38281ff369649edc9eabb01e41425cb7edd7da11ddea681655b61677fc1f19cde95c653830803', '2025-03-15 04:09:20'),
+(8, 'oammar03@gmail.com', 'ab49fe67d1f6fd8a6c281618c66de34b9d44b08cee59ffcd4c5ae9b70deee6a05d65fadcae9159a21abdac3d12a5f6ecaa66', '2025-03-15 04:17:38'),
+(9, 'oammar03@gmail.com', '5c45b5d217d7019e16615405795ce51e565e7c0b4639c73f2c6cc960bb4ab1ced8b6fa06b093bce4cb2191246d2e298ee76a', '2025-03-15 04:20:14'),
+(10, 'oammar03@gmail.com', '020a4646f169d33683dc6720ffe5e1384e49719a7bc042ff5a82af195ff1de5dbd233220d5fe3b642800d605e61ce4146e6d', '2025-03-15 04:25:49'),
+(11, 'oammar03@gmail.com', '75b5b25404c6358918e447b74170e1a2040e64df6eefdf86ea3d6bc5a11d03f1ac2ee8624a767ec447a96776d394bce86f06', '2025-03-15 14:18:38'),
+(12, 'oammar03@gmail.com', 'df66fe2827cf73e453ce5f0ab2aaaeeeb65ce046cde9c8254720f017de3d115fe1999043c552b32db8cdcd95e0863fc0f701', '2025-03-15 14:23:34'),
+(13, 'oammar03@gmail.com', '65ba39f3eaf44a7ee6e6a11cf0550653803d6ad0ec87750287f9c932013f411d2ec73b673b7d75d3544308a3c78ce88b87c8', '2025-03-15 14:30:27'),
+(14, 'oammar03@gmail.com', '36ec5fff9dd53f47ec9f53b5a592f7bf68331d517bb18935e27c1a22c4635f235beeddd26b4089f043c335a6afef1f618a99', '2025-03-15 14:34:52'),
+(15, 'oammar03@gmail.com', 'b0e7fd7923598354f2bef5a83db141390fd8d2e8a0376eda00d2af38206a0e533c6f93f640f88a76a2b34d1bc8efb4bf4f4e', '2025-03-15 14:56:56'),
+(17, 'oammar03@gmail.com', 'cd10b13cc50416d724b4f8a54de9393fcd97292f2bed334ed42fda5e8b6abb967dacba12ce28e4aac9f09d396bc29daf10d4', '2025-03-15 15:22:49'),
+(18, 'oammar03@gmail.com', '77dbf496734890ea1ddd5d1b2c0c57d61bab20dee23f8501148a8521eada6cc468d227db1c134067b81dbf799c013074704f', '2025-03-15 15:23:20'),
+(21, 'ddfbdf@gmail.com', '024a705c1795e94c7b5aad666caf26593ffbf199a9d98999a93eccbe6f7d706f7612893f2c32fd6b0867e618b1c991114adf', '2025-03-15 15:54:36'),
+(22, 'oammar03@gmail.com', '45170b38fcb65506ce21c8bea19c60bee1e5ab5140de7b9cb183efc946a75dda9fad973dd07d1601841000c6b6bc6cb3f100', '2025-03-15 16:00:48'),
+(24, 'oammar03@gmail.com', '5eb7a9aaee697a27532cb5e29c126778cd6aa3eb0c5e41860b6a3345238155baa9fe60f928ea4590de9f07efce6b6b38d8b4', '2025-03-15 17:08:37'),
+(25, 'oammar03@gmail.com', '0465fe55bd171ae34042ba94e5cf74bddc4daa887841040502b316a4492083601540df6d8c553de82d38d839b0bfbf9ec19d', '2025-03-15 17:15:33'),
+(27, 'oammar03@gmail.com', 'e687a0f311b600b0f42c62e7d3808a797987824a9cf0a699bfb36ba165e7d4db34b1cbd2816ff38a99dc0d1193dc96bf9685', '2025-03-15 17:20:11');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `payment`
 --
 
@@ -275,7 +316,7 @@ INSERT INTO `user` (`id`, `id_client`, `nom`, `email`, `password`, `role`) VALUE
 (39, 42, 'oussama ammar', 'lohud@mailinator.com', '$2y$10$X22hGgnvMoVjLfazdwqPW.6armlX/TCPTbEqYt3Cam/8706mFxo8O', 'client'),
 (40, NULL, 'topp', 'topp@gmail.com', '$2y$10$DNDmc2OEY.5Y7pxa.o/RN.w2EeJgHM3uwqLayWdYSOND9PZs2qUrW', 'topadmin'),
 (42, NULL, 'wesswess', 'wesswess@gmail.com', '$2y$10$kb5Vlz8PDjmEP.jIOyNpFuZBwSieXBon9FnZ/6ddzd0.y5pkFgXpi', 'admin'),
-(43, 43, 'oussama', 'oammar03@gmail.com', '$2y$10$8aRKblUySfdHh9xZ0UmElenoH.wMjtQ3QAaAGrtnzUrCAGShak8xa', 'client'),
+(43, 43, 'oussama', 'oammar03@gmail.com', '$2y$10$kHCp68rC17GTRV2mRKwMFuCjxc8dZJCMCKFVzjdai4VfiFPu3vPoK', 'client'),
 (44, NULL, 'ss', 'ddfbdf@gmail.com', '$2y$10$kClqOKYF.b9J0X4cBCQH0.u1UP/jobWv6tR4vA1WHZ.lh36246Gcm', 'admin');
 
 --
@@ -309,6 +350,13 @@ ALTER TABLE `partner`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `id_client` (`id_client`);
+
+--
+-- Index pour la table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `email` (`email`);
 
 --
 -- Index pour la table `payment`
@@ -361,6 +409,12 @@ ALTER TABLE `partner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT pour la table `password_resets`
+--
+ALTER TABLE `password_resets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT pour la table `payment`
 --
 ALTER TABLE `payment`
@@ -393,6 +447,12 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `partner`
   ADD CONSTRAINT `partner_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD CONSTRAINT `password_resets_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `payment`
