@@ -346,7 +346,7 @@
                           </div>
                         </div>
                       </div>
-                      
+
 
                       <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                       <script>
@@ -433,7 +433,7 @@
                               <div class="col-md-4">
                                 <input type="text" name="adresse_client" class="form-control"
                                   placeholder="12 rue de la Croissant. Appartement 3D. 56000" required>
-                                  <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
+                                <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                               </div>
                             </div>
                           </div>
@@ -586,10 +586,12 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-6 mb-2 mb-md-0">
-                                          <input type="text" name="nom_partner" class="form-control" placeholder="John">
+                                          <input type="text" name="nom_partner" class="form-control" placeholder="John" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                         <div class="col-md-6">
-                                          <input type="text" name="prenom_partner" class="form-control" placeholder="Doe">
+                                          <input type="text" name="prenom_partner" class="form-control" placeholder="Doe" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -601,7 +603,8 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="number" name="age_partner" class="form-control" placeholder="35 Ans">
+                                          <input type="number" name="age_partner" class="form-control" placeholder="35 Ans" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -613,7 +616,8 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" name="telephone_partner" class="form-control" placeholder="+1-202-555-0116">
+                                          <input type="text" name="telephone_partner" class="form-control" placeholder="+1-202-555-0116" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -625,7 +629,8 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" name="email_partner" class="form-control" placeholder="john.doe@gmail.com">
+                                          <input type="text" name="email_partner" class="form-control" placeholder="john.doe@gmail.com" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -638,7 +643,8 @@
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
                                           <input type="text" name="adresse_partner" class="form-control"
-                                            placeholder="12 rue de la Croissant. Appartement 3D. 56000">
+                                            placeholder="12 rue de la Croissant. Appartement 3D. 56000" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -650,7 +656,8 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" name="profession_partner" class="form-control" placeholder="Ingénieur Informatique">
+                                          <input type="text" name="profession_partner" class="form-control" placeholder="Ingénieur Informatique" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -662,7 +669,8 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="number" name="salaire_partner" class="form-control" placeholder="3500€">
+                                          <input type="number" name="salaire_partner" class="form-control" placeholder="3500€" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -674,7 +682,8 @@
                                     <div class="col-lg-9">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input type="text" name="statut_civil_partner" class="form-control" placeholder="Célibataire">
+                                          <input type="text" name="statut_civil_partner" class="form-control" placeholder="Célibataire" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -756,7 +765,8 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" name="fichier_paie_partner" type="file" id="formFile">
+                                          <input class="form-control" name="fichier_paie_partner" type="file" id="formFile" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -768,7 +778,8 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" name="attestation_salaire_partner" type="file" id="formFile">
+                                          <input class="form-control" name="attestation_salaire_partner" type="file" id="formFile" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -780,7 +791,8 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" name="extrait_salaire_partner" type="file" id="formFile">
+                                          <input class="form-control" name="extrait_salaire_partner" type="file" id="formFile" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -792,7 +804,8 @@
                                     <div class="col-lg-6">
                                       <div class="row">
                                         <div class="col-md-12 mb-2 mb-md-0">
-                                          <input class="form-control" name="contrat_partner" type="file" id="formFile">
+                                          <input class="form-control" name="contrat_partner" type="file" id="formFile" required>
+                                          <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
                                         </div>
                                       </div>
                                     </div>
@@ -807,78 +820,78 @@
 
                       <!-- Step 5 -->
                       <div class="step" id="step5">
-  <h3>Inscription</h3>
-  <!-- Error message placeholder -->
-  <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+                        <h3>Inscription</h3>
+                        <!-- Error message placeholder -->
+                        <div id="error-message" class="alert alert-danger" style="display: none;"></div>
 
-  <!-- Add your form fields here -->
-  <div class="mb-3">
-    <label for="text-name" class="form-label">Nom</label>
-    <input type="text" name="nom_user" class="form-control" id="text-name" placeholder="Entrez votre nom" required>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
-    <input type="email" name="mail_user" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" required>
-  </div>
-  <div class="mb-4">
-    <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-    <input type="password" name="password_user" class="form-control" id="exampleInputPassword1" 
-           placeholder="Entrez votre mot de passe" required minlength="8">
-    <small id="passwordError" style="color: red; display: none;">Le mot de passe doit contenir au moins 8 caractères.</small>
-</div>
-<button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1" id="submitBtn">S'inscrire</button>
+                        <!-- Add your form fields here -->
+                        <div class="mb-3">
+                          <label for="text-name" class="form-label">Nom</label>
+                          <input type="text" name="nom_user" class="form-control" id="text-name" placeholder="Entrez votre nom" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
+                          <input type="email" name="mail_user" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" required>
+                        </div>
+                        <div class="mb-4">
+                          <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                          <input type="password" name="password_user" class="form-control" id="exampleInputPassword1"
+                            placeholder="Entrez votre mot de passe" required minlength="8">
+                          <small id="passwordError" style="color: red; display: none;">Le mot de passe doit contenir au moins 8 caractères.</small>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100 py-8 mb-4 rounded-1" id="submitBtn">S'inscrire</button>
 
-<script>
-document.getElementById("submitBtn").addEventListener("click", function(event) {
-    let passwordInput = document.getElementById("exampleInputPassword1");
-    let passwordError = document.getElementById("passwordError");
+                        <script>
+                          document.getElementById("submitBtn").addEventListener("click", function(event) {
+                            let passwordInput = document.getElementById("exampleInputPassword1");
+                            let passwordError = document.getElementById("passwordError");
 
-    if (passwordInput.value.length < 8) {
-        event.preventDefault(); // Prevent form submission
-        passwordError.style.display = "block"; // Show error message
-    } else {
-        passwordError.style.display = "none"; // Hide error message
-    }
-});
-</script>
+                            if (passwordInput.value.length < 8) {
+                              event.preventDefault(); // Prevent form submission
+                              passwordError.style.display = "block"; // Show error message
+                            } else {
+                              passwordError.style.display = "none"; // Hide error message
+                            }
+                          });
+                        </script>
 
-</div>
+                      </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-  $(document).ready(function() {
-    // Handle form submission
-    $('#multiStepForm').on('submit', function(e) {
-      e.preventDefault(); // Prevent the default form submission
+                      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                      <script>
+                        $(document).ready(function() {
+                          // Handle form submission
+                          $('#multiStepForm').on('submit', function(e) {
+                            e.preventDefault(); // Prevent the default form submission
 
-      // Create a FormData object to handle file uploads
-      const formData = new FormData(this);
+                            // Create a FormData object to handle file uploads
+                            const formData = new FormData(this);
 
-      // Send AJAX request
-      $.ajax({
-        url: 'process_form.php', // URL to the PHP script
-        type: 'POST',
-        data: formData,
-        dataType: 'json',
-        processData: false, // Required for FormData
-        contentType: false, // Required for FormData
-        success: function(response) {
-          if (response.status === "success") {
-            // Redirect or show success message
-            window.location.href = "login.php"; // Redirect to login page
-          } else if (response.status === "error") {
-            // Display error message in step5
-            $('#step5 #error-message').text(response.message).show();
-          }
-        },
-        error: function(xhr, status, error) {
-          // Handle AJAX errors
-          $('#step5 #error-message').text("Une erreur s'est produite. Veuillez réessayer.").show();
-        }
-      });
-    });
-  });
-</script>
+                            // Send AJAX request
+                            $.ajax({
+                              url: 'process_form.php', // URL to the PHP script
+                              type: 'POST',
+                              data: formData,
+                              dataType: 'json',
+                              processData: false, // Required for FormData
+                              contentType: false, // Required for FormData
+                              success: function(response) {
+                                if (response.status === "success") {
+                                  // Redirect or show success message
+                                  window.location.href = "login.php"; // Redirect to login page
+                                } else if (response.status === "error") {
+                                  // Display error message in step5
+                                  $('#step5 #error-message').text(response.message).show();
+                                }
+                              },
+                              error: function(xhr, status, error) {
+                                // Handle AJAX errors
+                                $('#step5 #error-message').text("Une erreur s'est produite. Veuillez réessayer.").show();
+                              }
+                            });
+                          });
+                        });
+                      </script>
                     </form>
                   </div>
 
@@ -890,108 +903,134 @@ document.getElementById("submitBtn").addEventListener("click", function(event) {
 
 
                 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  $(document).ready(function() {
-    let currentStep = 1;
-    let totalSteps = 5;
-    let isTwoPersons = false;
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+                  $(document).ready(function() {
+                    let currentStep = 1;
+                    let totalSteps = 5;
+                    let isTwoPersons = false;
 
-    // Card Selection Logic
-    $(".js-1person").click(function() {
-      $("#1person").prop("checked", true);
-      $("#2persons").prop("checked", false);
-      isTwoPersons = false;
-      $('.js-1person').addClass('selected');
-      $('.js-2persons').removeClass('selected');
-      updateSteps();
-    });
+                    // Card Selection Logic
+                    $(".js-1person").click(function() {
+                      $("#1person").prop("checked", true);
+                      $("#2persons").prop("checked", false);
+                      isTwoPersons = false;
+                      $('.js-1person').addClass('selected');
+                      $('.js-2persons').removeClass('selected');
 
-    $(".js-2persons").click(function() {
-      $("#1person").prop("checked", false);
-      $("#2persons").prop("checked", true);
-      isTwoPersons = true;
-      $('.js-1person').removeClass('selected');
-      $('.js-2persons').addClass('selected');
-      updateSteps();
-    });
+                      // Remove required attribute from Step 4 inputs
+                      $('#step4 input[required]').removeAttr('required');
 
-    // Stepper Logic
-    function updateSteps() {
-      $('.step').removeClass('active');
-      $(`#step${currentStep}`).addClass('active');
+                      updateSteps();
+                    });
 
-      // Disable "Précédent" button on the first step
-      $('#prevBtn').prop('disabled', currentStep === 1);
+                    $(".js-2persons").click(function() {
+                      $("#1person").prop("checked", false);
+                      $("#2persons").prop("checked", true);
+                      isTwoPersons = true;
+                      $('.js-1person').removeClass('selected');
+                      $('.js-2persons').addClass('selected');
 
-      // Enable "Suivant" button on the first step only if a radio button is selected
-      if (currentStep === 1) {
-        const isRadioSelected = $('#1person').is(':checked') || $('#2persons').is(':checked');
-        $('#nextBtn').prop('disabled', !isRadioSelected);
-      } else {
-        // Enable "Suivant" button for other steps (validation happens on click)
-        $('#nextBtn').prop('disabled', false);
-      }
+                      // Add required attribute back to Step 4 inputs
+                      $('#step4 input').each(function() {
+                        if ($(this).data('was-required')) {
+                          $(this).attr('required', true);
+                        }
+                      });
 
-      // Hide "Suivant" button in Step 5
-      if (currentStep === totalSteps) {
-        $('#nextBtn').hide();
-      } else {
-        $('#nextBtn').show();
-      }
-    }
+                      updateSteps();
+                    });
 
-    // Validate the current step and show error messages if any
-    function validateStep(step) {
-      let isValid = true;
-      $(`#step${step} input[required]`).each(function() {
-        if (!$(this).val()) {
-          isValid = false;
-          $(this).addClass('is-invalid');
-          $(this).siblings('.invalid-feedback').show(); // Show error message
-        } else {
-          $(this).removeClass('is-invalid');
-          $(this).siblings('.invalid-feedback').hide(); // Hide error message
-        }
-      });
-      return isValid;
-    }
+                    $(document).ready(function() {
+                      // Store the initial required state of Step 4 inputs
+                      $('#step4 input[required]').each(function() {
+                        $(this).data('was-required', true);
+                      });
+                    });
 
-    // Next Button Click
-    $('#nextBtn').click(function() {
-      if (currentStep === 1) {
-        // For Step 1, no validation is needed (only radio button selection)
-        currentStep++;
-        updateSteps();
-      } else {
-        // For other steps, validate inputs
-        const isStepValid = validateStep(currentStep);
-        if (isStepValid) {
-          currentStep++;
-          // Skip Step 4 if "1 Person" is selected
-          if (currentStep === 4 && !isTwoPersons) {
-            currentStep++; // Skip to Step 5
-          }
-          updateSteps();
-        }
-      }
-    });
+                    // Stepper Logic
+                    function updateSteps() {
+                      $('.step').removeClass('active');
+                      $(`#step${currentStep}`).addClass('active');
 
-    // Previous Button Click
-    $('#prevBtn').click(function() {
-      if (currentStep > 1) {
-        currentStep--;
-        // Skip Step 4 if "1 Person" is selected
-        if (currentStep === 4 && !isTwoPersons) {
-          currentStep--; // Go back to Step 3
-        }
-        updateSteps();
-      }
-    });
+                      // Disable "Précédent" button on the first step
+                      $('#prevBtn').prop('disabled', currentStep === 1);
 
-    updateSteps();
-  });
-</script>
+                      // Enable "Suivant" button on the first step only if a radio button is selected
+                      if (currentStep === 1) {
+                        const isRadioSelected = $('#1person').is(':checked') || $('#2persons').is(':checked');
+                        $('#nextBtn').prop('disabled', !isRadioSelected);
+                      } else {
+                        // Enable "Suivant" button for other steps (validation happens on click)
+                        $('#nextBtn').prop('disabled', false);
+                      }
+
+                      // Hide "Suivant" button in Step 5
+                      if (currentStep === totalSteps) {
+                        $('#nextBtn').hide();
+                      } else {
+                        $('#nextBtn').show();
+                      }
+                    }
+
+                    // Validate the current step and show error messages if any
+                    function validateStep(step) {
+                      let isValid = true;
+
+                      // Skip validation for Step 4 if "1 Person" is selected
+                      if (step === 4 && !isTwoPersons) {
+                        return true;
+                      }
+
+                      $(`#step${step} input[required]`).each(function() {
+                        if (!$(this).val()) {
+                          isValid = false;
+                          $(this).addClass('is-invalid');
+                          $(this).siblings('.invalid-feedback').show();
+                        } else {
+                          $(this).removeClass('is-invalid');
+                          $(this).siblings('.invalid-feedback').hide();
+                        }
+                      });
+
+                      return isValid;
+                    }
+
+                    // Next Button Click
+                    $('#nextBtn').click(function() {
+                      if (currentStep === 1) {
+                        // For Step 1, no validation is needed (only radio button selection)
+                        currentStep++;
+                        updateSteps();
+                      } else {
+                        // For other steps, validate inputs
+                        const isStepValid = validateStep(currentStep);
+                        if (isStepValid) {
+                          currentStep++;
+                          // Skip Step 4 if "1 Person" is selected
+                          if (currentStep === 4 && !isTwoPersons) {
+                            currentStep++; // Skip to Step 5
+                          }
+                          updateSteps();
+                        }
+                      }
+                    });
+
+                    // Previous Button Click
+                    $('#prevBtn').click(function() {
+                      if (currentStep > 1) {
+                        currentStep--;
+                        // Skip Step 4 if "1 Person" is selected
+                        if (currentStep === 4 && !isTwoPersons) {
+                          currentStep--; // Go back to Step 3
+                        }
+                        updateSteps();
+                      }
+                    });
+
+                    updateSteps();
+                  });
+                </script>
                 <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                 <script
                   src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
