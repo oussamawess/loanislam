@@ -88,10 +88,10 @@ require_once 'auth-admin.php';
             // Fetch total number of rows
             $sql_total = "SELECT COUNT(*) as total FROM client";
             $result_total = $conn->query($sql_total);
-            $total_rows = 0;
+            $total_rows_count = 0;
             if ($result_total) {
               $row_total = $result_total->fetch_assoc();
-              $total_rows = $row_total['total'];
+              $total_rows_count = $row_total['total'];
             }
 
             // Fetch rows with statut "En attente"
@@ -125,6 +125,125 @@ require_once 'auth-admin.php';
             $conn->close();
             ?>
 
+            <?php
+            // Establish MySQL connection (adjust your connection details)
+            include 'db.php';
+
+            // Check connection
+            if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+            }
+
+            // Query to fetch results (the full query you provided)
+            $query = "
+WITH 
+nouvelles_current_month AS (
+  SELECT COUNT(*) AS nouvelles_count
+  FROM client
+  WHERE statut = 'Nouvelles' AND YEAR(date_creation) = YEAR(CURDATE()) AND MONTH(date_creation) = MONTH(CURDATE())
+),
+total_current_month AS (
+  SELECT COUNT(*) AS total_count
+  FROM client
+  WHERE YEAR(date_creation) = YEAR(CURDATE()) AND MONTH(date_creation) = MONTH(CURDATE())
+),
+total_previous_month AS (
+  SELECT COUNT(*) AS total_count
+  FROM client
+  WHERE YEAR(date_creation) = YEAR(CURDATE() - INTERVAL 1 MONTH) AND MONTH(date_creation) = MONTH(CURDATE() - INTERVAL 1 MONTH)
+),
+current_month AS (
+  SELECT statut, COUNT(*) AS current_count
+  FROM client_statut_history
+  WHERE YEAR(date_changed) = YEAR(CURDATE()) AND MONTH(date_changed) = MONTH(CURDATE())
+  GROUP BY statut
+),
+previous_month AS (
+  SELECT statut, COUNT(*) AS previous_count
+  FROM client_statut_history
+  WHERE YEAR(date_changed) = YEAR(CURDATE() - INTERVAL 1 MONTH) AND MONTH(date_changed) = MONTH(CURDATE() - INTERVAL 1 MONTH)
+  GROUP BY statut
+)
+SELECT 
+  'Total Rows' AS statut,
+  t1.total_count AS current_count,
+  t2.total_count AS previous_count,
+  (t1.total_count - t2.total_count) AS `change`,
+  ROUND(((t1.total_count - t2.total_count) / t2.total_count) * 100, 2) AS percentage_change
+FROM total_current_month t1, total_previous_month t2
+
+UNION ALL
+
+SELECT 
+  'Nouvelles' AS statut,
+  n.nouvelles_count AS current_count,
+  0 AS previous_count,
+  n.nouvelles_count AS `change`,
+  100.00 AS percentage_change
+FROM nouvelles_current_month n
+
+UNION ALL
+
+SELECT 
+  'En attente' AS statut,
+  c.current_count,
+  p.previous_count,
+  (c.current_count - p.previous_count) AS `change`,
+  ROUND(((c.current_count - p.previous_count) / p.previous_count) * 100, 2) AS percentage_change
+FROM current_month c
+LEFT JOIN previous_month p ON c.statut = p.statut
+WHERE c.statut = 'En attente'
+
+UNION ALL
+
+SELECT 
+  'signé' AS statut,
+  c.current_count,
+  p.previous_count,
+  (c.current_count - p.previous_count) AS `change`,
+  ROUND(((c.current_count - p.previous_count) / p.previous_count) * 100, 2) AS percentage_change
+FROM current_month c
+LEFT JOIN previous_month p ON c.statut = p.statut
+WHERE c.statut = 'signé';
+";
+
+            // Execute the query
+            $result = $conn->query($query);
+
+            // Initialize variables to prevent undefined variable errors
+            $total_rows_change = 0;
+            $total_rows_percentage_change = 0;
+            $nouvelles_change = 0;
+            $nouvelles_percentage_change = 0;
+            $en_attente_change = 0;
+            $en_attente_percentage_change = 0;
+            $signe_change = 0;
+            $signe_percentage_change = 0;
+
+            // Check for errors and fetch results
+            if ($result) {
+              // Iterate through the result set and store values in PHP variables
+              while ($row = $result->fetch_assoc()) {
+                if ($row['statut'] == 'Total Rows') {
+                  $total_rows_change = $row['change'];
+                  $total_rows_percentage_change = $row['percentage_change'];
+                } elseif ($row['statut'] == 'Nouvelles') {
+                  $nouvelles_change = $row['change'];
+                  $nouvelles_percentage_change = $row['percentage_change'];
+                } elseif ($row['statut'] == 'En attente') {
+                  $en_attente_change = $row['change'];
+                  $en_attente_percentage_change = $row['percentage_change'];
+                } elseif ($row['statut'] == 'signé') {
+                  $signe_change = $row['change'];
+                  $signe_percentage_change = $row['percentage_change'];
+                }
+              }
+            } else {
+              echo "Error executing query: " . $conn->error;
+            }          
+
+            ?>
+
 
             <div class="col-md-6 col-lg-3">
               <div class="card">
@@ -140,15 +259,25 @@ require_once 'auth-admin.php';
                   <h6 class="my-3 fs-4 fw-medium">Utilisateurs</h6>
                   <div class="d-flex flex-wrap align-items-center">
                     <div class="col-auto">
-                      <span class="fs-8 text-dark fw-bold"><?php echo $total_rows ?></span>
+                      <span class="fs-8 text-dark fw-bold"><?php echo $total_rows_count ?></span>
                     </div>
                     <div class="col-auto ms-1">
-                      <span class="fs-11 text-danger fw-semibold">
-                        <div
-                          class="d-flex align-items-center justify-content-center  flex-shrink-0 bg-success-subtle rounded-1 p-1">
-                          <iconify-icon icon="solar:course-up-linear" class="fs-5 text-success"></iconify-icon>
-                          <span class="fs-2 text-success">&nbsp;&nbsp;12%</span>
-                        </div>
+                      <span class="fs-11 text-danger fw-semibold d-inline-flex align-items-center">
+                        <?php if ($total_rows_change > 0): ?>
+                          <!-- Show this if the change is greater than 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-success-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-up-linear" class="fs-5 text-success"></iconify-icon>
+                            <span class="fs-2 text-success">&nbsp;&nbsp;<?php echo $total_rows_percentage_change ?>%</span>
+                          </div>
+                        <?php else: ?>
+                          <!-- Show this if the change is less than or equal to 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-danger-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-down-linear" class="fs-5 text-danger"></iconify-icon>
+                            <span class="fs-2 text-danger">&nbsp;&nbsp;<?php echo $total_rows_percentage_change ?>%</span>
+                          </div>
+                        <?php endif; ?>
+
+                        <span class="ms-2 text-black-50"><?php if ($total_rows_change > 0) echo "+"; ?><?php echo $total_rows_change ?></span>
                       </span>
                     </div>
                     </span>
@@ -174,12 +303,24 @@ require_once 'auth-admin.php';
                       <span class="fs-8 text-dark fw-bold"><?php echo $nouvelles_rows ?></span>
                     </div>
                     <div class="col-auto ms-1">
-                      <span class="fs-11 text-danger fw-semibold">
-                        <div
-                          class="d-flex align-items-center justify-content-center  flex-shrink-0 bg-danger-subtle rounded-1 p-1">
-                          <iconify-icon icon="solar:course-down-linear" class="fs-5 text-danger"></iconify-icon>
-                          <span class="fs-2">&nbsp;&nbsp;2%</span>
-                        </div>
+                      <span class="fs-11 text-danger fw-semibold d-inline-flex align-items-center">
+
+                        <?php if ($nouvelles_change > 0): ?>
+                          <!-- Show this if the change is greater than 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-success-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-up-linear" class="fs-5 text-success"></iconify-icon>
+                            <span class="fs-2 text-success">&nbsp;&nbsp;<?php echo $nouvelles_percentage_change ?>%</span>
+                          </div>
+                        <?php else: ?>
+                          <!-- Show this if the change is less than or equal to 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-danger-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-down-linear" class="fs-5 text-danger"></iconify-icon>
+                            <span class="fs-2 text-danger">&nbsp;&nbsp;<?php echo $nouvelles_percentage_change ?>%</span>
+                          </div>
+                        <?php endif; ?>
+
+
+                        <span class="ms-2 text-black-50"><?php if ($nouvelles_change > 0) echo "+"; ?><?php echo $nouvelles_change ?></span>
                       </span>
                     </div>
                     </span>
@@ -205,12 +346,25 @@ require_once 'auth-admin.php';
                       <span class="fs-8 text-dark fw-bold"><?php echo $en_attente_rows ?></span>
                     </div>
                     <div class="col-auto ms-1">
-                      <span class="fs-11 text-danger fw-semibold">
-                        <div
-                          class="d-flex align-items-center justify-content-center  flex-shrink-0 bg-danger-subtle rounded-1 p-1">
-                          <iconify-icon icon="solar:course-down-linear" class="fs-5 text-danger"></iconify-icon>
-                          <span class="fs-2">&nbsp;&nbsp;3%</span>
-                        </div>
+                      <span class="fs-11 text-danger fw-semibold d-inline-flex align-items-center">
+
+
+                        <?php if ($en_attente_change > 0): ?>
+                          <!-- Show this if the change is greater than 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-success-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-up-linear" class="fs-5 text-success"></iconify-icon>
+                            <span class="fs-2 text-success">&nbsp;&nbsp;<?php echo $en_attente_percentage_change ?>%</span>
+                          </div>
+                        <?php else: ?>
+                          <!-- Show this if the change is less than or equal to 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-danger-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-down-linear" class="fs-5 text-danger"></iconify-icon>
+                            <span class="fs-2 text-danger">&nbsp;&nbsp;<?php echo $en_attente_percentage_change ?>%</span>
+                          </div>
+                        <?php endif; ?>
+
+
+                        <span class="ms-2 text-black-50"><?php if ($en_attente_change > 0) echo "+"; ?><?php echo $en_attente_change ?></span>
                       </span>
                     </div>
                     </span>
@@ -236,12 +390,24 @@ require_once 'auth-admin.php';
                       <span class="fs-8 text-dark fw-bold"><?php echo $signe_rows ?></span>
                     </div>
                     <div class="col-auto ms-1">
-                      <span class="fs-11 text-danger fw-semibold">
-                        <div
-                          class="d-flex align-items-center justify-content-center  flex-shrink-0 bg-success-subtle rounded-1 p-1">
-                          <iconify-icon icon="solar:course-up-linear" class="fs-5 text-success"></iconify-icon>
-                          <span class="fs-2 text-success">&nbsp;&nbsp;25%</span>
-                        </div>
+                      <span class="fs-11 text-danger fw-semibold d-inline-flex align-items-center">
+
+                        <?php if ($signe_change > 0): ?>
+                          <!-- Show this if the change is greater than 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-success-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-up-linear" class="fs-5 text-success"></iconify-icon>
+                            <span class="fs-2 text-success">&nbsp;&nbsp;<?php echo $signe_percentage_change ?>%</span>
+                          </div>
+                        <?php else: ?>
+                          <!-- Show this if the change is less than or equal to 0 -->
+                          <div class="d-flex align-items-center justify-content-center flex-shrink-0 bg-danger-subtle rounded-1 p-1">
+                            <iconify-icon icon="solar:course-down-linear" class="fs-5 text-danger"></iconify-icon>
+                            <span class="fs-2 text-danger">&nbsp;&nbsp;<?php echo $signe_percentage_change ?>%</span>
+                          </div>
+                        <?php endif; ?>
+
+
+                        <span class="ms-2 text-black-50"><?php if ($signe_change > 0) echo "+"; ?><?php echo $signe_change ?></span>
                       </span>
                     </div>
                     </span>
@@ -250,6 +416,8 @@ require_once 'auth-admin.php';
               </div>
             </div>
 
+            <?php $conn->close();
+            ?>
             <!-- START table -->
             <style>
               .search-bar {
