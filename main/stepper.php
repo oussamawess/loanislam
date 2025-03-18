@@ -301,13 +301,13 @@
                                   <iconify-icon icon="material-symbols:person" width="1.2em" height="1.2em"
                                     style="color: #22825d"></iconify-icon>
                                 </div>
-                                <div class="c-selection-card__frequency">
+                                <!-- <div class="c-selection-card__frequency">
                                   text text
-                                </div>
+                                </div> -->
                               </div>
                               <div class="c-selection-card__footer">
-                                <div class="footer-item-left">text text</div>
-                                <div class="footer-item-right">text text</div>
+                                <!-- <div class="footer-item-left">text text</div>
+                                <div class="footer-item-right">text text</div> -->
                               </div>
                             </div>
 
@@ -334,13 +334,13 @@
                                   <iconify-icon icon="material-symbols:group" width="1.2em" height="1.2em"
                                     style="color: #22825d"></iconify-icon>
                                 </div>
-                                <div class="c-selection-card__frequency">
+                                <!-- <div class="c-selection-card__frequency">
                                   text text
-                                </div>
+                                </div> -->
                               </div>
                               <div class="c-selection-card__footer">
-                                <div class="footer-item-left text-grey">text text</div>
-                                <div class="footer-item-right">text text</div>
+                                <!-- <div class="footer-item-left text-grey">text text</div>
+                                <div class="footer-item-right">text text</div> -->
                               </div>
                             </div>
                           </div>
