@@ -80,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Insert client data
         $stmt = $conn->prepare("INSERT INTO client (nom, prenom, age, telephone, email, adress, profession, salaire_brut, statut_civil, montant_souhaite, duree_remboursement, type_maison, montant_total_du, statut, have_partner, fichier_paie, attestation_salaire, extrait_bancaire, contrat) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssissssdsdissssssss", $nom_client, $prenom_client, $age_client, $telephone_client, $email_client, $adresse_client, $profession_client, $salaire_client, $statut_civil_client, $montant_souhaite, $duree_remboursement, $type_maison, $montant_total_du, $statut, $have_partner, $fichier_paie_client, $attestation_salaire_client, $extrait_bancaire_client, $contrat_client);
+        $stmt->bind_param("ssissssdsdissssssss", $nom_client, $prenom_client, $age_client, $telephone_client, $email_user, $adresse_client, $profession_client, $salaire_client, $statut_civil_client, $montant_souhaite, $duree_remboursement, $type_maison, $montant_total_du, $statut, $have_partner, $fichier_paie_client, $attestation_salaire_client, $extrait_bancaire_client, $contrat_client);
 
         if (!$stmt->execute()) {
             throw new Exception("Erreur lors de l'inscription du client.");
