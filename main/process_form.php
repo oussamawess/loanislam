@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $prenom_client = sanitize($_POST['prenom_client']);
         $age_client = (int) $_POST['age_client'];
         $telephone_client = sanitize($_POST['telephone_client']);
-        $email_client = filter_var($_POST['email_client'], FILTER_VALIDATE_EMAIL) ? $_POST['email_client'] : null;
+        // $email_client = filter_var($_POST['email_client'], FILTER_VALIDATE_EMAIL) ? $_POST['email_client'] : null;
         $adresse_client = sanitize($_POST['adresse_client']);
         $profession_client = sanitize($_POST['profession_client']);
         $salaire_client = (float) str_replace('€', '', $_POST['salaire_client']);
@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Insert user data
-        $nom_user = sanitize($_POST['nom_user']);
+        $nom_user = sanitize($_POST['nom_client']) . ' ' . sanitize($_POST['prenom_client']);
         $password_user = password_hash($_POST['password_user'], PASSWORD_DEFAULT); // Secure password
         $role = "client"; // Default role
 

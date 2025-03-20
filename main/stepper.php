@@ -422,11 +422,16 @@
                           <div class="mb-3">
                             <div class="row align-items-center">
                               <!-- Age Label and Input -->
-                              <label class="col-md-2 form-label">Email</label>
+                              <label class="col-md-2 form-label">Statut</label>
+                              <div class="col-md-4">
+                                    <input type="text" name="statut_civil_client" class="form-control" placeholder="Célibataire" required>
+                                    <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
+                              </div>
+                              <!-- <label class="col-md-2 form-label">Email</label>
                               <div class="col-md-4">
                                 <input type="text" name="email_client" class="form-control" placeholder="john.doe@gmail.com" required>
                                 <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
-                              </div>
+                              </div> -->
 
                               <!-- Phone Label and Input -->
                               <label class="col-md-2 form-label">Adresse</label>
@@ -456,19 +461,7 @@
                             </div>
                           </div>
 
-                          <div class="mb-3">
-                            <div class="row align-items-center">
-                              <label class="col-lg-2 form-label">Statut</label>
-                              <div class="col-lg-4">
-                                <div class="row">
-                                  <div class="col-md-12 mb-2 mb-md-0">
-                                    <input type="text" name="statut_civil_client" class="form-control" placeholder="Célibataire" required>
-                                    <span class="invalid-feedback" style="display: none;">Ce champ est obligatoire.</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                          <hr>
 
                           <div class="mb-3">
                             <div class="row align-items-center">
@@ -825,10 +818,10 @@
                         <div id="error-message" class="alert alert-danger" style="display: none;"></div>
 
                         <!-- Add your form fields here -->
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                           <label for="text-name" class="form-label">Nom</label>
                           <input type="text" name="nom_user" class="form-control" id="text-name" placeholder="Entrez votre nom" required>
-                        </div>
+                        </div> -->
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Adresse e-mail</label>
                           <input type="email" name="mail_user" class="form-control" id="exampleInputEmail1" placeholder="Entrez votre adresse e-mail" required>
